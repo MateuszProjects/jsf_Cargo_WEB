@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/application_7.xsd" id="Application_ID" version="7">
+  <display-name>jsf_Cargo__EAR</display-name>
+  <module>
+    <ejb>jsf_Cargo_EJB.jar</ejb>
+  </module>
+  <module>
+    <web>
+      <web-uri>jsf_Cargo_WEB.war</web-uri>
+      <context-root>jsf_Cargo</context-root>
+    </web>
+  </module>
+</application>

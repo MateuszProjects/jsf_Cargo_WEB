@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="jsf_Cargo__EAR">
+        <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
+        <dependent-module archiveName="jsf_Cargo_EJB.jar" deploy-path="/" handle="module:/resource/jsf_Cargo_EJB/jsf_Cargo_EJB">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jsf_Cargo_WEB.war" deploy-path="/" handle="module:/resource/jsf_Cargo_WEB/jsf_Cargo_WEB">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+    </wb-module>
+</project-modules>
