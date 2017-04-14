@@ -1,21 +1,27 @@
 package info.dao;
 
+import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+
+
 import info.entities.Employee;
 
 @Stateless
-public class EmployeeLoginDAO implements IEmployeeLoginDAO {
+public class EmployeeLoginDAO /*implements IEmployeeLoginDAO*/ {
 
 	private final static String UNIT_NAME = "jsfcourse-CargoPU";
 
 	@PersistenceContext(unitName = UNIT_NAME)
 	protected EntityManager em;
-
-	@Override
+	
+	
 	public Employee getEmployee(String login, String pass) {
 		Employee employee = null;
 
@@ -26,11 +32,7 @@ public class EmployeeLoginDAO implements IEmployeeLoginDAO {
 		try {
 			employee = (Employee) query.getSingleResult();
 			
-			/*
-			if(employee != null){
-				employee.getRoles().size();
-			}
-			*/
+		
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
