@@ -5,9 +5,26 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
-	
+
 <ui:composition template="/templates/login-template.xhtml">
 
-	
+	<ui:define name="content">
+		<h:form>
+				<fieldset style="padding: 1em; border-radius: 0.2em;">
+					<legend>Login Admin</legend>
+					<h:panelGrid columns="2" cellpadding="5">
+						<h:outputText  value="Login"  />
+						<p:inputText id="p-login"  value="#{loginBB.login}" />
+						<h:outputLabel for="Password" value="password:" />
+						<p:password id="p-password" value="#{loginBB.pass}" />
+					</h:panelGrid>
+					    <p:messages showDetail="true" autoUpdate="true" />
+					<h:commandButton  value="Login"  
+					 update="msg" styleClass="ui-priority-primary" action="#{loginBB.doLogin()}" />
+				</fieldset>
+			</h:form>
+	</ui:define>
+
+
 </ui:composition>
 </html>
