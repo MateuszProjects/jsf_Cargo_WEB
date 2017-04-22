@@ -11,6 +11,23 @@
 		<param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
 		<param-value>true</param-value>
 	</context-param>
+	<filter>
+		<filter-name>SecurityFilter</filter-name>
+		<filter-class>info.SecurityCheckFilter.SecurityCheckFilter</filter-class>
+		<init-param>
+			<param-name>publicResource</param-name>
+			<param-value>/javax.faces.resource</param-value>
+		</init-param>
+		<init-param>
+			<param-name>loginPage</param-name>
+			<param-value>/index.jsf</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>SecurityFilter</filter-name>
+		<url-pattern>/admin/*</url-pattern>
+		
+	</filter-mapping>
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>

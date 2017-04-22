@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import info.entities.Employee;
+
 public class SecurityCheckFilter implements Filter {
 
 	private ServletContext servletContext;
@@ -23,27 +25,62 @@ public class SecurityCheckFilter implements Filter {
 			+ "<partial-response><redirect url=\"%s\"></redirect></partial-response>";
 
 	@Override
-	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chin)
+	public void init(FilterConfig config) throws ServletException {
+		servletContext = config.getServletContext();
+
+		publicRes = config.getInitParameter("publicResource");
+		if (publicRes == null) {
+			publicRes = "/public";
+		}
+		loginPage = config.getInitParameter("loginPage");
+		if (loginPage == null) {
+			loginPage = "/index?faces-redirect=true";
+		}
+
+	}
+
+	@Override
+	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
 			throws IOException, ServletException {
 
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
 
 		HttpSession session = request.getSession();
+		Employee employee = (Employee) session.getAttribute("employee");
 
 		boolean pass = false;
 
-	}
-
-	@Override
-	public void init(FilterConfig arg0) throws ServletException {
-		// TODO Auto-generated method stub
+		if (employee == null) {
+			String path = request.getServletPath();
+			if (path.startsWith(publicRes) || path.startsWith(loginPage)) {
+				pass = true;
+			}
+		} else {
+			pass = true;
+		}
+		
+		if(!pass){
+			
+			if ("partial/ajax".equals(request.getHeader("Faces-Request"))) {
+				res.setContentType("text/xml");
+				res.setCharacterEncoding("UTF-8");
+				res.getWriter().printf(FACES_REDIRECT_XML, request.getContextPath() + "/");
+			} else {
+				// if other (regular) request then forward to the defined
+				// login
+				// page
+				servletContext.getRequestDispatcher(loginPage).forward(request, response);
+			}
+			
+		}else{
+			chain.doFilter(request, response);
+		}
 
 	}
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
 
 	}
 

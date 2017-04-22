@@ -18,14 +18,16 @@ public class LoginBB {
 
 	LoginBB loginBB = null;
 
+	// @EJB(mappedName="java:jsf_Cargo_EJB/ejbModule/!info.dao.IEmployeeLoginDAO")
 	@EJB
 	EmployeeLoginDAO employeeLoginDAO;
 
 	@EJB
 	CustomerLoginDAO customerLoginDAO;
 
-	private static final String PAGE_MAIN = "admin/admin?faces-redirect=true";
+	private static final String PAGE_MAIN_ADMIN = "admin/admin?faces-redirect=true";
 	private static final String PAGE_LOGIN = "/index?faces-redirect=true";
+	private static final String PAGE_MAIN_USER = "users/user?faces-redirect=true";
 	private static final String PAGE_STAY_AT_THE_SAME = null;
 
 	public String login;
@@ -72,45 +74,59 @@ public class LoginBB {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		Employee employee = null;
 		Customer customer = null;
-		
+
 		if (!validateData()) {
 			return PAGE_STAY_AT_THE_SAME;
 		}
 
-		employee = employeeLoginDAO.getEmployee(login, pass);
-		customer = customerLoginDAO.getCustomerLogin(login, pass);
-		
-		
-		
-		 if(employee == null && customer == null){
-		 	ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Niepoprawny login lub has³o", null));
-			return PAGE_STAY_AT_THE_SAME;
-		  }
+		try {
+			employee = employeeLoginDAO.getEmployee(login, pass);
 
-		
-		/*
-		if (employee == null) {
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		try {
+			if (employee == null) {
+				customer = customerLoginDAO.getCustomerLogin(login, pass);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		if (employee == null && customer == null) {
 			ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Niepoprawny login lub has³o", null));
 			return PAGE_STAY_AT_THE_SAME;
 		}
-		if(customer == null){
-			ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Niepoprawny login lub has³lo", null));
-			return PAGE_STAY_AT_THE_SAME;
-		}
+
+		/*
+		 * if (employee == null) { ctx.addMessage(null, new
+		 * FacesMessage(FacesMessage.SEVERITY_ERROR,
+		 * "Niepoprawny login lub has³o", null)); return PAGE_STAY_AT_THE_SAME;
+		 * } if(customer == null){ ctx.addMessage(null, new
+		 * FacesMessage(FacesMessage.SEVERITY_ERROR,
+		 * "Niepoprawny login lub has³lo", null)); return PAGE_STAY_AT_THE_SAME;
+		 * }
 		 */
 		HttpSession session = (HttpSession) ctx.getExternalContext().getSession(true);
 		session.setAttribute("employee", employee);
 		session.setAttribute("customer", customer);
-		
-		return PAGE_MAIN;
+
+		if (employee != null) {
+			return PAGE_MAIN_ADMIN;
+		} else if (customer != null) {
+			return PAGE_MAIN_USER;
+		}
+		return null;
+
 	}
 
 	public Employee getEmployee() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		return (Employee) session.getAttribute("employee");
 	}
-	
-	public Customer getCustomer(){
+
+	public Customer getCustomer() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		return (Customer) session.getAttribute("customer");
 	}
