@@ -19,9 +19,14 @@ public class CustomerLoginDAO /* implements ICustomerLoginDAO */ {
 		Customer customer = null;
 
 		Query query = em.createQuery("SELECT e From Customer e where e.login=:login and e.pass=:pass");
-
+		query.setParameter("login", login);
+		query.setParameter("pass", pass);
+		
 		try {
 			customer = (Customer) query.getSingleResult();
+			if(customer == null){
+				return null;
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
