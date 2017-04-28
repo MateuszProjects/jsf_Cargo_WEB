@@ -18,15 +18,15 @@ public class Employee implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idemployee;
 
-	private String login;
-
 	private String name;
-
-	private String pass;
 
 	private String surname;
 
 	private String telephone;
+
+	//bi-directional many-to-one association to Access
+	@OneToMany(mappedBy="employee")
+	private List<Access> accesses;
 
 	//bi-directional many-to-one association to Address
 	@OneToMany(mappedBy="employee")
@@ -55,28 +55,12 @@ public class Employee implements Serializable {
 		this.idemployee = idemployee;
 	}
 
-	public String getLogin() {
-		return this.login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
 	public String getName() {
 		return this.name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getPass() {
-		return this.pass;
-	}
-
-	public void setPass(String pass) {
-		this.pass = pass;
 	}
 
 	public String getSurname() {
@@ -93,6 +77,28 @@ public class Employee implements Serializable {
 
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+
+	public List<Access> getAccesses() {
+		return this.accesses;
+	}
+
+	public void setAccesses(List<Access> accesses) {
+		this.accesses = accesses;
+	}
+
+	public Access addAccess(Access access) {
+		getAccesses().add(access);
+		access.setEmployee(this);
+
+		return access;
+	}
+
+	public Access removeAccess(Access access) {
+		getAccesses().remove(access);
+		access.setEmployee(null);
+
+		return access;
 	}
 
 	public List<Address> getAddresses() {
