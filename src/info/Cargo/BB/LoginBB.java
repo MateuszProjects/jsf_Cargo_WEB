@@ -7,8 +7,10 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import info.dao.AccessDAO;
 import info.dao.CustomerLoginDAO;
 import info.dao.EmployeeLoginDAO;
+import info.entities.Access;
 import info.entities.Customer;
 import info.entities.Employee;
 
@@ -20,10 +22,7 @@ public class LoginBB {
 
 	// @EJB(mappedName="java:jsf_Cargo_EJB/ejbModule/!info.dao.IEmployeeLoginDAO")
 	@EJB
-	EmployeeLoginDAO employeeLoginDAO;
-
-	@EJB
-	CustomerLoginDAO customerLoginDAO;
+	AccessDAO accessDAO;
 
 	private static final String PAGE_MAIN_ADMIN = "admin/admin?faces-redirect=true";
 	private static final String PAGE_LOGIN = "/index?faces-redirect=true";
@@ -32,6 +31,8 @@ public class LoginBB {
 
 	public String login;
 	public String pass;
+	public String customer_id;
+	public String employee_id;
 
 	public String getLogin() {
 		return login;
@@ -47,6 +48,22 @@ public class LoginBB {
 
 	public void setPass(String pass) {
 		this.pass = pass;
+	}
+
+	private String getCustomer_id() {
+		return customer_id;
+	}
+
+	private void setCustomer_id(String customer_id) {
+		this.customer_id = customer_id;
+	}
+
+	private String getEmployee_id() {
+		return employee_id;
+	}
+
+	private void setEmployee_id(String employee_id) {
+		this.employee_id = employee_id;
 	}
 
 	public boolean validateData() {
@@ -72,6 +89,7 @@ public class LoginBB {
 
 	public String doLogin() {
 		FacesContext ctx = FacesContext.getCurrentInstance();
+		Access access = null;
 		Employee employee = null;
 		Customer customer = null;
 
@@ -80,34 +98,14 @@ public class LoginBB {
 		}
 
 		try {
-			employee = employeeLoginDAO.getEmployee(login, pass);
+			access = accessDAO.getLogin(login, pass);
 
+			employee = access.getEmployee();
+			customer = access.getCustomer();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 
-		try {
-			if (employee == null) {
-				customer = customerLoginDAO.getCustomerLogin(login, pass);
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-
-		if (employee == null && customer == null) {
-			ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Niepoprawny login lub has³o", null));
-			return PAGE_STAY_AT_THE_SAME;
-		}
-
-		/*
-		 * if (employee == null) { ctx.addMessage(null, new
-		 * FacesMessage(FacesMessage.SEVERITY_ERROR,
-		 * "Niepoprawny login lub has³o", null)); return PAGE_STAY_AT_THE_SAME;
-		 * } if(customer == null){ ctx.addMessage(null, new
-		 * FacesMessage(FacesMessage.SEVERITY_ERROR,
-		 * "Niepoprawny login lub has³lo", null)); return PAGE_STAY_AT_THE_SAME;
-		 * }
-		 */
 		HttpSession session = (HttpSession) ctx.getExternalContext().getSession(true);
 		session.setAttribute("employee", employee);
 		session.setAttribute("customer", customer);
@@ -117,7 +115,8 @@ public class LoginBB {
 		} else if (customer != null) {
 			return PAGE_MAIN_USER;
 		}
-		return null;
+
+		return PAGE_MAIN_ADMIN;
 
 	}
 
