@@ -31,8 +31,7 @@ public class LoginBB {
 
 	public String login;
 	public String pass;
-	public String customer_id;
-	public String employee_id;
+
 
 	public String getLogin() {
 		return login;
@@ -50,21 +49,7 @@ public class LoginBB {
 		this.pass = pass;
 	}
 
-	private String getCustomer_id() {
-		return customer_id;
-	}
-
-	private void setCustomer_id(String customer_id) {
-		this.customer_id = customer_id;
-	}
-
-	private String getEmployee_id() {
-		return employee_id;
-	}
-
-	private void setEmployee_id(String employee_id) {
-		this.employee_id = employee_id;
-	}
+	
 
 	public boolean validateData() {
 		boolean result = true;
@@ -102,13 +87,21 @@ public class LoginBB {
 
 			employee = access.getEmployee();
 			customer = access.getCustomer();
+			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 
+		
 		HttpSession session = (HttpSession) ctx.getExternalContext().getSession(true);
+		
+		if(employee != null){
 		session.setAttribute("employee", employee);
+		}
+		
+		if(customer != null){
 		session.setAttribute("customer", customer);
+		}
 
 		if (employee != null) {
 			return PAGE_MAIN_ADMIN;

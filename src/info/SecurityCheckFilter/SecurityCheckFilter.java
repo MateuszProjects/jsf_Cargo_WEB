@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import info.entities.Customer;
 import info.entities.Employee;
 
 public class SecurityCheckFilter implements Filter {
@@ -48,6 +49,7 @@ public class SecurityCheckFilter implements Filter {
 
 		HttpSession session = request.getSession();
 		Employee employee = (Employee) session.getAttribute("employee");
+		Customer customer = (Customer) session.getAttribute("customer");
 
 		boolean pass = false;
 
@@ -60,8 +62,18 @@ public class SecurityCheckFilter implements Filter {
 			pass = true;
 		}
 		
-		if(!pass){
-			
+		if (employee == null)
+			if (customer == null) {
+				String path = request.getServletPath();
+				if (path.startsWith(publicRes) || path.startsWith(loginPage)) {
+					pass = true;
+				}
+			} else {
+				pass = true;
+			}
+
+		if (!pass) {
+
 			if ("partial/ajax".equals(request.getHeader("Faces-Request"))) {
 				res.setContentType("text/xml");
 				res.setCharacterEncoding("UTF-8");
@@ -72,8 +84,8 @@ public class SecurityCheckFilter implements Filter {
 				// page
 				servletContext.getRequestDispatcher(loginPage).forward(request, response);
 			}
-			
-		}else{
+
+		} else {
 			chain.doFilter(request, response);
 		}
 
