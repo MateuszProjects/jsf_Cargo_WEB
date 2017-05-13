@@ -3,6 +3,6 @@ package info.dao;
 import javax.ejb.Stateless;
 
 @Stateless
-public class TransportDAO implements ITransportDAO {
+public class TransportDAO  {
 
 }
