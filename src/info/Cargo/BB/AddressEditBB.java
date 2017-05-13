@@ -4,6 +4,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 @ManagedBean
-public class AddressBB {
+@ViewScoped
+public class AddressEditBB {
 
 }
