@@ -8,8 +8,9 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import info.dao.AccessDAO;
-import info.dao.CustomerLoginDAO;
-import info.dao.EmployeeLoginDAO;
+import info.dao.AddressDAO;
+
+
 import info.entities.Access;
 import info.entities.Customer;
 import info.entities.Employee;
@@ -23,6 +24,11 @@ public class LoginBB {
 	// @EJB(mappedName="java:jsf_Cargo_EJB/ejbModule/!info.dao.IEmployeeLoginDAO")
 	@EJB
 	AccessDAO accessDAO;
+	
+	// @EJB
+	@EJB
+	AddressDAO addressDAO;
+	
 
 	private static final String PAGE_MAIN_ADMIN = "admin/admin?faces-redirect=true";
 	private static final String PAGE_LOGIN = "/index?faces-redirect=true";
