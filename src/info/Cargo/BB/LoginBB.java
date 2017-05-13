@@ -21,11 +21,10 @@ public class LoginBB {
 
 	LoginBB loginBB = null;
 
-	// @EJB(mappedName="java:jsf_Cargo_EJB/ejbModule/!info.dao.IEmployeeLoginDAO")
 	@EJB
 	AccessDAO accessDAO;
 	
-	// @EJB
+
 	@EJB
 	AddressDAO addressDAO;
 	
