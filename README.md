@@ -5,7 +5,7 @@ Branch Master: </br>
 - jsf_Cargo_EJB - Layer with Stateless DAO and Entites generate from Data Base MySQL.  
 
 Branch web: </br>
-- jsf_Cargo_WEB - Layer WEB with JSF 2.2  MenageBean and HTML5.
+- jsf_Cargo_WEB - Layer WEB with JSF 2.2  MenageBean and HTML5 with PrimeFaces.
 
 Branch ear: </br>
 - jsf_Cargo_EAR - Enterprise Application Archive.
