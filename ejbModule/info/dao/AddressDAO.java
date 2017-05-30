@@ -6,6 +6,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import info.entities.Address;
+
 @Stateless
 
 public class AddressDAO  {
@@ -14,4 +16,8 @@ public class AddressDAO  {
 
 	@PersistenceContext(unitName = UNIT_NAME)
 	protected EntityManager em;
+	
+	public Address find(Integer id){
+		return em.find(Address.class, id);
+	}
 }
