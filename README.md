@@ -11,10 +11,11 @@ Branch ear: </br>
 - jsf_Cargo_EAR - Enterprise Application Archive.
 
 Module Login: <br/>
-Login for Employees and Customer.  Function check your role in system. 
+Multi login for Employees and Customer. Function check your role in system. 
  
 Module Employee: </br>
 - Address </br>
+- Payment </br>
 - Role
 
 Module Customer: </br>
