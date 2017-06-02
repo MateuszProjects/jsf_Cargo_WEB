@@ -13,11 +13,8 @@ Branch ear: </br>
 Module Login: <br/>
 Multi login for Employees and Customer. Function check your role in system. 
  
-Module Employee: </br>
+Module User: </br>
 - Address </br>
 - Payment </br>
 - Role
 
-Module Customer: </br>
-- Address </br>
-- Payment
