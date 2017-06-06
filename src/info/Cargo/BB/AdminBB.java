@@ -9,8 +9,6 @@ import info.dao.EmployeeDAO;
 
 @ManagedBean
 public class AdminBB implements Serializable{
-
-	
 	private static final long serialVersionUID = 1L;
 
 	

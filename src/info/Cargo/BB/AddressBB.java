@@ -11,4 +11,6 @@ public class AddressBB {
 
 	@EJB
 	AddressDAO addressDAO;
+	
+	// test
 }
