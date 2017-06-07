@@ -23,10 +23,12 @@ public class Payment implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date date;
 
-	//bi-directional many-to-one association to Employee
+	private int idemployee;
+
+	//bi-directional many-to-one association to User
 	@ManyToOne
-	@JoinColumn(name="idemployee")
-	private Employee employee;
+	@JoinColumn(name="users_idusers")
+	private User user;
 
 	public Payment() {
 	}
@@ -55,12 +57,20 @@ public class Payment implements Serializable {
 		this.date = date;
 	}
 
-	public Employee getEmployee() {
-		return this.employee;
+	public int getIdemployee() {
+		return this.idemployee;
 	}
 
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
+	public void setIdemployee(int idemployee) {
+		this.idemployee = idemployee;
+	}
+
+	public User getUser() {
+		return this.user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

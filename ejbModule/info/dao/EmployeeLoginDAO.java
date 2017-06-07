@@ -9,8 +9,6 @@ import javax.persistence.Query;
 
 
 
-import info.entities.Employee;
-
 @Stateless
 public class EmployeeLoginDAO /*implements IEmployeeLoginDAO*/ {
 
@@ -19,7 +17,7 @@ public class EmployeeLoginDAO /*implements IEmployeeLoginDAO*/ {
 	@PersistenceContext(unitName = UNIT_NAME)
 	protected EntityManager em;
 	
-	
+	/*
 	public Employee getEmployee(String login, String pass) {
 		Employee employee = null;
 
@@ -37,4 +35,5 @@ public class EmployeeLoginDAO /*implements IEmployeeLoginDAO*/ {
 
 		return employee;
 	}
+	*/
 }

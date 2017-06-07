@@ -22,6 +22,9 @@ public class Cargo implements Serializable {
 
 	private String role;
 
+	@Column(name="users_idemployee")
+	private int usersIdemployee;
+
 	private int weight;
 
 	//bi-directional many-to-one association to Billoflading
@@ -37,6 +40,11 @@ public class Cargo implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="idtransport")
 	private Transport transport;
+
+	//bi-directional many-to-one association to User
+	@ManyToOne
+	@JoinColumn(name="users_idusers")
+	private User user;
 
 	//bi-directional many-to-one association to Deliveryhistory
 	@OneToMany(mappedBy="cargo")
@@ -75,6 +83,14 @@ public class Cargo implements Serializable {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public int getUsersIdemployee() {
+		return this.usersIdemployee;
+	}
+
+	public void setUsersIdemployee(int usersIdemployee) {
+		this.usersIdemployee = usersIdemployee;
 	}
 
 	public int getWeight() {
@@ -121,6 +137,14 @@ public class Cargo implements Serializable {
 
 	public void setTransport(Transport transport) {
 		this.transport = transport;
+	}
+
+	public User getUser() {
+		return this.user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public List<Deliveryhistory> getDeliveryhistories() {

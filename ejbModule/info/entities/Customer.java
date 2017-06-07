@@ -24,10 +24,6 @@ public class Customer implements Serializable {
 
 	private String telephone;
 
-	//bi-directional many-to-one association to Access
-	@OneToMany(mappedBy="customer")
-	private List<Access> accesses;
-
 	//bi-directional many-to-one association to Address
 	@OneToMany(mappedBy="customer")
 	private List<Address> addresses;
@@ -69,28 +65,6 @@ public class Customer implements Serializable {
 
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
-	}
-
-	public List<Access> getAccesses() {
-		return this.accesses;
-	}
-
-	public void setAccesses(List<Access> accesses) {
-		this.accesses = accesses;
-	}
-
-	public Access addAccess(Access access) {
-		getAccesses().add(access);
-		access.setCustomer(this);
-
-		return access;
-	}
-
-	public Access removeAccess(Access access) {
-		getAccesses().remove(access);
-		access.setCustomer(null);
-
-		return access;
 	}
 
 	public List<Address> getAddresses() {

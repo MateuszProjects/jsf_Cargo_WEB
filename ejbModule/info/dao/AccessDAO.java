@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import info.entities.Access;
+
 
 @Stateless
 public class AccessDAO {
@@ -15,7 +15,7 @@ public class AccessDAO {
 
 	@PersistenceContext(unitName = UNIT_NAME)
 	protected EntityManager em;
-
+/*
 	public Access getLogin(String login, String pass) {
 		Access access = null;
 
@@ -42,4 +42,5 @@ public class AccessDAO {
 
 		return access;
 	}
+	*/
 }

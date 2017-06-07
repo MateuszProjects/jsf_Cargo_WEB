@@ -19,6 +19,8 @@ public class Address implements Serializable {
 
 	private String cityCode;
 
+	private int idemployee;
+
 	private String streat;
 
 	//bi-directional many-to-one association to Customer
@@ -26,10 +28,10 @@ public class Address implements Serializable {
 	@JoinColumn(name="idcustomer")
 	private Customer customer;
 
-	//bi-directional many-to-one association to Employee
+	//bi-directional many-to-one association to User
 	@ManyToOne
-	@JoinColumn(name="idemployee")
-	private Employee employee;
+	@JoinColumn(name="users_idusers")
+	private User user;
 
 	public Address() {
 	}
@@ -50,6 +52,14 @@ public class Address implements Serializable {
 		this.cityCode = cityCode;
 	}
 
+	public int getIdemployee() {
+		return this.idemployee;
+	}
+
+	public void setIdemployee(int idemployee) {
+		this.idemployee = idemployee;
+	}
+
 	public String getStreat() {
 		return this.streat;
 	}
@@ -66,12 +76,12 @@ public class Address implements Serializable {
 		this.customer = customer;
 	}
 
-	public Employee getEmployee() {
-		return this.employee;
+	public User getUser() {
+		return this.user;
 	}
 
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

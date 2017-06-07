@@ -18,20 +18,11 @@ public class Role implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idrole;
 
-	private String name;
+	private String nameRole;
 
-	//bi-directional many-to-many association to Employee
-	@ManyToMany
-	@JoinTable(
-		name="idemployee"
-		, joinColumns={
-			@JoinColumn(name="role_idrole")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="employee_idemployee")
-			}
-		)
-	private List<Employee> employees;
+	//bi-directional many-to-many association to User
+	@ManyToMany(mappedBy="roles")
+	private List<User> users;
 
 	public Role() {
 	}
@@ -44,20 +35,20 @@ public class Role implements Serializable {
 		this.idrole = idrole;
 	}
 
-	public String getName() {
-		return this.name;
+	public String getNameRole() {
+		return this.nameRole;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNameRole(String nameRole) {
+		this.nameRole = nameRole;
 	}
 
-	public List<Employee> getEmployees() {
-		return this.employees;
+	public List<User> getUsers() {
+		return this.users;
 	}
 
-	public void setEmployees(List<Employee> employees) {
-		this.employees = employees;
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
 }
