@@ -8,12 +8,11 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import info.dao.AccessDAO;
-import info.dao.AddressDAO;
 
 
-import info.entities.Access;
+
+
 import info.entities.Customer;
-import info.entities.Employee;
 
 @ManagedBean
 @SessionScoped
@@ -24,11 +23,11 @@ public class LoginBB {
 	@EJB
 	AccessDAO accessDAO;
 	
-
+/*
 	@EJB
 	AddressDAO addressDAO;
-	
-
+	*/
+/*
 	private static final String PAGE_MAIN_ADMIN = "admin/admin?faces-redirect=true";
 	private static final String PAGE_LOGIN = "/index?faces-redirect=true";
 	private static final String PAGE_MAIN_USER = "users/user?faces-redirect=true";
@@ -133,5 +132,5 @@ public class LoginBB {
 		session.invalidate();
 		return PAGE_LOGIN;
 	}
-
+*/
 }
