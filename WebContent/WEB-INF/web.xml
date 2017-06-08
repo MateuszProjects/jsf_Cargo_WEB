@@ -11,6 +11,10 @@
 		<param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
 		<param-value>true</param-value>
 	</context-param>
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>excite-bike</param-value>
+	</context-param>
 	<filter>
 		<filter-name>SecurityFilter</filter-name>
 		<filter-class>info.SecurityCheckFilter.SecurityCheckFilter</filter-class>

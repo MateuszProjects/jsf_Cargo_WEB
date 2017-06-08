@@ -10,7 +10,5 @@ public class AddressBB {
 /*
 	@EJB
 	AddressDAO addressDAO;
-	*/
-	// test
-	// test 2
+*/
 }

@@ -9,10 +9,8 @@ import javax.servlet.http.HttpSession;
 
 import info.dao.AccessDAO;
 
-
-
-
 import info.entities.Customer;
+import info.entities.User;
 
 @ManagedBean
 @SessionScoped
@@ -22,12 +20,10 @@ public class LoginBB {
 
 	@EJB
 	AccessDAO accessDAO;
-	
-/*
-	@EJB
-	AddressDAO addressDAO;
-	*/
-/*
+
+	/*
+	 * @EJB AddressDAO addressDAO;
+	 */
 	private static final String PAGE_MAIN_ADMIN = "admin/admin?faces-redirect=true";
 	private static final String PAGE_LOGIN = "/index?faces-redirect=true";
 	private static final String PAGE_MAIN_USER = "users/user?faces-redirect=true";
@@ -35,7 +31,6 @@ public class LoginBB {
 
 	public String login;
 	public String pass;
-
 
 	public String getLogin() {
 		return login;
@@ -52,8 +47,6 @@ public class LoginBB {
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
-
-	
 
 	public boolean validateData() {
 		boolean result = true;
@@ -78,53 +71,45 @@ public class LoginBB {
 
 	public String doLogin() {
 		FacesContext ctx = FacesContext.getCurrentInstance();
-		Access access = null;
-		Employee employee = null;
-		Customer customer = null;
+		User user = null;
 
 		if (!validateData()) {
 			return PAGE_STAY_AT_THE_SAME;
 		}
 
 		try {
-			access = accessDAO.getLogin(login, pass);
+			user = accessDAO.getLogin(login, pass);
 
-			employee = access.getEmployee();
-			customer = access.getCustomer();
-			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 
-		
 		HttpSession session = (HttpSession) ctx.getExternalContext().getSession(true);
-		
-		if(employee != null){
-		session.setAttribute("employee", employee);
-		}
-		
-		if(customer != null){
-		session.setAttribute("customer", customer);
+
+		if (user != null) {
+			session.setAttribute("user", user);
 		}
 
-		if (employee != null) {
+		if (user != null) {
+			
+			if(user.getRoles().get(0).getNameRole().equals("admin")){
 			return PAGE_MAIN_ADMIN;
-		} else if (customer != null) {
-			return PAGE_MAIN_USER;
+			}
+			
+			if(user.getRoles().get(0).getNameRole().equals("user"))
+			{
+				return PAGE_MAIN_USER;
+			}
 		}
 
-		return PAGE_MAIN_ADMIN;
+
+		 return null;
 
 	}
 
-	public Employee getEmployee() {
+	public User getUser() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-		return (Employee) session.getAttribute("employee");
-	}
-
-	public Customer getCustomer() {
-		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-		return (Customer) session.getAttribute("customer");
+		return (User) session.getAttribute("user");
 	}
 
 	public String doLogout() {
@@ -132,5 +117,5 @@ public class LoginBB {
 		session.invalidate();
 		return PAGE_LOGIN;
 	}
-*/
+
 }

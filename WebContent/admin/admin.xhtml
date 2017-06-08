@@ -5,12 +5,31 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
-	
+
 <ui:composition template="/templates/main-template.xhtml">
 
 	<ui:define name="content">
-	<p>Admin</p>
+		<p>Admin</p>
+		<h:form>
+			<p:growl id="growl" life="2000" />
+
+			<p:commandButton value="Ajax Submit" id="ajax" update="growl"
+				actionListener="#{buttonView.buttonAction}"
+				styleClass="ui-priority-primary" />
+
+			<p:commandButton value="Non-Ajax Submit" id="nonAjax"
+				actionListener="#{buttonView.buttonAction}" ajax="false" />
+
+			<p:commandButton value="With Icon" id="withIcon"
+				actionListener="#{buttonView.buttonAction}" update="growl"
+				icon="ui-icon-disk" />
+
+			<p:commandButton actionListener="#{buttonView.buttonAction}"
+				id="iconOnly" update="growl" icon="ui-icon-disk" title="Icon Only" />
+
+			<p:commandButton value="Disabled" id="disabled" disabled="true" />
+		</h:form>
 	</ui:define>
-	
+
 </ui:composition>
 </html>
