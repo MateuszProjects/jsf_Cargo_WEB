@@ -14,9 +14,13 @@ Module Login: <br/>
 Multi login for Employees and Customer. Function check your role in system. 
  
 Module User: </br>
-- Address </br>
+
+* Customer - User:
+- Edit - own Address </br>
 - Payment </br>
-- Role
 
-Module Cargo: </br>
-
+* Employee - Admin
+- Add/Edit Customer </br>
+- Add/Edit Employeee </br>
+- Add/Edit Role </br>
+- Add/Edit Address </br>
