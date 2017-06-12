@@ -39,7 +39,7 @@
 
 		<!-- Main Header -->
 		<header class="main-header"> <!-- Logo --> <a
-			href="index2.html" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+			href="user.jsf" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
 			<span class="logo-mini"><b>A</b>LT</span> <!-- logo for regular state and mobile devices -->
 			<span class="logo-lg"><b>Admin</b>LTE</span>
 		</a> <!-- Header Navbar --> <nav class="navbar navbar-static-top"
@@ -206,11 +206,7 @@
 				<img src="resources/dist/img/user2-160x160.jpg" class="img-circle"
 					alt="User Image" />
 			</div>
-			<div class="pull-left info">
-				<p>Alexander Pierce</p>
-				<!-- Status -->
-				<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-			</div>
+
 		</div>
 
 
@@ -222,20 +218,21 @@
 			<!-- Optionally, you can add icons to the links -->
 			<li class="active"></li>
 			
-			<li><a href="#"><i class="fa fa-link"> </i> <span>Address</span></a></li>
-			<li><a href="#"><i class="fa fa-link"> </i> <span>Payment</span></a></li>
-			<li><a href="#"><i class="fa fa-link"> </i> <span>Customer</span></a></li>				
-			<li><a href="#"><i class="fa fa-link"> </i> <span>Transport</span></a></li>
-			<li><a href="#"><i class="fa fa-link"> </i> <span>Cargo</span></a></li>					
+			<li><a href="u_address.jsf"><i class="fa fa-link"> </i> <span>Address</span></a></li>
+			<li><a href="u_payment.jsf"><i class="fa fa-link"> </i> <span>Payment</span></a></li>				
+			<li><a href="u_account.jsf"><i class="fa fa-link"> </i> <span>Account</span></a></li>			
 			
-			<li class="treeview"><a href="admin/a_address.jsf"><i
-					class="fa fa-link"></i> <span>Multilevel</span> <span
+			<li class="treeview"><a href="u_cargo.jsf"><i
+					class="fa fa-link"></i> <span>Cargo</span> <span
 					class="pull-right-container"> <i
 						class="fa fa-angle-left pull-right"></i>
 				</span> </a>
 				<ul class="treeview-menu">
-					<li><a href="#">Link in level 2</a></li>
-					<li><a href="#">Link in level 2</a></li>
+					<li><a href="u_cargo.jsf">Cargo</a></li>
+					<li><a href="u_transport.jsf">Transport</a></li>
+					<li><a href="u_deliveryhistory.jsf">Delivery History</a></li>
+					<li><a href="u_handingevent.jsf">Handing Event</a></li>
+					<li><a href="u_deliveryspecification.jsf">Delivery Specification</a></li>
 				</ul></li>
 		</ul>
 		<!-- end Sidebar Menu --> <!-- /.sidebar-menu --> </section> <!-- /.sidebar -->
