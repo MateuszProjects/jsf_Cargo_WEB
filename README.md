@@ -15,11 +15,11 @@ Multi login for Employees and Customer. Function check your role in system.
  
 Module User: </br>
 
-* Customer - User:
-- Edit - own Address </br>
+Customer - User:
+- Edit own Address </br>
 - Payment </br>
 
-* Employee - Admin
+Employee - Admin
 - Add/Edit Customer </br>
 - Add/Edit Employeee </br>
 - Add/Edit Role </br>
