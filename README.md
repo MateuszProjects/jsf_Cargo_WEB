@@ -24,3 +24,5 @@ Employee - Admin
 - Add/Edit Employeee </br>
 - Add/Edit Role </br>
 - Add/Edit Address </br>
+- Add/Edit Cargo </br>
+- Add/Edit Transport </br>
