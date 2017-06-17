@@ -26,3 +26,5 @@ Employee - Admin
 - Add/Edit Address </br>
 - Add/Edit Cargo </br>
 - Add/Edit Transport </br>
+
+#Cargo </br>
