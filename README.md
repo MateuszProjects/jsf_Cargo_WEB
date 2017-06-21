@@ -30,3 +30,4 @@ Employee - Admin
 #Cargo </br>
 - add new transport </br>
 - add or edit Delivery History </br>
+- add or edit Spedition </br>
