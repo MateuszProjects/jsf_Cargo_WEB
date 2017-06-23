@@ -31,3 +31,4 @@ Employee - Admin
 - add new transport </br>
 - add or edit Delivery History </br>
 - add or edit Spedition </br>
+- add or edit Delivery specification </br>
