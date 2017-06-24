@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import info.dao.AccessDAO;
 
-import info.entities.Customer;
 import info.entities.User;
 
 @ManagedBean
@@ -100,6 +99,8 @@ public class LoginBB {
 			{
 				return PAGE_MAIN_USER;
 			}
+			
+		
 		}
 
 
