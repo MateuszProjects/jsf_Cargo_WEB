@@ -12,6 +12,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.primefaces.event.FlowEvent;
 import org.primefaces.model.LazyDataModel;
 
 import info.dao.AddressDAO;
@@ -25,10 +26,10 @@ public class AddressBB implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@EJB
 	AddressDAO addressDAO;
-	
+
 	private LazyDataModelAddress lazyModel = null;
 
 	@PostConstruct
@@ -42,6 +43,26 @@ public class AddressBB implements Serializable {
 		lazyModel.setSearchParams(searchParams);
 		lazyModel.setAddressDAO(addressDAO);
 		return lazyModel;
+
+	}
+
+	private boolean skip;
+
+	public boolean isSkip() {
+		return skip;
+	}
+
+	public void setSkip(boolean skip) {
+		this.skip = skip;
+	}
+
+	public String onFlowProcess(FlowEvent event) {
+		if (skip) {
+			skip = false; // reset in case user goes back
+			return "confirm";
+		} else {
+			return event.getNewStep();
+		}
 
 	}
 }
