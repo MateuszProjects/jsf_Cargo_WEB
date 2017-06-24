@@ -7,7 +7,7 @@ import javax.persistence.PersistenceContext;
 import info.entities.User;
 
 @Stateless
-public class UserDAO {
+public class CustomerDAO {
 
 	private final static String UNIT_NAME = "jsfcourse-CargoPU";
 
@@ -18,7 +18,7 @@ public class UserDAO {
 		return em.find(User.class, id);
 	}
 
-	public void createUser(User user) {
+	public void createUserCustomer(User user) {
 		em.persist(user);
 	}
 

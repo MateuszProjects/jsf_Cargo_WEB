@@ -4,25 +4,25 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import info.entities.User;
+import info.entities.Transport;
 
 @Stateless
-public class UserDAO {
-
+public class TransportDAO {
+	
 	private final static String UNIT_NAME = "jsfcourse-CargoPU";
 
 	@PersistenceContext(unitName = UNIT_NAME)
 	protected EntityManager em;
-
-	public User find(Integer id) {
-		return em.find(User.class, id);
+	
+	public Transport find(Integer id) {
+		return em.find(Transport.class, id);
 	}
 
-	public void createUser(User user) {
-		em.persist(user);
+	public void createTransport(Transport transport ) {
+		em.persist(transport);
 	}
 
-	public void remove(User user) {
-		em.remove(em.merge(user));
+	public void remove(Transport transport) {
+		em.remove(em.merge(transport));
 	}
 }
