@@ -35,6 +35,8 @@ public class AddressDAO {
 	public List<Address> getAddressList(Map<String, Object> searchParams,PaginationInfo info) {
 		List<Address> list = null;
 		
+		// add searchParams 
+		
 		String select = "select p ";
 		String from = "from Address p ";
 		String where = "";
