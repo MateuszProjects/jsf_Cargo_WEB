@@ -57,7 +57,7 @@ public class LazyDataModelCargo extends LazyDataModel<Cargo> {
 
 		list = cargoDAO.getCargoList(searchParams, info);
 		setRowCount(info.getCount());
-		return null;
+		return list;
 	}
 
 }
