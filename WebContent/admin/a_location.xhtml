@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/templates/main-template.xhtml">
+
+	<ui:define name="content">
+		<p>Admin Cargo</p>
+		
+		<h:form>
+			<p:panel id="button_panel" widgetVar="List Panel" closable="true"
+				toggleable="true" header="Panel One">
+				<h1>Panel List</h1>
+
+				<p:dataTable var="location" paginator="true" rows="10"
+					value="#{locationBB.lazyList}"
+					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+					rowsPerPageTemplate="5,10,15" selectionMode="single" id="table"
+					lazy="true">
+
+
+
+					<p:column headerText="Id Location">
+						<h:outputText value="#{location.idlocation}" />
+					</p:column>
+
+
+
+					<p:column headerText="Edit">
+						<h:form>
+							<p:commandButton value="Edit" styleClass="ui-priority-primary" />
+						</h:form>
+					</p:column>
+
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>

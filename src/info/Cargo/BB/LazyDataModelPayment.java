@@ -8,7 +8,6 @@ import org.primefaces.model.SortOrder;
 
 import info.dao.PaginationInfo;
 import info.dao.PaymentDAO;
-import info.entities.Cargo;
 import info.entities.Payment;
 
 public class LazyDataModelPayment extends LazyDataModel<Payment> {
