@@ -20,21 +20,13 @@ public class Cargo implements Serializable {
 
 	private String hazMat;
 
-	private String role;
+	private String name;
 
-	@Column(name="users_idemployee")
-	private int usersIdemployee;
-
-	private int weight;
+	private double weight;
 
 	//bi-directional many-to-one association to Billoflading
 	@OneToMany(mappedBy="cargo")
 	private List<Billoflading> billofladings;
-
-	//bi-directional many-to-one association to Customer
-	@ManyToOne
-	@JoinColumn(name="idcustomer")
-	private Customer customer;
 
 	//bi-directional many-to-one association to Transport
 	@ManyToOne
@@ -77,27 +69,19 @@ public class Cargo implements Serializable {
 		this.hazMat = hazMat;
 	}
 
-	public String getRole() {
-		return this.role;
+	public String getName() {
+		return this.name;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public int getUsersIdemployee() {
-		return this.usersIdemployee;
-	}
-
-	public void setUsersIdemployee(int usersIdemployee) {
-		this.usersIdemployee = usersIdemployee;
-	}
-
-	public int getWeight() {
+	public double getWeight() {
 		return this.weight;
 	}
 
-	public void setWeight(int weight) {
+	public void setWeight(double weight) {
 		this.weight = weight;
 	}
 
@@ -121,14 +105,6 @@ public class Cargo implements Serializable {
 		billoflading.setCargo(null);
 
 		return billoflading;
-	}
-
-	public Customer getCustomer() {
-		return this.customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
 	}
 
 	public Transport getTransport() {

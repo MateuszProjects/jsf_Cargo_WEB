@@ -21,6 +21,8 @@ public class Deliveryhistory implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date arrivayDate;
 
+	private String coment;
+
 	@Temporal(TemporalType.DATE)
 	private Date leaveDate;
 
@@ -46,6 +48,14 @@ public class Deliveryhistory implements Serializable {
 
 	public void setArrivayDate(Date arrivayDate) {
 		this.arrivayDate = arrivayDate;
+	}
+
+	public String getComent() {
+		return this.coment;
+	}
+
+	public void setComent(String coment) {
+		this.coment = coment;
 	}
 
 	public Date getLeaveDate() {

@@ -18,11 +18,9 @@ public class Transport implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idtransport;
 
-	private int idemployee;
-
 	private String name;
 
-	private double pay;
+	private double paykm;
 
 	//bi-directional many-to-one association to Cargo
 	@OneToMany(mappedBy="transport")
@@ -39,14 +37,6 @@ public class Transport implements Serializable {
 		this.idtransport = idtransport;
 	}
 
-	public int getIdemployee() {
-		return this.idemployee;
-	}
-
-	public void setIdemployee(int idemployee) {
-		this.idemployee = idemployee;
-	}
-
 	public String getName() {
 		return this.name;
 	}
@@ -55,12 +45,12 @@ public class Transport implements Serializable {
 		this.name = name;
 	}
 
-	public double getPay() {
-		return this.pay;
+	public double getPaykm() {
+		return this.paykm;
 	}
 
-	public void setPay(double pay) {
-		this.pay = pay;
+	public void setPaykm(double paykm) {
+		this.paykm = paykm;
 	}
 
 	public List<Cargo> getCargos() {

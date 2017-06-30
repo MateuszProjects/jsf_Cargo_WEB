@@ -19,7 +19,11 @@ public class Address implements Serializable {
 
 	private String cityCode;
 
+	private String email;
+
 	private String streat;
+
+	private String telephone;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
@@ -45,12 +49,28 @@ public class Address implements Serializable {
 		this.cityCode = cityCode;
 	}
 
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getStreat() {
 		return this.streat;
 	}
 
 	public void setStreat(String streat) {
 		this.streat = streat;
+	}
+
+	public String getTelephone() {
+		return this.telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
 	}
 
 	public User getUser() {

@@ -33,7 +33,7 @@ public class TransportDAO {
 	public List<Transport> getSearchList(Map<String, Object> searchParams, PaginationInfo info) {
 
 		List<Transport> list = null;
-
+		
 		String select = "select c ";
 		String from = "from Transport c ";
 		String where = "";
