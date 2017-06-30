@@ -17,6 +17,7 @@ import org.primefaces.model.LazyDataModel;
 
 import info.dao.TransportDAO;
 import info.entities.Transport;
+import info.lazydatamodel.LazyDataModelTransport;
 
 @ManagedBean
 @ViewScoped

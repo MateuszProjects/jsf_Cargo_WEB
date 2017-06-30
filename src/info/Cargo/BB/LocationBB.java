@@ -13,6 +13,7 @@ import org.primefaces.model.LazyDataModel;
 
 import info.dao.LoactionDAO;
 import info.entities.Location;
+import info.lazydatamodel.LazyDataModelLoaction;
 
 @ManagedBean
 @ViewScoped

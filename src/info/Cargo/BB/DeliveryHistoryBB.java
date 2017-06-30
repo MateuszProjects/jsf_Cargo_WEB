@@ -13,6 +13,7 @@ import org.primefaces.model.LazyDataModel;
 
 import info.dao.DeliveryhistoryDAO;
 import info.entities.Deliveryhistory;
+import info.lazydatamodel.LazyDataModelDeliveryhistory;
 
 @ManagedBean
 @ViewScoped

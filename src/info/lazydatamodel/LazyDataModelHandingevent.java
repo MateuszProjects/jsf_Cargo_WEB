@@ -1,4 +1,4 @@
-package info.Cargo.BB;
+package info.lazydatamodel;
 
 import org.primefaces.model.LazyDataModel;
 
@@ -9,6 +9,8 @@ public class LazyDataModelHandingevent extends LazyDataModel<Handlingevent>{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -727271158771826682L;
+	private static final long serialVersionUID = 1L;
+
+	
 
 }

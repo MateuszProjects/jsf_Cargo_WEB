@@ -1,4 +1,4 @@
-package info.Cargo.BB;
+package info.lazydatamodel;
 
 import org.primefaces.model.LazyDataModel;
 
@@ -9,6 +9,8 @@ public class LazyDataModelDeliveryspecification extends LazyDataModel<Deliveryhi
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -573315501600617198L;
+	private static final long serialVersionUID = 1L;
+
+
 
 }

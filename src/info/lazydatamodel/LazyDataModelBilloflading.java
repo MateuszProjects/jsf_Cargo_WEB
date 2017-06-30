@@ -1,4 +1,4 @@
-package info.Cargo.BB;
+package info.lazydatamodel;
 
 import org.primefaces.model.LazyDataModel;
 
@@ -9,6 +9,7 @@ public class LazyDataModelBilloflading extends LazyDataModel<Billoflading> {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7353013143042671762L;
+	private static final long serialVersionUID = 1L;
+
 
 }

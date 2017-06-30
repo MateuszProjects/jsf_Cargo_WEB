@@ -1,4 +1,4 @@
-package info.Cargo.BB;
+package info.lazydatamodel;
 
 import java.util.List;
 import java.util.Map;
@@ -7,18 +7,19 @@ import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
 import info.dao.PaginationInfo;
-import info.dao.PaymentDAO;
-import info.entities.Payment;
+import info.dao.UserDAO;
+import info.entities.User;
 
-public class LazyDataModelPayment extends LazyDataModel<Payment> {
+public class LazyDataModelEmployee extends LazyDataModel<User> {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	PaymentDAO paymentDAO;
 
+	UserDAO userDAO;
+	
 	private Map<String, Object> searchParams;
 
 	public Map<String, Object> getSearchParams() {
@@ -29,31 +30,30 @@ public class LazyDataModelPayment extends LazyDataModel<Payment> {
 		this.searchParams = searchParams;
 	}
 
-	public void setPaymentDAO(PaymentDAO paymentDAO) {
-		this.paymentDAO = paymentDAO;
+	public void setUserDAO(UserDAO userDAO) {
+		this.userDAO = userDAO;
 	}
-
+	
 	@Override
-	public Payment getRowData(String rowKey) {
+	public User getRowData(String rowKey) {
 		return null;
 	}
-
+	
 	@Override
-	public Object getRowKey(Payment payment) {
+	public Object getRowKey(User user) {
 		return null;
 	}
-
+	
 	@Override
-	public List<Payment> load(int first, int pageSize, String sortField, SortOrder sortOrder,
+	public List<User> load(int first, int pageSize, String sortField, SortOrder sortOrder,
 			Map<String, Object> filters) {
-		List<Payment> list = null;
+		List<User> list = null;
 		PaginationInfo info = new PaginationInfo();
 		info.setLimit(pageSize);
 		info.setOffset(first);
-		list = paymentDAO.getSearchList(searchParams, info);
+		
+		// list = userDAO.getUserEmployeeList(searchParams, info);
 		setRowCount(info.getCount());
 		return list;
-
 	}
-
 }

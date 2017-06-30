@@ -1,4 +1,4 @@
-package info.Cargo.BB;
+package info.lazydatamodel;
 
 import java.util.List;
 import java.util.Map;
@@ -6,18 +6,19 @@ import java.util.Map;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
-import info.dao.DeliveryhistoryDAO;
 import info.dao.PaginationInfo;
-import info.entities.Deliveryhistory;
+import info.dao.TransportDAO;
+import info.entities.Location;
+import info.entities.Transport;
 
-public class LazyDataModelDeliveryhistory extends LazyDataModel<Deliveryhistory> {
+public class LazyDataModelTransport extends LazyDataModel<Transport> {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	DeliveryhistoryDAO deliveryhistoryDAO;
+	TransportDAO transportDAO;
 
 	private Map<String, Object> searchParams;
 
@@ -29,30 +30,30 @@ public class LazyDataModelDeliveryhistory extends LazyDataModel<Deliveryhistory>
 		this.searchParams = searchParams;
 	}
 
-	public void setDeliveryhistoryDAO(DeliveryhistoryDAO deliveryhistoryDAO) {
-		this.deliveryhistoryDAO = deliveryhistoryDAO;
+	public void setTransportDAO(TransportDAO transportDAO) {
+		this.transportDAO = transportDAO;
 	}
 
 	@Override
-	public Deliveryhistory getRowData(String rowKey) {
+	public Transport getRowData(String rowKey) {
 		return null;
 	}
 
 	@Override
-	public Object getRowKey(Deliveryhistory deliveryhistory) {
+	public Object getRowKey(Transport transport) {
 		return null;
 	}
 
 	@Override
-	public List<Deliveryhistory> load(int first, int pageSize, String sortField, SortOrder sortOrder,
+	public List<Transport> load(int first, int pageSize, String sortField, SortOrder sortOrder,
 			Map<String, Object> filters) {
-		List<Deliveryhistory> list = null;
+		List<Transport> list = null;
 		PaginationInfo info = new PaginationInfo();
 		info.setLimit(pageSize);
 		info.setOffset(first);
 
-		list = deliveryhistoryDAO.getSearchList(searchParams, info);
 		setRowCount(info.getCount());
+		list = transportDAO.getSearchList(searchParams, info);
 		return list;
 	}
 

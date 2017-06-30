@@ -13,6 +13,7 @@ import org.primefaces.model.LazyDataModel;
 
 import info.dao.PaymentDAO;
 import info.entities.Payment;
+import info.lazydatamodel.LazyDataModelPayment;
 
 @ManagedBean
 @ViewScoped

@@ -17,6 +17,7 @@ import org.primefaces.model.LazyDataModel;
 
 import info.dao.AddressDAO;
 import info.entities.Address;
+import info.lazydatamodel.LazyDataModelAddress;
 
 @ManagedBean
 @ViewScoped

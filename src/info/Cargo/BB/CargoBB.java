@@ -13,6 +13,7 @@ import org.primefaces.model.LazyDataModel;
 
 import info.dao.CargoDAO;
 import info.entities.Cargo;
+import info.lazydatamodel.LazyDataModelCargo;
 
 @ManagedBean
 @ViewScoped
