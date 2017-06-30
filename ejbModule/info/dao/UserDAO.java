@@ -1,8 +1,12 @@
 package info.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import info.entities.User;
 
@@ -24,5 +28,67 @@ public class UserDAO {
 
 	public void remove(User user) {
 		em.remove(em.merge(user));
+	}
+
+	public List<User> getEmployeeList(Map<String, Object> searchParams, PaginationInfo info) {
+		List<User> list = null;
+		// add searchParams
+
+		String select = "select p ";
+		String from = "from User p ";
+		String where = "";
+		String join = "";
+
+		Query querycount = em.createQuery("SELECT COUNT(p.idusers) " + from + join + where);
+
+		try {
+			Number n = (Number) querycount.getSingleResult();
+			info.setCount(n.intValue());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		Query query = em.createQuery(select + from + join + where);
+		query.setFirstResult(info.getOffset());
+		query.setMaxResults(info.getLimit());
+
+		try {
+			list = query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public List<User> getCustomerList(Map<String, Object> searchParams, PaginationInfo info) {
+		List<User> list = null;
+		// add searchParams
+
+		String select = "SELECT u  ";
+		String from = "from User u ";
+		String where = "";
+		String join = "";
+
+		Query querycount = em.createQuery("SELECT COUNT(u.idusers) " + from + join + where);
+
+		try {
+			Number n = (Number) querycount.getSingleResult();
+			info.setCount(n.intValue());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		Query query = em.createQuery(select + from + join + where);
+		query.setFirstResult(info.getOffset());
+		query.setMaxResults(info.getLimit());
+
+		try {
+			list = query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 }

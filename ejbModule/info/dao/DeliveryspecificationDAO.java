@@ -1,8 +1,12 @@
 package info.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import info.entities.Deliveryspecification;
 
@@ -24,5 +28,37 @@ public class DeliveryspecificationDAO {
 
 	public void remove(Deliveryspecification deliveryspecification) {
 		em.remove(em.merge(deliveryspecification));
+	}
+
+	public List<Deliveryspecification> getDeliberySpecyficationList(Map<String, Object> searchParams, PaginationInfo info) {
+		List<Deliveryspecification> list = null;
+		// add searchParams
+
+		String select = "select p ";
+		String from = "from Deliveryspecification p ";
+		String where = "";
+		String join = "";
+
+		Query querycount = em.createQuery("SELECT COUNT(p.iddeliverySpecification) " + from + join + where);
+
+		try {
+			Number n = (Number) querycount.getSingleResult();
+			info.setCount(n.intValue());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		Query query = em.createQuery(select + from + join + where);
+		query.setFirstResult(info.getOffset());
+		query.setMaxResults(info.getLimit());
+
+		try {
+			list = query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
 	}
 }
