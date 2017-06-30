@@ -50,7 +50,7 @@ public class LazyDataModelCustomer  extends LazyDataModel<User> {
 		info.setLimit(pageSize);
 		info.setOffset(first);
 		
-		// list = userDAO.getUserCustomerList(searchParams, info);
+	    list = userDAO.getCustomerList(searchParams, info);
 		setRowCount(info.getCount());
 		return list;
 	}

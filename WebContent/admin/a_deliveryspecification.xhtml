@@ -10,12 +10,32 @@
 
 	<ui:define name="content">
 		<p>Admin Delivery Specification</p>
-		
+
 		<h:form>
 			<p:panel id="button_panel" widgetVar="testPanel" closable="true"
 				toggleable="true" header="Panel One">
 				<h1>Testing</h1>
+				<p:dataTable var="spec" paginator="true" rows="10"
+					value="#{deliverSpecificationBB.lazyList}"
+					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+					rowsPerPageTemplate="5,10,15" selectionMode="single" id="table"
+					lazy="true">
 
+
+
+					<p:column headerText="Id address">
+						<h:outputText value="#{spec.iddeliverySpecification}" />
+					</p:column>
+
+
+
+					<p:column headerText="Edit">
+						<h:form>
+							<p:commandButton value="Edit" styleClass="ui-priority-primary" />
+						</h:form>
+					</p:column>
+
+				</p:dataTable>
 			</p:panel>
 		</h:form>
 	</ui:define>

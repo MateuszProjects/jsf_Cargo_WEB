@@ -8,7 +8,6 @@ import org.primefaces.model.SortOrder;
 
 import info.dao.PaginationInfo;
 import info.dao.TransportDAO;
-import info.entities.Location;
 import info.entities.Transport;
 
 public class LazyDataModelTransport extends LazyDataModel<Transport> {

@@ -52,7 +52,7 @@ public class LazyDataModelEmployee extends LazyDataModel<User> {
 		info.setLimit(pageSize);
 		info.setOffset(first);
 		
-		// list = userDAO.getUserEmployeeList(searchParams, info);
+		 list = userDAO.getEmployeeList(searchParams, info);
 		setRowCount(info.getCount());
 		return list;
 	}
