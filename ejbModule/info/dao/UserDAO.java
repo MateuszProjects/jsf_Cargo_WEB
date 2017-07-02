@@ -37,7 +37,9 @@ public class UserDAO {
 		String select = "select p ";
 		String from = "from User p ";
 		String where = "";
-		String join = "";
+		String group_by = "";
+		String having = "";
+		// String join = "join u.address a ON a.idaddress = u.users_idaddress";
 
 		/*if (idAddress != null) {
 		if (where.isEmpty()) {
@@ -51,7 +53,7 @@ public class UserDAO {
 		where += " c.idCustomer like :idCustomer ";
 	}*/
 		
-		Query querycount = em.createQuery("SELECT COUNT(p.idusers) " + from + join + where);
+		Query querycount = em.createQuery("SELECT COUNT(p.idusers) " + from + where);
 
 		try {
 			Number n = (Number) querycount.getSingleResult();
@@ -60,8 +62,8 @@ public class UserDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		Query query = em.createQuery(select + from + join + where);
+		// add join...
+		Query query = em.createQuery(select + from  + where);
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
 
