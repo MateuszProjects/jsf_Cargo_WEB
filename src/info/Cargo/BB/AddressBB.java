@@ -131,10 +131,6 @@ public class AddressBB implements Serializable {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		boolean result = false;
 
-		if (idAddress == null) {
-			ctx.addMessage(null, new FacesMessage("idAddress Wymagane"));
-		}
-
 		if (cityCode == null) {
 			ctx.addMessage(null, new FacesMessage("cityCode Wymagane"));
 		}
@@ -152,7 +148,6 @@ public class AddressBB implements Serializable {
 		}
 
 		if (ctx.getMessageList().isEmpty()) {
-			address.setIdaddress(idAddress);
 			address.setCityCode(cityCode);
 			address.setTelephone(telephone);
 			address.setStreat(street);

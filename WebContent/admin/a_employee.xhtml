@@ -53,7 +53,7 @@
 						<p:panel header="Personal Details">
 							<p:messages />
 							<h:panelGrid columns="2" columnClasses="label, value">
-				
+
 
 								<h:outputText value="Name" />
 								<p:inputText value="#{employeeBB.name}" label="Name" />
@@ -76,6 +76,10 @@
 								<h:outputText value="pass: " />
 								<p:inputText value="#{employeeBB.pass}" label="pass " />
 
+								<h:outputText value="Passsdfa "
+									rendered="#{employeeBB.renderIs('Jan')}" />
+																	<h:outputText value="Passsdfa "
+									rendered="#{employeeBB.renderIs('Jan')}" />
 							</h:panelGrid>
 						</p:panel>
 					</p:tab>
@@ -85,7 +89,7 @@
 							<h:panelGrid id="confirmation" columns="3"
 								columnClasses="grid,grid,grid">
 								<h:panelGrid columns="2" columnClasses="label, value">
-							
+
 
 									<h:outputText value="Name: " />
 									<h:outputText value="#{employeeBB.name}"
@@ -105,12 +109,18 @@
 									<h:outputText value="Pass " />
 									<h:outputText value="#{employeeBB.pass}"
 										styleClass="outputLabel" />
+
+
+
+
+
 								</h:panelGrid>
 
 							</h:panelGrid>
 
-							<p:commandButton value="Submit" actionListener="#{employeeBB.save}"
-								update="button_panel"  process="@this"/>
+							<p:commandButton value="Submit"
+								actionListener="#{employeeBB.save}" update="button_panel"
+								process="@this" />
 						</p:panel>
 					</p:tab>
 				</p:wizard>

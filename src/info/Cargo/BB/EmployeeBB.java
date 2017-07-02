@@ -106,6 +106,15 @@ public class EmployeeBB implements Serializable {
 
 	}
 
+	public boolean renderIs(String name){
+		boolean result = false;
+		if(name.equals(Surname)){
+			result = true;
+		}
+		return result;
+	}
+	
+	
 	private boolean validate() {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		boolean result = false;
