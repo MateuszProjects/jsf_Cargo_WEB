@@ -35,6 +35,18 @@ public class BillofladingDAO {
 
 		// add searchParams
 
+		/*if (idAddress != null) {
+		if (where.isEmpty()) {
+			where = "where ";
+		} else {
+			where += " or ";
+		}
+		if (join.isEmpty()) {
+			join = " join p.idaddress p  ";
+		}
+		where += " c.idCustomer like :idCustomer ";
+	}*/
+		
 		String select = "select p ";
 		String from = "from Billoflading p ";
 		String where = "";

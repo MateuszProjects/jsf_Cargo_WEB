@@ -33,12 +33,27 @@ public class DeliveryhistoryDAO {
 	
 	public List<Deliveryhistory>  getSearchList(Map<String, Object> searchParams,PaginationInfo info){
 		List<Deliveryhistory> list = null;
+		
 		String select = "select c ";
 		String from = "from Deliveryhistory c ";
 		String where = "";
 		String orderby = "";
 		String join = "";
 
+		
+		/*if (idAddress != null) {
+		if (where.isEmpty()) {
+			where = "where ";
+		} else {
+			where += " or ";
+		}
+		if (join.isEmpty()) {
+			join = " join p.idaddress p  ";
+		}
+		where += " c.idCustomer like :idCustomer ";
+	}*/
+		
+		
 		Query querycount = em.createQuery("SELECT COUNT(c.iddeliveryHistory) " + from + join + where);
 
 		try {

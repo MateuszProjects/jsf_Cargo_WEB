@@ -39,6 +39,19 @@ public class CargoDAO {
 		String join = "";
 		
 		
+		/*if (idAddress != null) {
+		if (where.isEmpty()) {
+			where = "where ";
+		} else {
+			where += " or ";
+		}
+		if (join.isEmpty()) {
+			join = " join p.idaddress p  ";
+		}
+		where += " c.idCustomer like :idCustomer ";
+	}*/
+		
+		
 		Query querycount = em.createQuery("SELECT COUNT(c.idcargo) " + from + join + where);
 		
 		
