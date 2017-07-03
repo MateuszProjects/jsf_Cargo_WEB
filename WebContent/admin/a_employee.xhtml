@@ -40,15 +40,14 @@
 		</h:form>
 
 
+		<p:panel id="panel_edit" widgetVar="test" closable="true"
+			toggleable="true" header="Panel AddUser" collapsed="true">
 
 
-
-		<p:panel id="button_panel" widgetVar="test" closable="true"
-			toggleable="true" header="Panel One" collapsed="true">
-			<h:form id="panelAdd">
+			<h:form id="panelEdit">
 				<p:growl id="growl" sticky="true" showDetail="true" />
 
-				<p:wizard flowListener="#{addressBB.onFlowProcess}">
+				<p:wizard flowListener="#{employeeBB.onFlowProcess}">
 					<p:tab id="personal" title="Personal">
 						<p:panel header="Personal Details">
 							<p:messages />
@@ -78,14 +77,14 @@
 
 								<h:outputText value="Passsdfa "
 									rendered="#{employeeBB.renderIs('Jan')}" />
-																	<h:outputText value="Passsdfa "
+								<h:outputText value="Passsdfa "
 									rendered="#{employeeBB.renderIs('Jan')}" />
 							</h:panelGrid>
 						</p:panel>
 					</p:tab>
 
 					<p:tab id="confirm" title="Confirmation">
-						<p:panel header="Confirmation">
+						<p:panel id="conf" header="Confirmation">
 							<h:panelGrid id="confirmation" columns="3"
 								columnClasses="grid,grid,grid">
 								<h:panelGrid columns="2" columnClasses="label, value">
@@ -110,25 +109,22 @@
 									<h:outputText value="#{employeeBB.pass}"
 										styleClass="outputLabel" />
 
-
-
-
-
 								</h:panelGrid>
-
 							</h:panelGrid>
 
 							<p:commandButton value="Submit"
-								actionListener="#{employeeBB.save}" update="button_panel"
+								actionListener="#{employeeBB.save()}" update="growl"
 								process="@this" />
+							<h:commandButton value="Reset p:ajax" style="margin-right:20px;">
+								<p:ajax update="conf" resetValues="true" />
+							</h:commandButton>
+
 						</p:panel>
 					</p:tab>
 				</p:wizard>
 			</h:form>
+
 		</p:panel>
-
-
-
 	</ui:define>
 
 </ui:composition>

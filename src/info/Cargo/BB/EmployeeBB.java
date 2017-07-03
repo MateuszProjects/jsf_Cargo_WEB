@@ -99,7 +99,7 @@ public class EmployeeBB implements Serializable {
 	public String onFlowProcess(FlowEvent event) {
 		if (skip) {
 			skip = false; // reset in case user goes back
-			return "confirm";
+			return "personal";
 		} else {
 			return event.getNewStep();
 		}
@@ -149,6 +149,16 @@ public class EmployeeBB implements Serializable {
 		
 		return result;
 	}
+	
+   
+ 
+	public void reset(FlowEvent event){
+		this.Name = null;
+		this.Surname = null;
+		this.Login = null;
+		this.pass = null;
+		skip = true;
+	}
 
 	public void save() {
 		if (user == null) {
@@ -164,7 +174,7 @@ public class EmployeeBB implements Serializable {
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
-		RequestContext.getCurrentInstance().reset("panelAdd");
+		RequestContext.getCurrentInstance().reset("panelAdd:");
 
 	}
 
