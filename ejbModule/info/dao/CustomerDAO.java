@@ -1,8 +1,11 @@
 package info.dao;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import info.entities.User;
 
@@ -25,4 +28,19 @@ public class CustomerDAO {
 	public void remove(User user) {
 		em.remove(em.merge(user));
 	}
+
+	public List<User> getCustomer() {
+		List<User> list = null;
+
+		Query query = em.createQuery("Select u User u");
+
+		try {
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		return list;
+	}
+
 }
