@@ -30,6 +30,10 @@ public class UserDAO {
 		em.remove(em.merge(user));
 	}
 
+	public User merge(User user) {
+		return em.merge(user);
+	}
+
 	public List<User> getEmployeeList(Map<String, Object> searchParams, PaginationInfo info) {
 		List<User> list = null;
 		// add searchParams
@@ -39,21 +43,16 @@ public class UserDAO {
 		String where = "";
 		String group_by = "";
 		String having = "";
-		// String join = "join u.address a ON a.idaddress = u.users_idaddress";
+		String join = "JOIN  p.addresses a";
 
-		/*if (idAddress != null) {
-		if (where.isEmpty()) {
-			where = "where ";
-		} else {
-			where += " or ";
-		}
-		if (join.isEmpty()) {
-			join = " join p.idaddress p  ";
-		}
-		where += " c.idCustomer like :idCustomer ";
-	}*/
-		
-		Query querycount = em.createQuery("SELECT COUNT(p.idusers) " + from + where);
+		/*
+		 * if (idAddress != null) { if (where.isEmpty()) { where = "where "; }
+		 * else { where += " or "; } if (join.isEmpty()) { join =
+		 * " join p.idaddress p  "; } where +=
+		 * " c.idCustomer like :idCustomer "; }
+		 */
+
+		Query querycount = em.createQuery("SELECT COUNT(p.idusers) " + from + join + where);
 
 		try {
 			Number n = (Number) querycount.getSingleResult();
@@ -63,7 +62,7 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 		// add join...
-		Query query = em.createQuery(select + from  + where);
+		Query query = em.createQuery(select + from + join + where);
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
 
@@ -74,7 +73,7 @@ public class UserDAO {
 		}
 		return list;
 	}
-	
+
 	public List<User> getCustomerList(Map<String, Object> searchParams, PaginationInfo info) {
 		List<User> list = null;
 		// add searchParams
