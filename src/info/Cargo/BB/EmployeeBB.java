@@ -13,6 +13,7 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FlowEvent;
+import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.LazyDataModel;
 
 import info.dao.UserDAO;
@@ -30,9 +31,6 @@ public class EmployeeBB implements Serializable {
 	private String Surname;
 	private String Login;
 	private String pass;
-
-	
-
 
 	public String getName() {
 		return Name;
@@ -80,7 +78,6 @@ public class EmployeeBB implements Serializable {
 
 	public LazyDataModel<User> getLazylist() {
 		Map<String, Object> searchParams = new HashMap<String, Object>();
-
 		lazyModel.setSearchParams(searchParams);
 		lazyModel.setUserDAO(userDAO);
 		return lazyModel;
@@ -106,53 +103,47 @@ public class EmployeeBB implements Serializable {
 
 	}
 
-	public boolean renderIs(String name){
+	public boolean renderIs(String name) {
 		boolean result = false;
-		if(name.equals(Surname)){
+		if (name.equals(Surname)) {
 			result = true;
 		}
 		return result;
 	}
-	
-	
+
 	private boolean validate() {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		boolean result = false;
-		
 
-		
 		if (Name == null) {
 			ctx.addMessage(null, new FacesMessage("Name Wymagane"));
 		}
-		
+
 		if (Surname == null) {
 			ctx.addMessage(null, new FacesMessage("Surname Wymagane"));
 		}
-		
+
 		if (Login == null) {
 			ctx.addMessage(null, new FacesMessage("idAddress Wymagane"));
 		}
-		
+
 		if (pass == null) {
 			ctx.addMessage(null, new FacesMessage("pass Wymagane"));
 		}
-		
+
 		if (ctx.getMessageList().isEmpty()) {
-			
-	
+
 			user.setName(Name);
 			user.setSurname(Surname);
 			user.setLogin(Login);
 			user.setPass(pass);
 			result = true;
 		}
-		
+
 		return result;
 	}
-	
-   
- 
-	public void reset(FlowEvent event){
+
+	public void reset(FlowEvent event) {
 		this.Name = null;
 		this.Surname = null;
 		this.Login = null;
@@ -160,7 +151,30 @@ public class EmployeeBB implements Serializable {
 		skip = true;
 	}
 
-	public void save() {
+	public void edit(User u) {
+
+		u.setName(u.getName());
+		try {
+			userDAO.merge(u);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		System.out.println("zapisano obiekt!!!");
+		FacesMessage msg = new FacesMessage("Updata Success" + u.getName());
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+
+	public void onRowEdit(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Car Edited");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+
+	public void onRowCancel(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Edit Cancelled");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+
+	public String save() {
 		if (user == null) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Brak objektu user"));
 		}
@@ -168,13 +182,14 @@ public class EmployeeBB implements Serializable {
 		if (!validate()) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Validate wrong"));
 		}
-		
-		try{
+
+		try {
 			userDAO.createUser(user);
-		}catch(Exception ex){
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		RequestContext.getCurrentInstance().reset("panelAdd:");
+
+		return null;
 
 	}
 

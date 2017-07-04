@@ -11,33 +11,116 @@
 	<ui:define name="content">
 		<p>Admin Employee</p>
 
-		<h:form>
-			<p:panel id="button_panel" widgetVar="testPanel" closable="true"
-				toggleable="true" header="Panel One">
-				<h1>Testing</h1>
+
+		<p:panel id="button_panel" widgetVar="testPanel" closable="true"
+			toggleable="true" header="Panel One">
+
+			<h:form id="form">
+				<p:growl id="msgs" showDetail="true" />
+
 				<p:dataTable var="empl" paginator="true" rows="10"
 					value="#{employeeBB.lazylist}"
-					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-					rowsPerPageTemplate="5,10,15" selectionMode="single" id="table"
-					lazy="true">
+					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} 
+					{PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+					editable="true" rowsPerPageTemplate="5,10,15"
+					selectionMode="single" id="table" lazy="true">
 
 
+					<p:ajax event="rowEdit" listener="#{employeeBB.onRowEdit}"
+						update=":form:msgs" />
+					<p:ajax event="rowEditCancel" listener="#{employeeBB.onRowCancel}"
+						update=":form:msgs" />
 
-					<p:column headerText="Id address">
-						<h:outputText value="#{empl.idusers}" />
+					<p:column headerText="Id Employee" sortBy="#{empl.idusers}" filterBy="#{empl.idusers}">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{empl.idusers}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="modelInput" value="#{empl.idusers}"
+									style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
 					</p:column>
 
+					<p:column headerText="Login">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{empl.login}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{empl.login}" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="Pass">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{empl.pass}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{empl.pass}" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="Name">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{empl.name}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{empl.name}" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
 
+					<p:column headerText="Surname">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{empl.surname}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{empl.surname}" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
 
-					<p:column headerText="Edit">
-						<h:form>
-							<p:commandButton value="Edit" styleClass="ui-priority-primary" />
-						</h:form>
+					<p:column headerText="Id Address">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{empl.addresses.get(0).idaddress}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText="e-mail">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{empl.addresses.get(0).email}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="edit">
+						
+							<p:commandButton value="Edit" action="#{employeeBB.edit(empl)}" update=":form:msgs" />
+						
+					</p:column>
+
+					<p:column style="width:32px">
+						<p:rowEditor />
 					</p:column>
 
 				</p:dataTable>
-			</p:panel>
-		</h:form>
+
+			</h:form>
+		</p:panel>
+
 
 
 		<p:panel id="panel_edit" widgetVar="test" closable="true"
