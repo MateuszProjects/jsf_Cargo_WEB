@@ -41,7 +41,7 @@ public class LazyDataModelEmployee extends LazyDataModel<User> {
 	
 	@Override
 	public Object getRowKey(User user) {
-		return null;
+		return user.getIdusers();
 	}
 	
 	@Override

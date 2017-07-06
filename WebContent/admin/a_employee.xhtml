@@ -10,7 +10,10 @@
 
 	<ui:define name="content">
 		<p>Admin Employee</p>
-
+		
+		<p:panel id="panel_search" widgetVar="search" closable="true"
+			toggleable="true" header="Panel Search" collapsed="true">
+		</p:panel>
 
 		<p:panel id="button_panel" widgetVar="testPanel" closable="true"
 			toggleable="true" header="Panel One">
@@ -31,7 +34,8 @@
 					<p:ajax event="rowEditCancel" listener="#{employeeBB.onRowCancel}"
 						update=":form:msgs" />
 
-					<p:column headerText="Id Employee" sortBy="#{empl.idusers}" filterBy="#{empl.idusers}">
+					<p:column headerText="Id Employee" sortBy="#{empl.idusers}"
+						filterBy="#{empl.idusers}">
 						<p:cellEditor>
 							<f:facet name="output">
 								<h:outputText value="#{empl.idusers}" />
@@ -107,9 +111,10 @@
 						</p:cellEditor>
 					</p:column>
 					<p:column headerText="edit">
-						
-							<p:commandButton value="Edit" action="#{employeeBB.edit(empl)}" update=":form:msgs" />
-						
+
+						<p:commandButton value="Edit" action="#{employeeBB.edit(empl)}"
+							update=":form:msgs" />
+
 					</p:column>
 
 					<p:column style="width:32px">
