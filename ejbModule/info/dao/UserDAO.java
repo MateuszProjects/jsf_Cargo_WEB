@@ -53,7 +53,9 @@ public class UserDAO {
 		 */
 
 		Query querycount = em.createQuery("SELECT COUNT(p.idusers) " + from + join + where);
-
+		
+		
+		
 		try {
 			Number n = (Number) querycount.getSingleResult();
 			info.setCount(n.intValue());
@@ -85,6 +87,7 @@ public class UserDAO {
 
 		Query querycount = em.createQuery("SELECT COUNT(u.idusers) " + from + join + where);
 
+		
 		try {
 			Number n = (Number) querycount.getSingleResult();
 			info.setCount(n.intValue());
