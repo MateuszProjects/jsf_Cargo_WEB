@@ -32,6 +32,17 @@ public class EmployeeBB implements Serializable {
 	private String Login;
 	private String pass;
 
+	// params for looking for
+	private Integer idEmployee  = 1;
+
+	public Integer getIdEmployee() {
+		return idEmployee;
+	}
+
+	public void setIdEmployee(Integer idEmployee) {
+		this.idEmployee = idEmployee;
+	}
+
 	public String getName() {
 		return Name;
 	}
@@ -78,6 +89,11 @@ public class EmployeeBB implements Serializable {
 
 	public LazyDataModel<User> getLazylist() {
 		Map<String, Object> searchParams = new HashMap<String, Object>();
+
+		if (idEmployee != null) {
+			searchParams.put("idEmployee", idEmployee);
+		}
+
 		lazyModel.setSearchParams(searchParams);
 		lazyModel.setUserDAO(userDAO);
 		return lazyModel;

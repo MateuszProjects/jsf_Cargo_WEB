@@ -9,8 +9,7 @@
 <ui:composition template="/templates/main-template.xhtml">
 
 	<ui:define name="content">
-		<p>Admin Employee</p>
-		
+
 		<p:panel id="panel_search" widgetVar="search" closable="true"
 			toggleable="true" header="Panel Search" collapsed="true">
 		</p:panel>
@@ -19,14 +18,24 @@
 			toggleable="true" header="Panel One">
 
 			<h:form id="form">
+			
+				<fieldset style="border-radius: 0.2em;">
+					<legend>Opcje wyszukiwania</legend>
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:outputLabel value="idEmployee" />
+						<p:inputText value="#{employeeBB.idEmployee}" />
+						<p:commandButton value="Szukaj" update="table" />
+					</h:panelGrid>
+				</fieldset>
+				
 				<p:growl id="msgs" showDetail="true" />
 
-				<p:dataTable var="empl" paginator="true" rows="10"
+				<p:dataTable id="table" var="empl" paginator="true" rows="10"
 					value="#{employeeBB.lazylist}"
 					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} 
 					{PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
 					editable="true" rowsPerPageTemplate="5,10,15"
-					selectionMode="single" id="table" lazy="true">
+					selectionMode="single" lazy="true">
 
 
 					<p:ajax event="rowEdit" listener="#{employeeBB.onRowEdit}"
@@ -34,8 +43,7 @@
 					<p:ajax event="rowEditCancel" listener="#{employeeBB.onRowCancel}"
 						update=":form:msgs" />
 
-					<p:column headerText="Id Employee" sortBy="#{empl.idusers}"
-						filterBy="#{empl.idusers}">
+					<p:column headerText="Id Employee">
 						<p:cellEditor>
 							<f:facet name="output">
 								<h:outputText value="#{empl.idusers}" />
@@ -53,8 +61,11 @@
 								<h:outputText value="#{empl.login}" />
 							</f:facet>
 							<f:facet name="input">
+
 								<p:inputText value="#{empl.login}" style="width:100%" />
+
 							</f:facet>
+
 						</p:cellEditor>
 					</p:column>
 					<p:column headerText="Pass">
@@ -122,8 +133,8 @@
 					</p:column>
 
 				</p:dataTable>
-
 			</h:form>
+
 		</p:panel>
 
 
