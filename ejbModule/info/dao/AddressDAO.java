@@ -29,31 +29,31 @@ public class AddressDAO {
 	public void remove(Address address) {
 		em.remove(em.merge(address));
 	}
+	
+	public Address merge(Address address){
+		return em.merge(address);
+	}
 
 	public List<Address> getAddressList(Map<String, Object> searchParams, PaginationInfo info) {
 		List<Address> list = null;
 
-		// add searchParams
 
 		String select = "select p ";
 		String from = "from Address p ";
 		String where = "";
 		String join = "";
+		
+		Integer idAddress = (Integer) searchParams.get("idAddress");
 
-		/*if (idAddress != null) {
+		if (idAddress != null) {
 			if (where.isEmpty()) {
-				where = "where ";
-			} else {
-				where += " or ";
-			}
-			if (join.isEmpty()) {
-				join = " join p.idaddress p  ";
-			}
-			where += " c.idCustomer like :idCustomer ";
-		}*/
+				where = " where ";
+			} 
+			where += " p.idaddress like :idAddress ";
+		}
 		
 
-		Query querycount = em.createQuery("SELECT COUNT(p.idaddress) " + from + join + where);
+		Query querycount = em.createQuery("SELECT COUNT(p.idaddress) " + from);
 
 		try {
 			Number n = (Number) querycount.getSingleResult();
@@ -67,6 +67,10 @@ public class AddressDAO {
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
 
+		if (idAddress != null) {
+			query.setParameter("idAddress", idAddress);
+		}
+		
 		try {
 			list = query.getResultList();
 		} catch (Exception e) {

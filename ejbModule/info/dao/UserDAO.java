@@ -81,14 +81,24 @@ public class UserDAO {
 
 	public List<User> getCustomerList(Map<String, Object> searchParams, PaginationInfo info) {
 		List<User> list = null;
-		// add searchParams
 
-		String select = "SELECT u  ";
-		String from = "from User u ";
+		String select = "select p ";
+		String from = "from User p ";
 		String where = "";
-		String join = "";
+		String group_by = "";
+		String having = "";
+		String join = " JOIN  p.addresses a ";
 
-		Query querycount = em.createQuery("SELECT COUNT(u.idusers) " + from + join + where);
+		Integer idEmployee = (Integer) searchParams.get("idEmployee");
+
+		if (idEmployee != null) {
+			if (where.isEmpty()) {
+				where = " where ";
+			}
+			where += " p.idusers like :idEmployee";
+		}
+
+		Query querycount = em.createQuery("SELECT COUNT(p.idusers) " + from + join);
 
 		try {
 			Number n = (Number) querycount.getSingleResult();
@@ -101,6 +111,10 @@ public class UserDAO {
 		Query query = em.createQuery(select + from + join + where);
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
+
+		if (idEmployee != null) {
+			query.setParameter("idEmployee", idEmployee);
+		}
 
 		try {
 			list = query.getResultList();
