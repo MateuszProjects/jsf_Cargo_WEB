@@ -14,6 +14,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import org.primefaces.event.FlowEvent;
+import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.LazyDataModel;
 
 import info.dao.AddressDAO;
@@ -101,6 +102,10 @@ public class AddressBB implements Serializable {
 	public LazyDataModel<Address> getLazylist() {
 		Map<String, Object> searchParams = new HashMap<String, Object>();
 
+		if (idAddress != null) {
+			searchParams.put("idAddress", idAddress);
+		}
+		
 		lazyModel.setSearchParams(searchParams);
 		lazyModel.setAddressDAO(addressDAO);
 		return lazyModel;
@@ -156,6 +161,31 @@ public class AddressBB implements Serializable {
 			result = true;
 		}
 		return result;
+	}
+
+	public void onRowEdit(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Car Edited");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+
+	public void onRowCancel(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Edit Cancelled");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+
+	public void edit(Address a) {
+
+		a.setCityCode(a.getCityCode());
+		a.setEmail(a.getEmail());
+		a.setStreat(a.getStreat());
+		a.setTelephone(a.getTelephone());
+		try {
+			addressDAO.merge(a);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		FacesMessage msg = new FacesMessage("Updata Success");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
 	public void save() {

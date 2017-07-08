@@ -33,7 +33,7 @@ public class EmployeeBB implements Serializable {
 	private String pass;
 
 	// params for looking for
-	private Integer idEmployee  = 1;
+	private Integer idEmployee = 1;
 
 	public Integer getIdEmployee() {
 		return idEmployee;
@@ -170,12 +170,15 @@ public class EmployeeBB implements Serializable {
 	public void edit(User u) {
 
 		u.setName(u.getName());
+		u.setSurname(u.getSurname());
+		u.setPass(u.getPass());
+		u.setLogin(u.getLogin());
+
 		try {
 			userDAO.merge(u);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		System.out.println("zapisano obiekt!!!");
 		FacesMessage msg = new FacesMessage("Updata Success" + u.getName());
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
@@ -190,7 +193,7 @@ public class EmployeeBB implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
-	public String save() {
+	public void save() {
 		if (user == null) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Brak objektu user"));
 		}
@@ -204,8 +207,6 @@ public class EmployeeBB implements Serializable {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-
-		return null;
 
 	}
 

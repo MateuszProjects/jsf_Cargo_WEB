@@ -10,15 +10,11 @@
 
 	<ui:define name="content">
 
-		<p:panel id="panel_search" widgetVar="search" closable="true"
-			toggleable="true" header="Panel Search" collapsed="true">
-		</p:panel>
-
 		<p:panel id="button_panel" widgetVar="testPanel" closable="true"
 			toggleable="true" header="Panel One">
 
 			<h:form id="form">
-			
+
 				<fieldset style="border-radius: 0.2em;">
 					<legend>Opcje wyszukiwania</legend>
 					<h:panelGrid columns="2" cellpadding="5">
@@ -27,7 +23,7 @@
 						<p:commandButton value="Szukaj" update="table" />
 					</h:panelGrid>
 				</fieldset>
-				
+
 				<p:growl id="msgs" showDetail="true" />
 
 				<p:dataTable id="table" var="empl" paginator="true" rows="10"
