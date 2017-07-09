@@ -12,6 +12,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.context.RequestContext;
+import org.primefaces.event.FlowEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.LazyDataModel;
 
@@ -60,6 +61,26 @@ public class TransportBB implements Serializable {
 		lazyModel.setSearchParams(searchParams);
 		lazyModel.setTransportDAO(transportDAO);
 		return lazyModel;
+
+	}
+	
+	private boolean skip;
+
+	public boolean isSkip() {
+		return skip;
+	}
+
+	public void setSkip(boolean skip) {
+		this.skip = skip;
+	}
+
+	public String onFlowProcess(FlowEvent event) {
+		if (skip) {
+			skip = false; // reset in case user goes back
+			return "personal";
+		} else {
+			return event.getNewStep();
+		}
 
 	}
 
