@@ -30,6 +30,10 @@ public class LoactionDAO {
 		em.remove(em.merge(location));
 	}
 	
+	public Location merge(Location location){
+		return em.merge(location);
+	}
+	
 	public List<Location> getSearchList(Map<String, Object> searchParams,PaginationInfo info){
 		List<Location> list = null;
 		

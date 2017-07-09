@@ -30,6 +30,10 @@ public class HandingeventDAO {
 		em.remove(em.merge(handlingevent));
 	}
 
+	public Handlingevent  merge(Handlingevent handlingevent){
+		return em.merge(handlingevent);
+	}
+	
 	public List<Handlingevent> getHandingEventList(Map<String, Object> searchParams, PaginationInfo info) {
 		List<Handlingevent> list = null;
 		

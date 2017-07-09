@@ -29,6 +29,10 @@ public class DeliveryspecificationDAO {
 	public void remove(Deliveryspecification deliveryspecification) {
 		em.remove(em.merge(deliveryspecification));
 	}
+	
+	public Deliveryspecification  merge(Deliveryspecification deliveryspecification){
+		return em.merge(deliveryspecification);
+	}
 
 	public List<Deliveryspecification> getDeliberySpecyficationList(Map<String, Object> searchParams, PaginationInfo info) {
 		List<Deliveryspecification> list = null;

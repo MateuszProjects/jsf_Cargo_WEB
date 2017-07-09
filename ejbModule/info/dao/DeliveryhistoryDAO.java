@@ -31,6 +31,10 @@ public class DeliveryhistoryDAO {
 		em.remove(em.merge(deliveryhistory));
 	}
 	
+	public Deliveryhistory merge(Deliveryhistory deliveryhistory){
+		return em.merge(deliveryhistory);
+	}
+	
 	public List<Deliveryhistory>  getSearchList(Map<String, Object> searchParams,PaginationInfo info){
 		List<Deliveryhistory> list = null;
 		

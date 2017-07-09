@@ -29,6 +29,10 @@ public class PaymentDAO {
 	public void remove(Payment payment) {
 		em.remove(em.merge(payment));
 	}
+	
+	public Payment merge(Payment payment){
+		return em.merge(payment);
+	}
 
 	public List<Payment> getSearchList(Map<String, Object> searchParams,PaginationInfo info){
 		List<Payment> list = null;

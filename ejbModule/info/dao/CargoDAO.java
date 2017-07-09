@@ -29,6 +29,9 @@ public class CargoDAO {
 		em.remove(em.merge(cargo));
 	}
 
+	public Cargo merge(Cargo cargo){
+		return em.merge(cargo);
+	}
 	
 	public List<Cargo> getCargoList(Map<String, Object> searchParams,PaginationInfo info){
 		List<Cargo> list = null;

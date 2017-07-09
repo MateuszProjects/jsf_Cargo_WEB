@@ -30,6 +30,11 @@ public class BillofladingDAO {
 		em.remove(em.merge(billoflading));
 	}
 
+	public Billoflading merge(Billoflading billoflading){
+		return em.merge(billoflading);
+	}
+	
+	
 	public List<Billoflading> getBillofladingList(Map<String, Object> searchParams, PaginationInfo info) {
 		List<Billoflading> list = null;
 

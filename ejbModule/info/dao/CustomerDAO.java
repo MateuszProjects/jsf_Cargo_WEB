@@ -28,6 +28,10 @@ public class CustomerDAO {
 	public void remove(User user) {
 		em.remove(em.merge(user));
 	}
+	
+	public User merge(User user){
+		return em.merge(user);
+	}
 
 	public List<User> getCustomer() {
 		List<User> list = null;
