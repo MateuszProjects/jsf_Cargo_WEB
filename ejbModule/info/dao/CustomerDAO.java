@@ -39,7 +39,7 @@ public class CustomerDAO {
 		Query query = em.createQuery("Select u User u");
 
 		try {
-
+			list = query.getResultList();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
