@@ -44,14 +44,22 @@ public class AddressDAO {
 		String join = "";
 		
 		Integer idAddress = (Integer) searchParams.get("idAddress");
-
+		Integer cityCode = (Integer) searchParams.get("cityCode");
+		String street = (String) searchParams.get("street");
+		
 		if (idAddress != null) {
 			if (where.isEmpty()) {
 				where = " where ";
 			} 
 			where += " p.idaddress like :idAddress ";
 		}
-		
+
+		if (cityCode != null) {
+			if (where.isEmpty()) {
+				where = " where ";
+			} 
+			where += cityCode;
+		}
 
 		Query querycount = em.createQuery("SELECT COUNT(p.idaddress) " + from);
 

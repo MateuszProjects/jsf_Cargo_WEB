@@ -30,32 +30,38 @@ public class BillofladingDAO {
 		em.remove(em.merge(billoflading));
 	}
 
-	public Billoflading merge(Billoflading billoflading){
+	public Billoflading merge(Billoflading billoflading) {
 		return em.merge(billoflading);
 	}
-	
-	
+
 	public List<Billoflading> getBillofladingList(Map<String, Object> searchParams, PaginationInfo info) {
 		List<Billoflading> list = null;
 
-		// add searchParams
-
-		/*if (idAddress != null) {
-		if (where.isEmpty()) {
-			where = "where ";
-		} else {
-			where += " or ";
-		}
-		if (join.isEmpty()) {
-			join = " join p.idaddress p  ";
-		}
-		where += " c.idCustomer like :idCustomer ";
-	}*/
-		
 		String select = "select p ";
 		String from = "from Billoflading p ";
 		String where = "";
 		String join = "";
+
+		Integer idBillofloading = (Integer) searchParams.get("idBillofloading");
+		String text = (String) searchParams.get("text");
+
+		if (text != null) {
+			if (where.isEmpty()) {
+				where = "where ";
+			} else {
+				where += " or ";
+			}
+			where += text;
+		}
+		
+		if (idBillofloading != null) {
+			if (where.isEmpty()) {
+				where = "where ";
+			} else {
+				where += " or ";
+			}
+			where += idBillofloading;
+		}		
 
 		Query querycount = em.createQuery("SELECT COUNT(p.idbillofLading) " + from + join + where);
 
