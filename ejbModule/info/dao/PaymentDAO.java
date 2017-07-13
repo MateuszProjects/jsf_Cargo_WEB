@@ -29,12 +29,12 @@ public class PaymentDAO {
 	public void remove(Payment payment) {
 		em.remove(em.merge(payment));
 	}
-	
-	public Payment merge(Payment payment){
+
+	public Payment merge(Payment payment) {
 		return em.merge(payment);
 	}
 
-	public List<Payment> getSearchList(Map<String, Object> searchParams,PaginationInfo info){
+	public List<Payment> getSearchList(Map<String, Object> searchParams, PaginationInfo info) {
 		List<Payment> list = null;
 
 		String select = "select c ";
@@ -43,19 +43,28 @@ public class PaymentDAO {
 		String orderby = "";
 		String join = "";
 
-		
-		/*if (idAddress != null) {
-		if (where.isEmpty()) {
-			where = "where ";
-		} else {
-			where += " or ";
+		Integer idPayemt = (Integer) searchParams.get("idPayment");
+		Double amount = (Double) searchParams.get("amount");
+
+		if (idPayemt != null) {
+			if (where.isEmpty()) {
+				where = "where ";
+			} else {
+				where += " or ";
+			}
+
+			where += " c.idPayment like :idPayment ";
 		}
-		if (join.isEmpty()) {
-			join = " join p.idaddress p  ";
-		}
-		where += " c.idCustomer like :idCustomer ";
-	}*/
 		
+		if(amount != null){
+			if(where.isEmpty()){
+				where = "where ";
+			}else{
+				where += " or ";
+			}
+			
+		}
+
 		Query querycount = em.createQuery("SELECT COUNT(c.idpayment) " + from + join + where);
 
 		try {

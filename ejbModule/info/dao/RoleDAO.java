@@ -43,12 +43,28 @@ public class RoleDAO {
 		String orderby = "";
 		String join = "";
 
-		/*
-		 * if (idAddress != null) { if (where.isEmpty()) { where = "where "; }
-		 * else { where += " or "; } if (join.isEmpty()) { join =
-		 * " join p.idaddress p  "; } where +=
-		 * " c.idCustomer like :idCustomer "; }
-		 */
+		Integer idRole = (Integer) searchParams.get("idRole");
+		String name = (String) searchParams.get("name");
+
+		if (idRole != null) {
+			if (where.isEmpty()) {
+				where = "where ";
+			} else {
+				where += " or ";
+			}
+
+			where += idRole + ": ";
+		}
+
+		if (name != null) {
+			if (where.isEmpty()) {
+				where = "where ";
+			} else {
+				where += " or ";
+			}
+
+			where += name + ": ";
+		}
 
 		Query querycount = em.createQuery("SELECT COUNT(c.idrole) " + from);
 
