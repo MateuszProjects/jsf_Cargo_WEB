@@ -29,6 +29,10 @@ public class TransportDAO {
 	public void remove(Transport transport) {
 		em.remove(em.merge(transport));
 	}
+	
+	public Transport merge(Transport transport){
+		return em.merge(transport);
+	}
 
 	public List<Transport> getSearchList(Map<String, Object> searchParams, PaginationInfo info) {
 
