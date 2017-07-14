@@ -39,7 +39,7 @@ public class RoleBB implements Serializable {
 		lazyModel = new LazyDataModelRole();
 	}
 
-	public LazyDataModel<Role> etLazylist() {
+	public LazyDataModel<Role> getLazylist() {
 		Map<String, Object> searchParams = new HashMap<String, Object>();
 		lazyModel.setSearchParams(searchParams);
 		lazyModel.setRoleDAO(roleDAO);
