@@ -10,6 +10,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.facelets.FaceletException;
 
 import org.primefaces.event.FlowEvent;
 import org.primefaces.event.RowEditEvent;
@@ -17,7 +18,9 @@ import org.primefaces.model.LazyDataModel;
 
 import info.dao.PaymentDAO;
 import info.entities.Payment;
+import info.entities.User;
 import info.lazydatamodel.LazyDataModelPayment;
+import javafx.scene.chart.PieChart.Data;
 
 @ManagedBean
 @ViewScoped
@@ -28,11 +31,12 @@ public class PaymentBB implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private Payment payment = new Payment();
+	User user = new User();
+
 	private Integer idPayment;
-	private Double amoutn;
-	
-	
-	
+	private Double amount;
+
 	public Integer getIdPayment() {
 		return idPayment;
 	}
@@ -41,12 +45,12 @@ public class PaymentBB implements Serializable {
 		this.idPayment = idPayment;
 	}
 
-	public Double getAmoutn() {
-		return amoutn;
+	public Double getAmount() {
+		return amount;
 	}
 
-	public void setAmoutn(Double amoutn) {
-		this.amoutn = amoutn;
+	public void setAmount(Double amount) {
+		this.amount = amount;
 	}
 
 	private boolean skip;
@@ -95,23 +99,54 @@ public class PaymentBB implements Serializable {
 		FacesMessage msg = new FacesMessage("Edit Cancelled");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
-	
+
 	private boolean validate() {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		boolean result = false;
+
+		if (amount == null) {
+			ctx.addMessage(null, new FacesMessage("amount Wymagane"));
+		}
+
+		if (ctx.getMessageList().isEmpty()) {
+			payment.setAmoutn(amount);
+			payment.setUser(user);
+			result = true;
+		}
+
 		return result;
-	
-	
 	}
-	
-	public void edit(Payment payment){
-		
+
+	public void edit(Payment paymentOject) {
+
+		paymentOject.setAmoutn(paymentOject.getAmoutn());
+
+		try {
+			paymentDAO.merge(paymentOject);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		FacesMessage msg = new FacesMessage("Updata Success");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
-	
+
 	public void save() {
-		
+
+		if (payment == null) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Brak objektu address"));
+		}
+
+		if (!validate()) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Validate wrong"));
+		}
+
+		try {
+			paymentDAO.createPayment(payment);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		FacesMessage msg = new FacesMessage("Create Success");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
-	
-	
 
 }
