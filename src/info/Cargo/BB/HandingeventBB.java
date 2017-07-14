@@ -64,9 +64,23 @@ public class HandingeventBB implements Serializable {
 	
 	public void edit(Handlingevent handlingevent){
 		
+		try {
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		FacesMessage msg = new FacesMessage(" Success");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 	
 	public void save() {
 		
+		try {
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		FacesMessage msg = new FacesMessage(" Success");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 }

@@ -29,11 +29,7 @@ public class TransportBB implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	public void showMessage() {
-		RequestContext.getCurrentInstance().showMessageInDialog(
-				new FacesMessage(FacesMessage.SEVERITY_INFO, "What we do in life", "Echoes in eternity."));
-	}
+	private Transport transport = new Transport();
 
 	@EJB
 	TransportDAO transportDAO;
@@ -98,16 +94,47 @@ public class TransportBB implements Serializable {
 	private boolean validate() {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		boolean result = false;
+		
+		if(ctx.getMessageList().isEmpty()){
+			// add geters for transport
+			result = true;
+		}
+		
 		return result;
 
 	}
 
-	public void edit(Transport transport) {
+	public void edit(Transport transportObject) {
 
+		transportObject.setName(transportObject.getName());
+		transportObject.setPaykm(transportObject.getPaykm());
+		
+		try {
+			transportDAO.merge(transportObject);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		FacesMessage msg = new FacesMessage(" Success");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
 	public void save() {
 
+		if(transport == null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Brak objektu transport"));
+		}
+		
+		if(!validate()){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("validate false"));
+		}
+		
+		try {
+			transportDAO.createTransport(transport);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		FacesMessage msg = new FacesMessage(" Success");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
 }

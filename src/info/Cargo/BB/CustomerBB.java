@@ -121,12 +121,12 @@ public class CustomerBB implements Serializable {
 	}
 
 	public void onRowEdit(RowEditEvent event) {
-		FacesMessage msg = new FacesMessage("Car Edited");
+		FacesMessage msg = new FacesMessage("Customer Edited");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
 	public void onRowCancel(RowEditEvent event) {
-		FacesMessage msg = new FacesMessage("Edit Cancelled");
+		FacesMessage msg = new FacesMessage("Customer Cancelled");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 	

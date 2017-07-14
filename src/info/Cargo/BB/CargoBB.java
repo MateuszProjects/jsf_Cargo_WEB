@@ -26,6 +26,8 @@ public class CargoBB implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	
 
 	@EJB
 	CargoDAO cargoDAO;
@@ -62,11 +64,27 @@ public class CargoBB implements Serializable {
 	
 	}
 	
-	public void edit(Cargo cargo){
+	public void edit(Cargo cargoObject){
 		
+		
+		
+		try {
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		FacesMessage msg = new FacesMessage(" Success");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 	
 	public void save() {
 		
+		try {
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		FacesMessage msg = new FacesMessage(" Success");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 }

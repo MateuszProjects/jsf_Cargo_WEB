@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.RowEditEvent;
@@ -18,15 +19,18 @@ import info.entities.Role;
 import info.lazydatamodel.LazyDataModelRole;
 
 @ManagedBean
+@ViewScoped
 public class RoleBB implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	private Role role = new Role();
+	private String name = new String();
+	
 	private LazyDataModelRole lazyModel;
-
+	
 	@EJB
 	RoleDAO roleDAO;
 
@@ -55,17 +59,54 @@ public class RoleBB implements Serializable {
 	private boolean validate() {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		boolean result = false;
+		
+		if(name == null){
+			
+		}
+		
+		if(ctx.getMessageList().isEmpty()){
+			
+			// add seter for role
+			
+			result = true;
+		}
+		
 		return result;
 	
 	
 	}
 	
-	public void edit(Role role){
+	public void edit(Role roleObject){
 		
+		roleObject.setNameRole(roleObject.getNameRole());
+		roleObject.setUsers(roleObject.getUsers());
+		
+		try {
+			roleDAO.merge(roleObject);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		FacesMessage msg = new FacesMessage(" Success");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 	
 	public void save() {
 		
+		if(role == null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Brak objektu role"));
+		}
+		
+		if(!validate()){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("validate false"));
+		}
+		
+		try {
+			roleDAO.createRole(role);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		FacesMessage msg = new FacesMessage(" Success");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
 }

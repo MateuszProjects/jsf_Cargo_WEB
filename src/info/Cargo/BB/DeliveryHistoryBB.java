@@ -64,9 +64,23 @@ public class DeliveryHistoryBB implements Serializable {
 	
 	public void edit(Deliveryhistory deliveryhistory){
 		
+		try {
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		FacesMessage msg = new FacesMessage(" Success");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 	
 	public void save() {
 		
+		try {
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		FacesMessage msg = new FacesMessage(" Success");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 }

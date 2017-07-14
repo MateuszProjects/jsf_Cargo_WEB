@@ -26,7 +26,8 @@ public class LocationBB implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	private Location location = new Location();
+	
 	@EJB
 	LoactionDAO locationDAO;
 
@@ -65,15 +66,48 @@ public class LocationBB implements Serializable {
 	private boolean validate() {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		boolean result = false;
+		
+		if(ctx.getMessageList().isEmpty()){
+			
+			// add set for location
+			
+			result = true;
+		}
+		
 		return result;
 
 	}
 
-	public void edit(Location location) {
-
+	public void edit(Location locationObject) {
+		
+		locationObject.setDescription(locationObject.getDescription());
+		locationObject.setDeliveryspecification(locationObject.getDeliveryspecification());
+		
+		try {
+			locationDAO.merge(locationObject);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		FacesMessage msg = new FacesMessage(" Success");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
 	public void save() {
-
+		
+		if(location == null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Brak objektu location"));
+		}
+		
+		if(!validate()){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("validate false"));
+		}
+		
+		try {
+			locationDAO.createLocation(location);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		FacesMessage msg = new FacesMessage(" Success");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 }
