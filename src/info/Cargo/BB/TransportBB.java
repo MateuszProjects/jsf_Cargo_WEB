@@ -13,6 +13,7 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FlowEvent;
+import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.LazyDataModel;
 
@@ -63,7 +64,7 @@ public class TransportBB implements Serializable {
 		return lazyModel;
 
 	}
-	
+
 	private boolean skip;
 
 	public boolean isSkip() {
@@ -81,6 +82,31 @@ public class TransportBB implements Serializable {
 		} else {
 			return event.getNewStep();
 		}
+
+	}
+
+	public void onRowEdit(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Car Edited");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+
+	public void onRowCancel(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Edit Cancelled");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+
+	private boolean validate() {
+		FacesContext ctx = FacesContext.getCurrentInstance();
+		boolean result = false;
+		return result;
+
+	}
+
+	public void edit(Transport transport) {
+
+	}
+
+	public void save() {
 
 	}
 

@@ -40,6 +40,25 @@ public class AddressBB implements Serializable {
 
 	User user = new User();
 	Address address = new Address();
+	private boolean skip;
+
+	public boolean isSkip() {
+		return skip;
+	}
+
+	public void setSkip(boolean skip) {
+		this.skip = skip;
+	}
+
+	public String onFlowProcess(FlowEvent event) {
+		if (skip) {
+			skip = false; // reset in case user goes back
+			return "confirm";
+		} else {
+			return event.getNewStep();
+		}
+
+	}
 
 	public Integer getIdAddress() {
 		return idAddress;
@@ -105,30 +124,10 @@ public class AddressBB implements Serializable {
 		if (idAddress != null) {
 			searchParams.put("idAddress", idAddress);
 		}
-		
+
 		lazyModel.setSearchParams(searchParams);
 		lazyModel.setAddressDAO(addressDAO);
 		return lazyModel;
-
-	}
-
-	private boolean skip;
-
-	public boolean isSkip() {
-		return skip;
-	}
-
-	public void setSkip(boolean skip) {
-		this.skip = skip;
-	}
-
-	public String onFlowProcess(FlowEvent event) {
-		if (skip) {
-			skip = false; // reset in case user goes back
-			return "confirm";
-		} else {
-			return event.getNewStep();
-		}
 
 	}
 
