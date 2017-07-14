@@ -23,8 +23,6 @@ public class Payment implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date date;
 
-	private int idemployee;
-
 	//bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="users_idusers")
@@ -55,14 +53,6 @@ public class Payment implements Serializable {
 
 	public void setDate(Date date) {
 		this.date = date;
-	}
-
-	public int getIdemployee() {
-		return this.idemployee;
-	}
-
-	public void setIdemployee(int idemployee) {
-		this.idemployee = idemployee;
 	}
 
 	public User getUser() {

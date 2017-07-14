@@ -21,7 +21,7 @@ public class Address implements Serializable {
 
 	private String email;
 
-	private String streat;
+	private String street;
 
 	private String telephone;
 
@@ -57,12 +57,12 @@ public class Address implements Serializable {
 		this.email = email;
 	}
 
-	public String getStreat() {
-		return this.streat;
+	public String getStreet() {
+		return this.street;
 	}
 
-	public void setStreat(String streat) {
-		this.streat = streat;
+	public void setStreet(String street) {
+		this.street = street;
 	}
 
 	public String getTelephone() {
