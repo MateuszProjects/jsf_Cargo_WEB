@@ -11,33 +11,67 @@
 	<ui:define name="content">
 		<p>Admin Delivery Specification</p>
 
-		<h:form>
-			<p:panel id="button_panel" widgetVar="testPanel" closable="true"
-				toggleable="true" header="Panel One">
-				<h1>Testing</h1>
-				<p:dataTable var="spec" paginator="true" rows="10"
-					value="#{deliverSpecificationBB.lazyList}"
-					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-					rowsPerPageTemplate="5,10,15" selectionMode="single" id="table"
-					lazy="true">
+
+		<p:panel id="button_panel" widgetVar="testPanel" closable="true"
+			toggleable="true" header="Panel One">
+			<h1>Testing</h1>
+			<h:form id="form">
+
+				<fieldset style="border-radius: 0.2em;">
+					<legend>Opcje wyszukiwania</legend>
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:outputLabel value="idSalary" />
+						<p:inputText value="" />
+						<p:commandButton value="Szukaj" update="table" />
+					</h:panelGrid>
+				</fieldset>
+
+				<p:growl id="msgs" showDetail="true" />
+
+				<p:dataTable id="table" var="payment" paginator="true" rows="10"
+					value="#{paymentBB.lazyList}"
+					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} 
+					{PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+					editable="true" rowsPerPageTemplate="5,10,15"
+					selectionMode="single" lazy="true">
 
 
+					<p:ajax event="rowEdit" listener="#{paymentBB.onRowEdit}"
+						update=":form:msgs" />
 
-					<p:column headerText="Id address">
-						<h:outputText value="#{spec.iddeliverySpecification}" />
+					<p:ajax event="rowEditCancel" listener="#{paymentBB.onRowCancel}"
+						update=":form:msgs" />
+
+
+					<p:column headerText="IdSalary">
+
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{payment.idpayment}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{payment.idpayment}" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+
 					</p:column>
 
 
+					<p:column headerText="edit">
 
-					<p:column headerText="Edit">
-						<h:form>
-							<p:commandButton value="Edit" styleClass="ui-priority-primary" />
-						</h:form>
+						<p:commandButton value="Edit" action="#{addressBB.edit(address)}"
+							update=":form:msgs" />
+
+					</p:column>
+
+					<p:column style="width:32px">
+						<p:rowEditor />
 					</p:column>
 
 				</p:dataTable>
-			</p:panel>
-		</h:form>
+			</h:form>
+		</p:panel>
+
 	</ui:define>
 
 </ui:composition>

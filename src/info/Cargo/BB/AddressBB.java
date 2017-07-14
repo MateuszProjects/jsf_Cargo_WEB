@@ -155,7 +155,7 @@ public class AddressBB implements Serializable {
 		if (ctx.getMessageList().isEmpty()) {
 			address.setCityCode(cityCode);
 			address.setTelephone(telephone);
-			address.setStreat(street);
+			address.setStreet(street);
 			address.setEmail(email);
 			address.setUser(user);
 			result = true;
@@ -177,7 +177,7 @@ public class AddressBB implements Serializable {
 
 		a.setCityCode(a.getCityCode());
 		a.setEmail(a.getEmail());
-		a.setStreat(a.getStreat());
+		a.setStreet(a.getStreet());
 		a.setTelephone(a.getTelephone());
 		try {
 			addressDAO.merge(a);
