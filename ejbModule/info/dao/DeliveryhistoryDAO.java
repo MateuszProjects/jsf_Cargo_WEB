@@ -40,9 +40,12 @@ public class DeliveryhistoryDAO {
 		
 		String select = "select c ";
 		String from = "from Deliveryhistory c ";
-		String where = "";
-		String orderby = "";
 		String join = "";
+		String where = "";
+		String groupBY = "";
+		String having = "";
+		String orderby = "";
+
 
 		
 		/*if (idAddress != null) {

@@ -40,9 +40,12 @@ public class TransportDAO {
 		
 		String select = "select c ";
 		String from = "from Transport c ";
-		String where = "";
-		String orderby = "";
 		String join = "";
+		String where = "";
+		String groupBY ="";
+		String having = "";
+		String orderBY = "";
+
 		
 		/*if (idAddress != null) {
 		if (where.isEmpty()) {

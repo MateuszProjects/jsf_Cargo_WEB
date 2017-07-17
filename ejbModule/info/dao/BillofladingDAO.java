@@ -39,8 +39,12 @@ public class BillofladingDAO {
 
 		String select = "select p ";
 		String from = "from Billoflading p ";
-		String where = "";
 		String join = "";
+		String where = "";
+		String groupBY = "";
+		String having = "";
+		String orderBY = "";
+
 
 		Integer idBillofloading = (Integer) searchParams.get("idBillofloading");
 		String text = (String) searchParams.get("text");

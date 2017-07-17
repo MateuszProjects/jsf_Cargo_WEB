@@ -38,8 +38,13 @@ public class CargoDAO {
 		
 		String select = "select c ";
 		String from = "from Cargo c ";
-		String where = "";
 		String join = "";
+		String where = "";
+		String groupBY = "";
+		String having = "";
+		String orderBY = "";
+		
+
 		
 		
 		/*if (idAddress != null) {

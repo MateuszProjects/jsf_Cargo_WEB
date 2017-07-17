@@ -40,8 +40,12 @@ public class AddressDAO {
 
 		String select = "select p ";
 		String from = "from Address p ";
-		String where = "";
 		String join = "";
+		String where = "";
+		String groupBY = "";
+		String having = "";
+		String orderBY = "";
+
 		
 		Integer idAddress = (Integer) searchParams.get("idAddress");
 		Integer cityCode = (Integer) searchParams.get("cityCode");
