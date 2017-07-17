@@ -93,7 +93,6 @@ public class DeliverSpecificationBB implements Serializable {
 
 	public void edit(Deliveryspecification deliveryspecificationObject) {
 	
-		deliveryspecificationObject.setCargo(deliveryspecificationObject.getCargo());
 		deliveryspecificationObject.setArrivaltime(deliveryspecificationObject.getArrivaltime());
 		deliveryspecificationObject.setLocations(deliveryspecificationObject.getLocations());
 		

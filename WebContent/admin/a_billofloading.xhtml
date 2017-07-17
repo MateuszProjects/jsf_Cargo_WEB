@@ -19,7 +19,7 @@
 				<fieldset style="border-radius: 0.2em;">
 					<legend>Opcje wyszukiwania</legend>
 					<h:panelGrid columns="2" cellpadding="5">
-						<p:outputLabel value="idSalary" />
+						<p:outputLabel value="idBillofLoading" />
 						<p:inputText value="" />
 						<p:commandButton value="Szukaj" update="table" />
 					</h:panelGrid>
@@ -27,39 +27,49 @@
 
 				<p:growl id="msgs" showDetail="true" />
 
-				<p:dataTable id="table" var="payment" paginator="true" rows="10"
-					value="#{paymentBB.lazyList}"
+				<p:dataTable id="table" var="billof" paginator="true" rows="10"
+					value="#{billofloadingBB.lazyList}"
 					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} 
 					{PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
 					editable="true" rowsPerPageTemplate="5,10,15"
 					selectionMode="single" lazy="true">
 
 
-					<p:ajax event="rowEdit" listener="#{paymentBB.onRowEdit}"
+					<p:ajax event="rowEdit" listener="#{billofloadingBB.onRowEdit}"
 						update=":form:msgs" />
 
-					<p:ajax event="rowEditCancel" listener="#{paymentBB.onRowCancel}"
-						update=":form:msgs" />
+					<p:ajax event="rowEditCancel"
+						listener="#{billofloadingBB.onRowCancel}" update=":form:msgs" />
 
 
-					<p:column headerText="IdSalary">
-
-						<p:cellEditor>
-							<f:facet name="output">
-								<h:outputText value="#{payment.idpayment}" />
-							</f:facet>
-							<f:facet name="input">
-								<p:inputText value="#{payment.idpayment}" style="width:100%" />
-							</f:facet>
-						</p:cellEditor>
-
+					<p:column headerText="idBillofloading">
+						<f:facet name="output">
+							<h:outputText value="#{billof.idbillofLading}" />
+						</f:facet>
 					</p:column>
 
+					<p:column headerText="Price">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{billof.tekst}" />
+							</f:facet>
+							<f:facet name="input">
 
+								<p:inputText value="#{billof.tekst}" style="width:100%" />
+
+							</f:facet>
+
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="idCargo">
+						<f:facet name="output">
+							<h:outputText value="#{billof.cargo.idcargo}" />
+						</f:facet>
+					</p:column>
 					<p:column headerText="edit">
 
-						<p:commandButton value="Edit" action="#{addressBB.edit(address)}"
-							update=":form:msgs" />
+						<p:commandButton value="Edit"
+							action="#{billofloadingBB.edit(billof)}" update=":form:msgs" />
 
 					</p:column>
 

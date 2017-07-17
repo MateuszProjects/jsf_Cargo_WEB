@@ -96,7 +96,6 @@ public class BillofloadingBB implements Serializable {
 	public void edit(Billoflading billofladingObject) {
 
 		billofladingObject.setTekst(billofladingObject.getTekst());
-		billofladingObject.setCargo(billofladingObject.getCargo());
 
 		try {
 			billofladingDAO.merge(billofladingObject);

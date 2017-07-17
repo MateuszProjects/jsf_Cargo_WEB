@@ -29,6 +29,7 @@ public class DeliveryHistoryBB implements Serializable {
 
 	@EJB
 	DeliveryhistoryDAO deliveryhistoryDAO;
+	Deliveryhistory deliveryHistory = new Deliveryhistory();
 
 	private LazyDataModelDeliveryhistory lazyModel;
 
@@ -62,10 +63,14 @@ public class DeliveryHistoryBB implements Serializable {
 	
 	}
 	
-	public void edit(Deliveryhistory deliveryhistory){
+	public void edit(Deliveryhistory deliveryhistoryObject){
+		
+		deliveryhistoryObject.setComent(deliveryhistoryObject.getComent());
+		deliveryhistoryObject.setLeaveDate(deliveryhistoryObject.getLeaveDate());
+		deliveryhistoryObject.setArrivayDate(deliveryhistoryObject.getArrivayDate());
 		
 		try {
-
+			deliveryhistoryDAO.merge(deliveryhistoryObject);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -75,8 +80,16 @@ public class DeliveryHistoryBB implements Serializable {
 	
 	public void save() {
 		
+		if(deliveryHistory == null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Brak objektu delivery history"));
+		}
+		
+		if(!validate()){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Validate false"));
+		}
+		
 		try {
-
+			deliveryhistoryDAO.createDeliveryhistory(deliveryHistory);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

@@ -29,38 +29,50 @@
 
 				<p:growl id="msgs" showDetail="true" />
 
-				<p:dataTable id="table" var="payment" paginator="true" rows="10"
-					value="#{paymentBB.lazyList}"
+				<p:dataTable id="table" var="location" paginator="true" rows="10"
+					value="#{locationBB.lazyList}"
 					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} 
 					{PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
 					editable="true" rowsPerPageTemplate="5,10,15"
 					selectionMode="single" lazy="true">
 
 
-					<p:ajax event="rowEdit" listener="#{paymentBB.onRowEdit}"
+					<p:ajax event="rowEdit" listener="#{locationBB.onRowEdit}"
 						update=":form:msgs" />
 
-					<p:ajax event="rowEditCancel" listener="#{paymentBB.onRowCancel}"
+					<p:ajax event="rowEditCancel" listener="#{locationBB.onRowCancel}"
 						update=":form:msgs" />
 
 
-					<p:column headerText="IdSalary">
+					<p:column headerText="idLocation">
+						<f:facet name="output">
+							<h:outputText value="#{location.idlocation}" />
+						</f:facet>
+					</p:column>
+
+					<p:column headerText="Description">
 
 						<p:cellEditor>
 							<f:facet name="output">
-								<h:outputText value="#{payment.idpayment}" />
+								<h:outputText value="#{location.description}" />
 							</f:facet>
 							<f:facet name="input">
-								<p:inputText value="#{payment.idpayment}" style="width:100%" />
+								<p:inputText value="#{location.description}" style="width:100%" />
 							</f:facet>
 						</p:cellEditor>
 
+					</p:column>
+					
+					<p:column headerText="idDelivery">
+						<f:facet name="output">
+							<h:outputText value="#{location.deliveryspecification.iddeliverySpecification}" />
+						</f:facet>
 					</p:column>
 
 
 					<p:column headerText="edit">
 
-						<p:commandButton value="Edit" action="#{addressBB.edit(address)}"
+						<p:commandButton value="Edit" action="#{locationBB.edit(location)}"
 							update=":form:msgs" />
 
 					</p:column>

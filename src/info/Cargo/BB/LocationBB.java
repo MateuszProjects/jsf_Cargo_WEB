@@ -81,7 +81,7 @@ public class LocationBB implements Serializable {
 	public void edit(Location locationObject) {
 		
 		locationObject.setDescription(locationObject.getDescription());
-		locationObject.setDeliveryspecification(locationObject.getDeliveryspecification());
+		
 		
 		try {
 			locationDAO.merge(locationObject);

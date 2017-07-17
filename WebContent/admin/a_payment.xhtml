@@ -43,23 +43,37 @@
 						update=":form:msgs" />
 
 
-					<p:column headerText="IdSalary">
-
-						<p:cellEditor>
-							<f:facet name="output">
-								<h:outputText value="#{payment.idpayment}" />
-							</f:facet>
-							<f:facet name="input">
-								<p:inputText value="#{payment.idpayment}" style="width:100%" />
-							</f:facet>
-						</p:cellEditor>
-
+					<p:column headerText="idPayment">
+						<f:facet name="output">
+							<h:outputText value="#{payment.idpayment}" />
+						</f:facet>
 					</p:column>
 
-
+					<p:column headerText="amount">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{payment.amoutn}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{payment.amoutn}" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					
+					<p:column headerText="Date">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{payment.date}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{payment.date}" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					
 					<p:column headerText="edit">
 
-						<p:commandButton value="Edit" action="#{addressBB.edit(address)}"
+						<p:commandButton value="Edit" action="#{paymentBB.edit(payment)}"
 							update=":form:msgs" />
 
 					</p:column>

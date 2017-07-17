@@ -120,8 +120,7 @@ public class PaymentBB implements Serializable {
 	public void edit(Payment paymentOject) {
 
 		paymentOject.setAmoutn(paymentOject.getAmoutn());
-		paymentOject.setUser(paymentOject.getUser());
-		paymentOject.setIdpayment(paymentOject.getIdpayment());
+		paymentOject.setDate(paymentOject.getDate());
 		
 		try {
 			paymentDAO.merge(paymentOject);
