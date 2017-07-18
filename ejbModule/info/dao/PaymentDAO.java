@@ -39,9 +39,12 @@ public class PaymentDAO {
 
 		String select = "select c ";
 		String from = "from Payment c ";
-		String where = "";
-		String orderby = "";
 		String join = "";
+		String where = "";
+		String groupBY = "";
+		String having = "";
+		String orderby = "";
+
 
 		Integer idPayemt = (Integer) searchParams.get("idPayment");
 		Double amount = (Double) searchParams.get("amount");

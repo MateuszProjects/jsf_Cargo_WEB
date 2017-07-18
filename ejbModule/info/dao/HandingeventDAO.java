@@ -42,8 +42,12 @@ public class HandingeventDAO {
 		
 		String select = "select p ";
 		String from = "from Handlingevent p ";
-		String where = "";
 		String join = "";
+		String where = "";
+		String groupBY = "";
+		String having = "";
+		String orderBY = "";
+
 		
 		/*if (idAddress != null) {
 		if (where.isEmpty()) {

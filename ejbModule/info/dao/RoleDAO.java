@@ -39,9 +39,12 @@ public class RoleDAO {
 
 		String select = "select c ";
 		String from = "from Role c ";
-		String where = "";
-		String orderby = "";
 		String join = "";
+		String where = "";
+		String groupBY = "";
+		String having = "";
+		String orderBY = "";
+
 
 		Integer idRole = (Integer) searchParams.get("idRole");
 		String name = (String) searchParams.get("name");

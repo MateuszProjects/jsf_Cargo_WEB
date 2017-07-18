@@ -39,9 +39,12 @@ public class LoactionDAO {
 
 		String select = "select c ";
 		String from = "from Location c ";
-		String where = "";
-		String orderby = "";
 		String join = "";
+		String where = "";
+		String groupBY = "";
+		String having = "";
+		String orderby = "";
+
 
 		Integer idLocation = (Integer) searchParams.get("idlocation");
 		String description = (String) searchParams.get("description");

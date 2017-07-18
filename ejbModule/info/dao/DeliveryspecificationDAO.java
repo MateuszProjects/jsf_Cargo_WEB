@@ -40,8 +40,12 @@ public class DeliveryspecificationDAO {
 
 		String select = "select p ";
 		String from = "from Deliveryspecification p ";
-		String where = "";
 		String join = "";
+		String where = "";
+		String groupBY = "";
+		String having = "";
+		String orderBY = "";
+
 
 		/*if (idAddress != null) {
 		if (where.isEmpty()) {
