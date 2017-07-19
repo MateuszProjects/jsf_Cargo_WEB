@@ -67,7 +67,7 @@ public class CustomerBB implements Serializable {
 	}
 
 	@EJB
-	UserDAO userDAO;
+	CustomerDAO customerDAO;
 
 	private LazyDataModelCustomer lazyModel;
 
@@ -80,7 +80,7 @@ public class CustomerBB implements Serializable {
 		Map<String, Object> searchParams = new HashMap<String, Object>();
 
 		lazyModel.setSearchParams(searchParams);
-		lazyModel.setUserDAO(userDAO);
+		lazyModel.setCustomerDAO(customerDAO);
 		return lazyModel;
 	}
 	
@@ -112,7 +112,7 @@ public class CustomerBB implements Serializable {
 		u.setLogin(u.getLogin());
 
 		try {
-			userDAO.merge(u);
+			customerDAO.merge(u);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

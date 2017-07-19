@@ -11,10 +11,10 @@
 	<ui:define name="content">
 		<p>Admin Transport</p>
 
-		
-			<p:panel id="button_panel" widgetVar="testPanel" closable="true"
-				toggleable="true" header="Panel One" collapsed="true">
-				<h1>Testing</h1>
+
+		<p:panel id="button_panel" widgetVar="testPanel" closable="true"
+			toggleable="true" header="Panel One" collapsed="true">
+			<h1>Testing</h1>
 			<h:form id="form">
 
 				<fieldset style="border-radius: 0.2em;">
@@ -28,35 +28,63 @@
 
 				<p:growl id="msgs" showDetail="true" />
 
-				<p:dataTable id="table" var="payment" paginator="true" rows="10"
-					value="#{paymentBB.lazyList}"
+				<p:dataTable id="table" var="transport" paginator="true" rows="10"
+					value="#{transportBB.lazyList}"
 					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} 
 					{PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
 					editable="true" rowsPerPageTemplate="5,10,15"
 					selectionMode="single" lazy="true">
 
 
-					<p:ajax event="rowEdit" listener="#{paymentBB.onRowEdit}"
+					<p:ajax event="rowEdit" listener="#{transportBB.onRowEdit}"
 						update=":form:msgs" />
 
-					<p:ajax event="rowEditCancel" listener="#{paymentBB.onRowCancel}"
+					<p:ajax event="rowEditCancel" listener="#{transportBB.onRowCancel}"
 						update=":form:msgs" />
 
 
-					<p:column headerText="IdSalary">
+					<p:column headerText="IdTransport">
+						<f:facet name="output">
+							<h:outputText value="#{transport.idtransport}" />
+						</f:facet>
+					</p:column>
+
+
+					<p:column headerText="Name">
 
 						<p:cellEditor>
 							<f:facet name="output">
-								<h:outputText value="#{payment.idpayment}" />
+								<h:outputText value="#{transport.name}" />
 							</f:facet>
 							<f:facet name="input">
-								<p:inputText value="#{payment.idpayment}" style="width:100%" />
+								<p:inputText value="#{transport.name}"
+									style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+
+
+					</p:column>
+
+					<p:column headerText="Pay km">
+
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{transport.paykm}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{transport.paykm}"
+									style="width:100%" />
 							</f:facet>
 						</p:cellEditor>
 
 					</p:column>
 
 
+					<p:column headerText="id ">
+						<f:facet name="output">
+							<h:outputText value="#{transport.cargos.get(0).idcargo}" />
+						</f:facet>
+					</p:column>
 					<p:column headerText="edit">
 
 						<p:commandButton value="Edit" action="#{addressBB.edit(address)}"
@@ -70,8 +98,8 @@
 
 				</p:dataTable>
 			</h:form>
-			</p:panel>
-		
+		</p:panel>
+
 
 	</ui:define>
 

@@ -43,6 +43,13 @@
 						listener="#{deliveryHistoryBB.onRowCancel}" update=":form:msgs" />
 
 
+
+					<p:column headerText="idDeliveryHistory">
+							<f:facet name="output">
+								<h:outputText value="#{deliveryhistory.iddeliveryHistory}" />
+							</f:facet>
+					</p:column>
+					
 					<p:column headerText="Coment">
 
 						<p:cellEditor>

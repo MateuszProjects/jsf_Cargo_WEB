@@ -62,10 +62,12 @@ public class HandingeventBB implements Serializable {
 	
 	}
 	
-	public void edit(Handlingevent handlingevent){
+	public void edit(Handlingevent handlingeventObject){
+		
+		handlingeventObject.setDecriptonEvent(handlingeventObject.getDecriptonEvent());
 		
 		try {
-
+			handingeventDAO.merge(handlingeventObject);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

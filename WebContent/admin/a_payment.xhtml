@@ -70,7 +70,13 @@
 							</f:facet>
 						</p:cellEditor>
 					</p:column>
-					
+				
+					<p:column headerText="idUser">
+						<f:facet name="output">
+							<h:outputText value="#{payment.user.idusers}" />
+						</f:facet>
+					</p:column>
+				
 					<p:column headerText="edit">
 
 						<p:commandButton value="Edit" action="#{paymentBB.edit(payment)}"

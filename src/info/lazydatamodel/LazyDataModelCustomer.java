@@ -6,6 +6,7 @@ import java.util.Map;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
+import info.dao.CustomerDAO;
 import info.dao.PaginationInfo;
 import info.dao.UserDAO;
 import info.entities.User;
@@ -16,7 +17,7 @@ public class LazyDataModelCustomer  extends LazyDataModel<User> {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	UserDAO userDAO;
+	CustomerDAO customerDAO;
 	
 	private Map<String, Object> searchParams;
 
@@ -28,10 +29,16 @@ public class LazyDataModelCustomer  extends LazyDataModel<User> {
 		this.searchParams = searchParams;
 	}
 
-	public void setUserDAO(UserDAO userDAO) {
-		this.userDAO = userDAO;
-	}
+
 	
+	public CustomerDAO getCustomerDAO() {
+		return customerDAO;
+	}
+
+	public void setCustomerDAO(CustomerDAO customerDAO) {
+		this.customerDAO = customerDAO;
+	}
+
 	@Override
 	public User getRowData(String rowKey) {
 		return null;
@@ -50,7 +57,7 @@ public class LazyDataModelCustomer  extends LazyDataModel<User> {
 		info.setLimit(pageSize);
 		info.setOffset(first);
 		
-	    list = userDAO.getCustomerList(searchParams, info);
+	    list = customerDAO.getCustomerList(searchParams, info);
 		setRowCount(info.getCount());
 		return list;
 	}

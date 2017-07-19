@@ -44,19 +44,29 @@
 
 
 					<p:column headerText="IdHandingEvent">
-
-						<p:cellEditor>
 							<f:facet name="output">
 								<h:outputText value="#{handlist.idhandlingEvent}" />
 							</f:facet>
+					</p:column>
+
+					<p:column headerText="Description">
+
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{handlist.decriptonEvent}" />
+							</f:facet>
 							<f:facet name="input">
-								<p:inputText value="#{handlist.idhandlingEvent}" style="width:100%" />
+								<p:inputText value="#{handlist.decriptonEvent}"
+									style="width:100%" />
 							</f:facet>
 						</p:cellEditor>
 
 					</p:column>
-
-
+					<p:column headerText="IdCargo">
+							<f:facet name="output">
+								<h:outputText value="#{handlist.cargo.idcargo}" />
+							</f:facet>
+					</p:column>
 					<p:column headerText="edit">
 
 						<p:commandButton value="Edit" action="#{handingeventBB.edit(handlist)}"
