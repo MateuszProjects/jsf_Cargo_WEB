@@ -38,8 +38,8 @@ public class TransportDAO {
 
 		List<Transport> list = null;
 		
-		String select = "select c ";
-		String from = "from Transport c ";
+		String select = "SELECT t ";
+		String from = "FROM Transport t ";
 		String join = "";
 		String where = "";
 		String groupBY ="";
@@ -59,7 +59,7 @@ public class TransportDAO {
 		where += " c.idCustomer like :idCustomer ";
 	}*/
 
-		Query querycount = em.createQuery("SELECT COUNT(c.idtransport) " + from + join + where);
+		Query querycount = em.createQuery("SELECT COUNT(t.idtransport) " + from);
 
 		try {
 			Number n = (Number) querycount.getSingleResult();

@@ -61,7 +61,7 @@ public class DeliveryhistoryDAO {
 	}*/
 		
 		
-		Query querycount = em.createQuery("SELECT COUNT(c.iddeliveryHistory) " + from + join + where);
+		Query querycount = em.createQuery("SELECT COUNT(c.iddeliveryHistory) " + from);
 
 		try {
 			Number n = (Number) querycount.getSingleResult();
