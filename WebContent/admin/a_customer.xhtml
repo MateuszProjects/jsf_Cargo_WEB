@@ -11,9 +11,9 @@
 	<ui:define name="content">
 		<p>Admin Customer</p>
 
-	
-			<p:panel id="button_panel" widgetVar="testPanel" closable="true"
-				toggleable="true" header="Panel One">
+
+		<p:panel id="button_panel" widgetVar="testPanel" closable="true"
+			toggleable="true" header="Panel One">
 
 			<h:form id="form">
 
@@ -28,39 +28,105 @@
 
 				<p:growl id="msgs" showDetail="true" />
 
-				<p:dataTable id="table" var="payment" paginator="true" rows="10"
-					value="#{paymentBB.lazyList}"
+				<p:dataTable id="table" var="customer" paginator="true" rows="10"
+					value="#{customerBB.lazylist}"
 					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} 
 					{PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
 					editable="true" rowsPerPageTemplate="5,10,15"
 					selectionMode="single" lazy="true">
 
 
-					<p:ajax event="rowEdit" listener="#{paymentBB.onRowEdit}"
+					<p:ajax event="rowEdit" listener="#{customerBB.onRowEdit}"
 						update=":form:msgs" />
 
-					<p:ajax event="rowEditCancel" listener="#{paymentBB.onRowCancel}"
+					<p:ajax event="rowEditCancel" listener="#{customerBB.onRowCancel}"
 						update=":form:msgs" />
 
 
-					<p:column headerText="IdSalary">
-
+					<p:column headerText="Id Employee">
 						<p:cellEditor>
 							<f:facet name="output">
-								<h:outputText value="#{payment.idpayment}" />
+								<h:outputText value="#{customer.idusers}" />
 							</f:facet>
 							<f:facet name="input">
-								<p:inputText value="#{payment.idpayment}" style="width:100%" />
+								<p:inputText id="modelInput" value="#{customer.idusers}"
+									style="width:100%" />
 							</f:facet>
 						</p:cellEditor>
+					</p:column>
 
+					<p:column headerText="Login">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{customer.login}" />
+							</f:facet>
+							<f:facet name="input">
+
+								<p:inputText value="#{customer.login}" style="width:100%" />
+
+							</f:facet>
+
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="Pass">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{customer.pass}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{customer.pass}" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="Name">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{customer.name}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{customer.name}" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText="Surname">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{customer.surname}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{customer.surname}" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText="Id Address">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{empl.addresses.get(0).idaddress}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText="e-mail">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{empl.addresses.get(0).email}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
 					</p:column>
 
 
 					<p:column headerText="edit">
 
-						<p:commandButton value="Edit" action="#{addressBB.edit(address)}"
-							update=":form:msgs" />
+						<p:commandButton value="Edit"
+							action="#{customerBB.edit(customer)}" update=":form:msgs" />
 
 					</p:column>
 
@@ -70,8 +136,8 @@
 
 				</p:dataTable>
 			</h:form>
-			</p:panel>
-	
+		</p:panel>
+
 	</ui:define>
 
 </ui:composition>

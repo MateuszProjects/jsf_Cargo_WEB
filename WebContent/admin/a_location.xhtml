@@ -10,11 +10,11 @@
 
 	<ui:define name="content">
 		<p>Admin Cargo</p>
-		
-		
-			<p:panel id="button_panel" widgetVar="List Panel" closable="true"
-				toggleable="true" header="Panel One">
-				<h1>Panel List</h1>
+
+
+		<p:panel id="button_panel" widgetVar="List Panel" closable="true"
+			toggleable="true" header="Panel One">
+			<h1>Panel List</h1>
 
 			<h:form id="form">
 
@@ -45,9 +45,14 @@
 
 
 					<p:column headerText="idLocation">
-						<f:facet name="output">
-							<h:outputText value="#{location.idlocation}" />
-						</f:facet>
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{location.idlocation}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{location.idlocation}" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
 					</p:column>
 
 					<p:column headerText="Description">
@@ -64,16 +69,17 @@
 					</p:column>
 					<p:column headerText="idDeliverySpec">
 						<f:facet name="output">
-							<h:outputText value="#{location.deliveryspecification.iddeliverySpecification}" />
+							<h:outputText
+								value="#{location.deliveryspecification.iddeliverySpecification}" />
 						</f:facet>
 					</p:column>
-				
+
 
 
 					<p:column headerText="edit">
 
-						<p:commandButton value="Edit" action="#{locationBB.edit(location)}"
-							update=":form:msgs" />
+						<p:commandButton value="Edit"
+							action="#{locationBB.edit(location)}" update=":form:msgs" />
 
 					</p:column>
 
@@ -83,8 +89,8 @@
 
 				</p:dataTable>
 			</h:form>
-			</p:panel>
-		
+		</p:panel>
+
 	</ui:define>
 
 </ui:composition>

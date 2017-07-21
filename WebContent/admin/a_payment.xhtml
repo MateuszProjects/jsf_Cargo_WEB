@@ -43,10 +43,17 @@
 						update=":form:msgs" />
 
 
-					<p:column headerText="idPayment">
-						<f:facet name="output">
-							<h:outputText value="#{payment.idpayment}" />
-						</f:facet>
+					<p:column headerText="IdSalary">
+
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{payment.idpayment}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{payment.idpayment}" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+
 					</p:column>
 
 					<p:column headerText="amount">
@@ -71,10 +78,17 @@
 						</p:cellEditor>
 					</p:column>
 				
-					<p:column headerText="idUser">
-						<f:facet name="output">
-							<h:outputText value="#{payment.user.idusers}" />
-						</f:facet>
+					<p:column headerText="IdSalary">
+
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{payment.user.idusers}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{payment.user.idusers}" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+
 					</p:column>
 				
 					<p:column headerText="edit">

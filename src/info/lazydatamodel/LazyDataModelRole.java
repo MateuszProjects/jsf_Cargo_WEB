@@ -51,8 +51,9 @@ public class LazyDataModelRole extends LazyDataModel<Role> {
 		PaginationInfo info = new PaginationInfo();
 		info.setLimit(pageSize);
 		info.setOffset(first);
-		setRowCount(info.getCount());
+
 		list = roleDAO.getSearchList(searchParams, info);
+		setRowCount(info.getCount());
 		return list;
 	}
 

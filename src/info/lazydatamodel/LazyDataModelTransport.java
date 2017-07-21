@@ -51,8 +51,9 @@ public class LazyDataModelTransport extends LazyDataModel<Transport> {
 		info.setLimit(pageSize);
 		info.setOffset(first);
 
-		setRowCount(info.getCount());
+
 		list = transportDAO.getSearchList(searchParams, info);
+		setRowCount(info.getCount());
 		return list;
 	}
 

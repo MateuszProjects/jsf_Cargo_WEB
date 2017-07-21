@@ -12,9 +12,8 @@
 		<p>Admin Transport</p>
 
 
-		<p:panel id="button_panel" widgetVar="testPanel" closable="true"
-			toggleable="true" header="Panel One" collapsed="true">
-			<h1>Testing</h1>
+			<p:panel id="button_panel" widgetVar="List Panel" closable="true"
+				toggleable="true" header="Panel One">
 			<h:form id="form">
 
 				<fieldset style="border-radius: 0.2em;">
@@ -43,10 +42,17 @@
 						update=":form:msgs" />
 
 
-					<p:column headerText="IdTransport">
-						<f:facet name="output">
-							<h:outputText value="#{transport.idtransport}" />
-						</f:facet>
+					<p:column headerText="idTransport">
+
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{transport.idtransport}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{transport.idtransport}" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+
 					</p:column>
 
 
@@ -65,7 +71,7 @@
 
 					</p:column>
 
-					<p:column headerText="Pay km">
+					<p:column headerText="Pay KM">
 
 						<p:cellEditor>
 							<f:facet name="output">
@@ -87,7 +93,7 @@
 					</p:column>
 					<p:column headerText="edit">
 
-						<p:commandButton value="Edit" action="#{addressBB.edit(address)}"
+						<p:commandButton value="Edit" action="#{transportBB.edit(transport)}"
 							update=":form:msgs" />
 
 					</p:column>

@@ -44,9 +44,15 @@
 						update=":form:msgs" />
 
 					<p:column headerText="idDelivery">
-						<f:facet name="output">
-							<h:outputText value="#{deliveryspec.iddeliverySpecification}" />
-						</f:facet>
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{deliveryspec.iddeliverySpecification}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{deliveryspec.iddeliverySpecification}"
+									style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
 					</p:column>
 
 					<p:column headerText="Arrivaltime">

@@ -66,10 +66,12 @@ public class CargoBB implements Serializable {
 	
 	public void edit(Cargo cargoObject){
 		
-		
+		cargoObject.setHazMat(cargoObject.getHazMat());
+		cargoObject.setName(cargoObject.getName());
+		cargoObject.setWeight(cargoObject.getWeight());
 		
 		try {
-
+			cargoDAO.merge(cargoObject);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

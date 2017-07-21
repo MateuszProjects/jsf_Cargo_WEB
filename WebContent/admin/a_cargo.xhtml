@@ -10,11 +10,11 @@
 
 	<ui:define name="content">
 		<p>Admin Cargo</p>
-		
-	
-			<p:panel id="button_panel" widgetVar="List Panel" closable="true"
-				toggleable="true" header="Panel One">
-				<h1>Panel List</h1>
+
+
+		<p:panel id="button_panel" widgetVar="List Panel" closable="true"
+			toggleable="true" header="Panel One">
+			<h1>Panel List</h1>
 
 			<h:form id="form">
 
@@ -29,35 +29,81 @@
 
 				<p:growl id="msgs" showDetail="true" />
 
-				<p:dataTable id="table" var="payment" paginator="true" rows="10"
-					value="#{paymentBB.lazyList}"
+				<p:dataTable id="table" var="cargo" paginator="true" rows="10"
+					value="#{cargoBB.lazyList}"
 					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} 
 					{PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
 					editable="true" rowsPerPageTemplate="5,10,15"
 					selectionMode="single" lazy="true">
 
 
-					<p:ajax event="rowEdit" listener="#{paymentBB.onRowEdit}"
+					<p:ajax event="rowEdit" listener="#{cargoBB.onRowEdit}"
 						update=":form:msgs" />
 
-					<p:ajax event="rowEditCancel" listener="#{paymentBB.onRowCancel}"
+					<p:ajax event="rowEditCancel" listener="#{cargoBB.onRowCancel}"
 						update=":form:msgs" />
 
 
-					<p:column headerText="IdSalary">
+					<p:column headerText="idCargo">
 
 						<p:cellEditor>
 							<f:facet name="output">
-								<h:outputText value="#{payment.idpayment}" />
+								<h:outputText value="#{cargo.idcargo}" />
 							</f:facet>
 							<f:facet name="input">
-								<p:inputText value="#{payment.idpayment}" style="width:100%" />
+								<p:inputText value="#{cargo.idcargo}" style="width:100%" />
 							</f:facet>
 						</p:cellEditor>
 
 					</p:column>
+					<p:column headerText="HazMat">
 
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{cargo.hazMat}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{cargo.hazMat}" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
 
+					</p:column>
+					<p:column headerText="Name">
+
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{cargo.name}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{cargo.name}" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+
+					</p:column>
+					<p:column headerText="Weight">
+
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{cargo.weight}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{cargo.weight}" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+
+					</p:column>
+					<p:column headerText="Weight">
+
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{cargo.deliveryhistories.get(0).iddeliveryHistory}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{cargo.weight}" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+
+					</p:column>					
 					<p:column headerText="edit">
 
 						<p:commandButton value="Edit" action="#{addressBB.edit(address)}"
@@ -71,8 +117,8 @@
 
 				</p:dataTable>
 			</h:form>
-			</p:panel>
-		
+		</p:panel>
+
 	</ui:define>
 
 </ui:composition>

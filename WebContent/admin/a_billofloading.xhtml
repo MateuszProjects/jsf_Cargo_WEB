@@ -43,9 +43,14 @@
 
 
 					<p:column headerText="idBillofloading">
-						<f:facet name="output">
-							<h:outputText value="#{billof.idbillofLading}" />
-						</f:facet>
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{billof.idbillofLading}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{billof.idbillofLading}" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
 					</p:column>
 
 					<p:column headerText="Price">
