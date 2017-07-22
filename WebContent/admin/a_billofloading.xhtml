@@ -86,7 +86,71 @@
 			</h:form>
 
 		</p:panel>
+		<br />
+		<p:panel id="button_panel1" widgetVar="testPanel1" closable="true"
+			toggleable="true" header="Create Cargo" collapsed="true">
+			<h1>Create BillofLoading</h1>
+			<h:form id="createCargo">
+				<p:growl id="growl" sticky="true" showDetail="true" />
 
+				<p:wizard flowListener="#{employeeBB.onFlowProcess}">
+
+					<p:tab id="personal" title="Personal">
+						<p:panel header="Personal Details">
+							<p:messages />
+							<h:panelGrid columns="2" columnClasses="label, value">
+
+
+								<h:outputText value="Name" style="color:black;" />
+								<p:inputText value="#{employeeBB.name}" label="Name" />
+
+								<h:outputText value="Surname:" />
+								<p:inputText value="#{employeeBB.surname}" label="Surname:" />
+
+							</h:panelGrid>
+						</p:panel>
+					</p:tab>
+
+					<p:tab id="confirm" title="Confirmation">
+						<p:panel id="conf" header="Confirmation">
+							<h:panelGrid id="confirmation" columns="3"
+								columnClasses="grid,grid,grid">
+								<h:panelGrid columns="2" columnClasses="label, value">
+
+									<h:outputText value="IdCargo" />
+									<h:outputText value="#{billofloadingBB.idCargo}"
+										styleClass="outputLabel" />
+
+									<h:outputText value="Amount" />
+									<h:outputText value="#{billofloadingBB.text}"
+										styleClass="outputLabel" />
+								</h:panelGrid>
+
+								<h:panelGrid columns="2" columnClasses="label, value">
+
+									<h:outputText value="IdCargo " />
+									<h:outputText value="#{billofloadingBB.idCargo}"
+										styleClass="outputLabel" />
+										
+									<h:outputText value="Amount" />
+									<h:outputText value="#{billofloadingBB.text}"
+										styleClass="outputLabel" />
+								</h:panelGrid>
+							</h:panelGrid>
+
+							<p:commandButton value="Submit"
+								actionListener="#{billofloadingBB.save()}" update="growl"
+								process="@this" />
+							<h:commandButton value="Reset p:ajax" style="margin-right:20px;">
+								<p:ajax update="conf" resetValues="true" />
+							</h:commandButton>
+
+						</p:panel>
+					</p:tab>
+
+				</p:wizard>
+			</h:form>
+		</p:panel>
 	</ui:define>
 
 </ui:composition>

@@ -30,14 +30,32 @@ public class BillofloadingBB implements Serializable {
 	private Billoflading billoflading = new Billoflading();
 	private Cargo cargo = null;
 
-	private String text = new String();
-
+	private String text = null;
+	private Integer idCargo = null;
+	private Integer idBillofLoading = null;
+	
 	public String getText() {
 		return text;
 	}
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public Integer getIdCargo() {
+		return idCargo;
+	}
+
+	public void setIdCargo(Integer idCargo) {
+		this.idCargo = idCargo;
+	}
+
+	public Integer getIdBillofLoading() {
+		return idBillofLoading;
+	}
+
+	public void setIdBillofLoading(Integer idBillofLoading) {
+		this.idBillofLoading = idBillofLoading;
 	}
 
 	@EJB
@@ -52,6 +70,7 @@ public class BillofloadingBB implements Serializable {
 		cargo = (Cargo) session.getAttribute("cargo");
 
 		if (cargo != null) {
+			setIdCargo(cargo.getIdcargo());
 			session.removeAttribute("cargo");
 		}
 
@@ -79,10 +98,18 @@ public class BillofloadingBB implements Serializable {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		boolean result = false;
 
+		if(idCargo == null){
+			ctx.addMessage(null, new FacesMessage("idCargo Wymagane"));
+		}
+		
 		if (text == null) {
 			ctx.addMessage(null, new FacesMessage("text Wymagane"));
 		}
-
+		
+		if(idBillofLoading == null){
+		ctx.addMessage(null, new FacesMessage("text Wymagane"));
+		}
+		
 		if (ctx.getMessageList().isEmpty()) {
 			billoflading.setTekst(text);
 			billoflading.setCargo(cargo);

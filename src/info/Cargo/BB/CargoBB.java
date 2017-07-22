@@ -81,6 +81,10 @@ public class CargoBB implements Serializable {
 	
 	public void save() {
 		
+		if(!validate()){
+			
+		}
+		
 		try {
 
 		} catch (Exception ex) {
@@ -88,5 +92,10 @@ public class CargoBB implements Serializable {
 		}
 		FacesMessage msg = new FacesMessage(" Success");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+	
+	public String addBillofLoading(Cargo cargo){
+		
+		return "billofloading";
 	}
 }

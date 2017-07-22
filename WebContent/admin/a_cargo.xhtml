@@ -14,14 +14,12 @@
 
 		<p:panel id="button_panel" widgetVar="List Panel" closable="true"
 			toggleable="true" header="Panel One">
-			<h1>Panel List</h1>
-
 			<h:form id="form">
 
 				<fieldset style="border-radius: 0.2em;">
 					<legend>Opcje wyszukiwania</legend>
 					<h:panelGrid columns="2" cellpadding="5">
-						<p:outputLabel value="idSalary" />
+						<p:outputLabel value="idCargo" />
 						<p:inputText value="" />
 						<p:commandButton value="Szukaj" update="table" />
 					</h:panelGrid>
@@ -96,21 +94,27 @@
 
 						<p:cellEditor>
 							<f:facet name="output">
-								<h:outputText value="#{cargo.deliveryhistories.get(0).iddeliveryHistory}" />
+								<h:outputText
+									value="#{cargo.deliveryhistories.get(0).iddeliveryHistory}" />
 							</f:facet>
 							<f:facet name="input">
 								<p:inputText value="#{cargo.weight}" style="width:100%" />
 							</f:facet>
 						</p:cellEditor>
 
-					</p:column>					
+					</p:column>
 					<p:column headerText="edit">
 
-						<p:commandButton value="Edit" action="#{addressBB.edit(address)}"
+						<p:commandButton value="Edit" action="#{cargoBB.edit(cargo)}"
 							update=":form:msgs" />
 
 					</p:column>
+					<p:column headerText="add Bill">
 
+						<p:commandButton value="Edit" action="#{cargoBB.addBillofLoading(cargo)}"
+							update=":form:msgs" />
+
+					</p:column>
 					<p:column style="width:32px">
 						<p:rowEditor />
 					</p:column>
@@ -118,7 +122,90 @@
 				</p:dataTable>
 			</h:form>
 		</p:panel>
+		<br />
+		<p:panel id="button_panel1" widgetVar="testPanel1" closable="true"
+			toggleable="true" header="Create Cargo" collapsed="true">
+			<h1>Create Cargo</h1>
+			<h:form id="createCargo">
+				<p:growl id="growl" sticky="true" showDetail="true" />
 
+				<p:wizard flowListener="#{employeeBB.onFlowProcess}">
+					<p:tab id="personal" title="Personal">
+						<p:panel header="Personal Details">
+							<p:messages />
+							<h:panelGrid columns="2" columnClasses="label, value">
+
+
+								<h:outputText value="Name" />
+								<p:inputText value="#{employeeBB.name}" label="Name" />
+
+								<h:outputText value="Surname:" />
+								<p:inputText value="#{employeeBB.surname}" label="Surname:" />
+
+							</h:panelGrid>
+						</p:panel>
+					</p:tab>
+
+
+					<p:tab id="contact" title="Contact">
+						<p:panel header="Contact Information">
+							<p:messages />
+							<h:panelGrid columns="2" columnClasses="label, value">
+								<h:outputText value="login " />
+								<p:inputText value="#{employeeBB.login}" label="login" />
+
+								<h:outputText value="pass: " />
+								<p:inputText value="#{employeeBB.pass}" label="pass " />
+
+								<h:outputText value="Passsdfa "
+									rendered="#{employeeBB.renderIs('Jan')}" />
+								<h:outputText value="Passsdfa "
+									rendered="#{employeeBB.renderIs('Jan')}" />
+							</h:panelGrid>
+						</p:panel>
+					</p:tab>
+
+					<p:tab id="confirm" title="Confirmation">
+						<p:panel id="conf" header="Confirmation">
+							<h:panelGrid id="confirmation" columns="3"
+								columnClasses="grid,grid,grid">
+								<h:panelGrid columns="2" columnClasses="label, value">
+
+
+									<h:outputText value="Name: " />
+									<h:outputText value="#{employeeBB.name}"
+										styleClass="outputLabel" />
+
+									<h:outputText value="Surname " />
+									<h:outputText value="#{employeeBB.surname}"
+										styleClass="outputLabel" />
+								</h:panelGrid>
+
+								<h:panelGrid columns="2" columnClasses="label, value">
+
+									<h:outputText value="Login " />
+									<h:outputText value="#{employeeBB.login}"
+										styleClass="outputLabel" />
+
+									<h:outputText value="Pass " />
+									<h:outputText value="#{employeeBB.pass}"
+										styleClass="outputLabel" />
+
+								</h:panelGrid>
+							</h:panelGrid>
+
+							<p:commandButton value="Submit"
+								actionListener="#{employeeBB.save()}" update="growl"
+								process="@this" />
+							<h:commandButton value="Reset p:ajax" style="margin-right:20px;">
+								<p:ajax update="conf" resetValues="true" />
+							</h:commandButton>
+
+						</p:panel>
+					</p:tab>
+				</p:wizard>
+			</h:form>
+		</p:panel>
 	</ui:define>
 
 </ui:composition>
