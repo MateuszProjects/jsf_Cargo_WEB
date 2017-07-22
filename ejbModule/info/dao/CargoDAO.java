@@ -16,7 +16,7 @@ public class CargoDAO {
 
 	@PersistenceContext(unitName = UNIT_NAME)
 	protected EntityManager em;
-	
+
 	public Cargo find(Integer id) {
 		return em.find(Cargo.class, id);
 	}
@@ -25,17 +25,17 @@ public class CargoDAO {
 		em.persist(cargo);
 	}
 
-	public void remove(Cargo cargo ) {
+	public void remove(Cargo cargo) {
 		em.remove(em.merge(cargo));
 	}
 
-	public Cargo merge(Cargo cargo){
+	public Cargo merge(Cargo cargo) {
 		return em.merge(cargo);
 	}
-	
-	public List<Cargo> getCargoList(Map<String, Object> searchParams,PaginationInfo info){
+
+	public List<Cargo> getCargoList(Map<String, Object> searchParams, PaginationInfo info) {
 		List<Cargo> list = null;
-		
+
 		String select = "select c ";
 		String from = "from Cargo c ";
 		String join = "";
@@ -43,45 +43,38 @@ public class CargoDAO {
 		String groupBY = "";
 		String having = "";
 		String orderBY = "";
-		
 
-		
-		
-		/*if (idAddress != null) {
-		if (where.isEmpty()) {
-			where = "where ";
-		} else {
-			where += " or ";
+		Integer idCargo = (Integer) searchParams.get("idCargo");
+
+		if (idCargo != null) {
+			if (where.isEmpty()) {
+				where = "where ";
+			} else {
+				where += " or ";
+			}
+			where += " c.idcargo like :idCargo ";
 		}
-		if (join.isEmpty()) {
-			join = " join p.idaddress p  ";
-		}
-		where += " c.idCustomer like :idCustomer ";
-	}*/
-		
-		
+
 		Query querycount = em.createQuery("SELECT COUNT(c.idcargo) " + from + join + where);
-		
-		
+
 		try {
 			Number n = (Number) querycount.getSingleResult();
 			info.setCount(n.intValue());
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		Query query = em.createQuery(select + from + join + where);
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
-		
+
 		try {
 			list = query.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
+
 		return list;
 	}
 }
