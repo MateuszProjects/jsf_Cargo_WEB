@@ -45,10 +45,18 @@ public class BillofladingDAO {
 		String having = "";
 		String orderBY = "";
 
-
 		Integer idBillofloading = (Integer) searchParams.get("idBillofloading");
-		String text = (String) searchParams.get("text");
+		// String text = (String) searchParams.get("text");
 
+		if (idBillofloading != null) {
+			if (where.isEmpty()) {
+				where = "where ";
+			} else {
+				where += " or ";
+			}
+			where += " p.idbillofLading like :idBillofloading";
+		}
+/*
 		if (text != null) {
 			if (where.isEmpty()) {
 				where = "where ";
@@ -57,17 +65,8 @@ public class BillofladingDAO {
 			}
 			where += text;
 		}
-		
-		if (idBillofloading != null) {
-			if (where.isEmpty()) {
-				where = "where ";
-			} else {
-				where += " or ";
-			}
-			where += idBillofloading;
-		}		
-
-		Query querycount = em.createQuery("SELECT COUNT(p.idbillofLading) " + from + join + where);
+*/
+		Query querycount = em.createQuery("SELECT COUNT(p.idbillofLading) " + from + join);
 
 		try {
 			Number n = (Number) querycount.getSingleResult();
@@ -78,6 +77,10 @@ public class BillofladingDAO {
 		}
 
 		Query query = em.createQuery(select + from + join + where);
+
+		if (idBillofloading != null) {
+			query.setParameter("idBillofloading", idBillofloading);
+		}
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
 

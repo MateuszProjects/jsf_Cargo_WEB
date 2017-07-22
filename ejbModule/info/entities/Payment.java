@@ -16,7 +16,7 @@ public class Payment implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer idpayment;
+	private int idpayment;
 
 	private double amoutn;
 
@@ -35,7 +35,7 @@ public class Payment implements Serializable {
 		return this.idpayment;
 	}
 
-	public void setIdpayment(Integer idpayment) {
+	public void setIdpayment(int idpayment) {
 		this.idpayment = idpayment;
 	}
 
