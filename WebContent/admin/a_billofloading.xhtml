@@ -20,7 +20,7 @@
 					<legend>Opcje wyszukiwania</legend>
 					<h:panelGrid columns="2" cellpadding="5">
 						<p:outputLabel value="idBillofLoading" />
-						<p:inputText value="" />
+						<p:inputText value="#{billofloadingBB.idBillofLoading}" />
 						<p:commandButton value="Szukaj" update="table" />
 					</h:panelGrid>
 				</fieldset>
@@ -77,7 +77,12 @@
 							action="#{billofloadingBB.edit(billof)}" update=":form:msgs" />
 
 					</p:column>
+					<p:column headerText="deleate">
 
+						<p:commandButton value="del"
+							action="#{billofloadingBB.deleate(billof)}" update=":form:msgs" />
+
+					</p:column>
 					<p:column style="width:32px">
 						<p:rowEditor />
 					</p:column>
@@ -88,24 +93,25 @@
 		</p:panel>
 		<br />
 		<p:panel id="button_panel1" widgetVar="testPanel1" closable="true"
-			toggleable="true" header="Create Cargo" collapsed="true">
+			toggleable="true" header="Create Bill of Loading" collapsed="true">
 			<h1>Create BillofLoading</h1>
-			<h:form id="createCargo">
+			<h:form id="createBillofLoading">
 				<p:growl id="growl" sticky="true" showDetail="true" />
 
-				<p:wizard flowListener="#{employeeBB.onFlowProcess}">
+				<p:wizard flowListener="#{billofloadingBB.onFlowProcess}">
 
-					<p:tab id="personal" title="Personal">
-						<p:panel header="Personal Details">
+					<p:tab id="personal" title="Details">
+						<p:panel header="Details">
 							<p:messages />
 							<h:panelGrid columns="2" columnClasses="label, value">
 
+	
+								
+								<h:outputText value="IdCargo" style="color:black;" />
+								<p:inputText value="#{billofloadingBB.idCargo}" label="IdCargo" />
 
-								<h:outputText value="Name" style="color:black;" />
-								<p:inputText value="#{employeeBB.name}" label="Name" />
-
-								<h:outputText value="Surname:" />
-								<p:inputText value="#{employeeBB.surname}" label="Surname:" />
+								<h:outputText value="Amount" style="color:black;"/>
+								<p:inputText value="#{billofloadingBB.text}" label="Amount" />
 
 							</h:panelGrid>
 						</p:panel>
@@ -117,21 +123,11 @@
 								columnClasses="grid,grid,grid">
 								<h:panelGrid columns="2" columnClasses="label, value">
 
+										
 									<h:outputText value="IdCargo" />
 									<h:outputText value="#{billofloadingBB.idCargo}"
 										styleClass="outputLabel" />
 
-									<h:outputText value="Amount" />
-									<h:outputText value="#{billofloadingBB.text}"
-										styleClass="outputLabel" />
-								</h:panelGrid>
-
-								<h:panelGrid columns="2" columnClasses="label, value">
-
-									<h:outputText value="IdCargo " />
-									<h:outputText value="#{billofloadingBB.idCargo}"
-										styleClass="outputLabel" />
-										
 									<h:outputText value="Amount" />
 									<h:outputText value="#{billofloadingBB.text}"
 										styleClass="outputLabel" />
@@ -141,10 +137,6 @@
 							<p:commandButton value="Submit"
 								actionListener="#{billofloadingBB.save()}" update="growl"
 								process="@this" />
-							<h:commandButton value="Reset p:ajax" style="margin-right:20px;">
-								<p:ajax update="conf" resetValues="true" />
-							</h:commandButton>
-
 						</p:panel>
 					</p:tab>
 

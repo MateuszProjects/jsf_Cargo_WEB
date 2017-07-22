@@ -11,9 +11,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+
+import org.primefaces.event.FlowEvent;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.LazyDataModel;
 import info.dao.BillofladingDAO;
+import info.dao.CargoDAO;
 import info.entities.Billoflading;
 import info.entities.Cargo;
 import info.lazydatamodel.LazyDataModelBilloflading;
@@ -30,9 +33,19 @@ public class BillofloadingBB implements Serializable {
 	private Billoflading billoflading = new Billoflading();
 	private Cargo cargo = null;
 
-	private String text = null;
-	private Integer idCargo = null;
-	private Integer idBillofLoading = null;
+	private String text;
+	private Integer idCargo;
+	private Integer idBillofLoading;
+	
+	private boolean skip;
+
+	public boolean isSkip() {
+		return skip;
+	}
+
+	public void setSkip(boolean skip) {
+		this.skip = skip;
+	}
 	
 	public String getText() {
 		return text;
@@ -60,6 +73,9 @@ public class BillofloadingBB implements Serializable {
 
 	@EJB
 	BillofladingDAO billofladingDAO;
+	
+	@EJB
+	CargoDAO cargoDAO;
 
 	private LazyDataModelBilloflading lazyModel;
 
@@ -79,6 +95,11 @@ public class BillofloadingBB implements Serializable {
 
 	public LazyDataModel<Billoflading> getLazyList() {
 		Map<String, Object> searchParams = new HashMap<String, Object>();
+		
+		if(idBillofLoading != null){
+			searchParams.put("idBillofLoading", idBillofLoading);
+		}
+		
 		lazyModel.setSearchParams(searchParams);
 		lazyModel.setBillofladingDAO(billofladingDAO);
 		return lazyModel;
@@ -94,6 +115,16 @@ public class BillofloadingBB implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
+	public String onFlowProcess(FlowEvent event) {
+		if (skip) {
+			skip = false; // reset in case user goes back
+			return "confirm";
+		} else {
+			return event.getNewStep();
+		}
+
+	}
+	
 	private boolean validate() {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		boolean result = false;
@@ -106,13 +137,12 @@ public class BillofloadingBB implements Serializable {
 			ctx.addMessage(null, new FacesMessage("text Wymagane"));
 		}
 		
-		if(idBillofLoading == null){
-		ctx.addMessage(null, new FacesMessage("text Wymagane"));
-		}
+
 		
 		if (ctx.getMessageList().isEmpty()) {
 			billoflading.setTekst(text);
-			billoflading.setCargo(cargo);
+			Cargo cargofind = cargoDAO.find(idCargo);
+			billoflading.setCargo(cargofind);
 			result = true;
 		}
 
@@ -146,5 +176,11 @@ public class BillofloadingBB implements Serializable {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Success"));
 	}
+	
+	public String deleate(Billoflading billofladingObject){
+		billofladingDAO.remove(billofladingObject);
+		return null;
+		}
 }

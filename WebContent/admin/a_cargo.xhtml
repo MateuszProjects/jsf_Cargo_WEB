@@ -20,7 +20,7 @@
 					<legend>Opcje wyszukiwania</legend>
 					<h:panelGrid columns="2" cellpadding="5">
 						<p:outputLabel value="idCargo" />
-						<p:inputText value="" />
+						<p:inputText value="#{cargoBB.idCargo}" />
 						<p:commandButton value="Szukaj" update="table" />
 					</h:panelGrid>
 				</fieldset>
@@ -111,7 +111,7 @@
 					</p:column>
 					<p:column headerText="add Bill">
 
-						<p:commandButton value="Edit" action="#{cargoBB.addBillofLoading(cargo)}"
+						<p:commandButton value="add" action="#{cargoBB.addBillofLoading(cargo)}"
 							update=":form:msgs" />
 
 					</p:column>
@@ -122,6 +122,9 @@
 				</p:dataTable>
 			</h:form>
 		</p:panel>
+		
+		
+		
 		<br />
 		<p:panel id="button_panel1" widgetVar="testPanel1" closable="true"
 			toggleable="true" header="Create Cargo" collapsed="true">
