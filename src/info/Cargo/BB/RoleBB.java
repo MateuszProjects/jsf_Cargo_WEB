@@ -28,6 +28,7 @@ public class RoleBB implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Role role = new Role();
 	private String name = new String();
+	private final String PAGE_ROLE = "a_role?faces-redirect=true";
 	
 	private LazyDataModelRole lazyModel;
 	
@@ -107,6 +108,11 @@ public class RoleBB implements Serializable {
 		}
 		FacesMessage msg = new FacesMessage(" Success");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+	
+	public String delete(Role roleObject){
+		roleDAO.remove(roleObject);
+		return PAGE_ROLE;
 	}
 
 }

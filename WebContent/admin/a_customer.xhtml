@@ -129,7 +129,12 @@
 							action="#{customerBB.edit(customer)}" update=":form:msgs" />
 
 					</p:column>
+					<p:column headerText="deleate">
 
+						<p:commandButton value="del"
+							action="#{customerBB.delete(customer)}" update=":form:msgs" />
+
+					</p:column>
 					<p:column style="width:32px">
 						<p:rowEditor />
 					</p:column>

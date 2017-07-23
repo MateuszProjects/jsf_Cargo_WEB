@@ -28,6 +28,7 @@ public class EmployeeBB implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private final String PAGE_ADDRESS = "a_address?faces-redirect=true";
+	private final String PAGE_EMPLOYEE = "a_employee?faces-redirect=true";
 
 	// private Integer Iduser;
 	private String Name;
@@ -218,5 +219,11 @@ public class EmployeeBB implements Serializable {
 		session.setAttribute("userObject", userObject);
 		return PAGE_ADDRESS;
 	}
+	
+	public String deleteUser(User userObject){
+		userDAO.remove(userObject);
+		return PAGE_EMPLOYEE;
+	}
+	
 
 }

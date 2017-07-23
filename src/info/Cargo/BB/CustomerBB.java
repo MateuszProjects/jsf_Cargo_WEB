@@ -28,7 +28,8 @@ public class CustomerBB implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	private final String PAGE_CUSTOMER = "a_customer?faces-redirect=true";
+	
 	private String Name;
 	private String Surname;
 	private String Login;
@@ -119,6 +120,11 @@ public class CustomerBB implements Serializable {
 		FacesMessage msg = new FacesMessage("Updata Success" + u.getName());
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
+	
+	public String delete(User userObject){
+		customerDAO.remove(userObject);
+		return PAGE_CUSTOMER;
+	}
 
 	public void onRowEdit(RowEditEvent event) {
 		FacesMessage msg = new FacesMessage("Customer Edited");
@@ -129,6 +135,7 @@ public class CustomerBB implements Serializable {
 		FacesMessage msg = new FacesMessage("Customer Cancelled");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
+
 	
 
 }

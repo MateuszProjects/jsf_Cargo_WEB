@@ -80,7 +80,12 @@
 							update=":form:msgs" />
 
 					</p:column>
+					<p:column headerText="delete">
 
+						<p:commandButton value="del" action="#{roleBB.delete(role)}"
+							update=":form:msgs" />
+
+					</p:column>
 					<p:column style="width:32px">
 						<p:rowEditor />
 					</p:column>

@@ -225,7 +225,7 @@ public class AddressBB implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 	
-	public String deleate(Address address){
+	public String delete(Address address){
 		addressDAO.remove(address);
 		return PAGE_ADDRESS;
 	}

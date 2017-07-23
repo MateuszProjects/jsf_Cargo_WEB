@@ -97,7 +97,12 @@
 							update=":form:msgs" />
 
 					</p:column>
+					<p:column headerText="delete">
 
+						<p:commandButton value="del" action="#{paymentBB.deleate(payment)}"
+							update=":form:msgs" />
+
+					</p:column>
 					<p:column style="width:32px">
 						<p:rowEditor />
 					</p:column>
@@ -107,9 +112,9 @@
 		</p:panel>
 		<br />
 		<p:panel id="button_panel1" widgetVar="testPanel1" closable="true"
-			toggleable="true" header="Create Cargo" collapsed="true">
-			<h1>Create BillofLoading</h1>
-			<h:form id="createPayment">
+			toggleable="true" header="Create Salary" collapsed="true">
+			<h1>Create Salary</h1>
+			<h:form id="createSalary">
 				<p:growl id="growl" sticky="true" showDetail="true" />
 
 				<p:wizard flowListener="#{paymentBB.onFlowProcess}">

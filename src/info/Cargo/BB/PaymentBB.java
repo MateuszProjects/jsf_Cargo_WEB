@@ -30,7 +30,8 @@ public class PaymentBB implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	private final String PAGE_PAYMENT = "a_payment?faces-redirect=true";
+	
 	private Payment payment = new Payment();
 	User user = new User();
 
@@ -150,4 +151,8 @@ public class PaymentBB implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
+	public String delete(Payment paymentObject){
+		paymentDAO.remove(paymentObject);
+		return PAGE_PAYMENT;
+	}
 }

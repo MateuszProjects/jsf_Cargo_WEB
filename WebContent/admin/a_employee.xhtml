@@ -123,10 +123,16 @@
 							update=":form:msgs" />
 
 					</p:column>
+					<p:column headerText="deleate">
+
+						<p:commandButton value="del" action="#{employeeBB.deleteUser(empl)}"
+							update=":form:msgs" />
+
+					</p:column>
 					<p:column headerText="Add Address">
 
-						<p:commandButton value="Add" action="#{employeeBB.addAddress(empl)}"
-							update=":form:msgs" />
+						<p:commandButton value="Add"
+							action="#{employeeBB.addAddress(empl)}" update=":form:msgs" />
 
 					</p:column>
 
