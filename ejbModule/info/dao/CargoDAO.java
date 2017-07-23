@@ -69,6 +69,10 @@ public class CargoDAO {
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
 
+		if(idCargo != null){
+			query.setParameter("idCargo", idCargo);
+		}
+		
 		try {
 			list = query.getResultList();
 		} catch (Exception e) {
