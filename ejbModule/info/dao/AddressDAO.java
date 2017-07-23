@@ -29,44 +29,53 @@ public class AddressDAO {
 	public void remove(Address address) {
 		em.remove(em.merge(address));
 	}
-	
-	public Address merge(Address address){
+
+	public Address merge(Address address) {
 		return em.merge(address);
 	}
 
 	public List<Address> getAddressList(Map<String, Object> searchParams, PaginationInfo info) {
 		List<Address> list = null;
 
-
-		String select = "select p ";
-		String from = "from Address p ";
+		String select = "select a ";
+		String from = "from Address a ";
 		String join = "";
 		String where = "";
 		String groupBY = "";
 		String having = "";
 		String orderBY = "";
 
-		
 		Integer idAddress = (Integer) searchParams.get("idAddress");
-		
-		Integer cityCode = (Integer) searchParams.get("cityCode");
+		String cityCode = (String) searchParams.get("cityCode");
 		String street = (String) searchParams.get("street");
-		
+
 		if (idAddress != null) {
 			if (where.isEmpty()) {
 				where = " where ";
-			} 
-			where += " p.idaddress like :idAddress ";
+			}else{
+				where += " or ";
+			}
+			where += " a.idaddress like :idAddress ";
 		}
 
 		if (cityCode != null) {
 			if (where.isEmpty()) {
 				where = " where ";
-			} 
-			where += cityCode;
+			}else{
+				where += " or ";
+			}
+			where += " a.cityCode like :CityCode";
 		}
 
-		Query querycount = em.createQuery("SELECT COUNT(p.idaddress) " + from);
+		if (street != null) {
+			if (where.isEmpty()) {
+				where = " where ";
+			}else{
+				where += " or ";
+			}
+			where += " a.street like :Street";
+		}
+		Query querycount = em.createQuery("SELECT COUNT(a.idaddress) " + from);
 
 		try {
 			Number n = (Number) querycount.getSingleResult();
@@ -83,7 +92,15 @@ public class AddressDAO {
 		if (idAddress != null) {
 			query.setParameter("idAddress", idAddress);
 		}
-		
+
+		if (street != null) {
+			query.setParameter("Street", street);
+		}
+
+		if (cityCode != null) {
+			query.setParameter("CityCode", cityCode);
+		}
+
 		try {
 			list = query.getResultList();
 		} catch (Exception e) {
