@@ -29,14 +29,15 @@ public class BillofloadingBB implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	private final String PAGE_BILL_OF_LOADING = "a_billofloading?faces-redirect=true";
+	
 	private Billoflading billoflading = new Billoflading();
 	private Cargo cargo = null;
 
 	private String text;
 	private Integer idCargo;
 	private Integer idBillofLoading;
-	
+
 	private boolean skip;
 
 	public boolean isSkip() {
@@ -46,7 +47,7 @@ public class BillofloadingBB implements Serializable {
 	public void setSkip(boolean skip) {
 		this.skip = skip;
 	}
-	
+
 	public String getText() {
 		return text;
 	}
@@ -73,7 +74,7 @@ public class BillofloadingBB implements Serializable {
 
 	@EJB
 	BillofladingDAO billofladingDAO;
-	
+
 	@EJB
 	CargoDAO cargoDAO;
 
@@ -95,11 +96,15 @@ public class BillofloadingBB implements Serializable {
 
 	public LazyDataModel<Billoflading> getLazyList() {
 		Map<String, Object> searchParams = new HashMap<String, Object>();
-		
-		if(idBillofLoading != null){
+
+		if (idBillofLoading != null) {
 			searchParams.put("idBillofLoading", idBillofLoading);
 		}
 		
+		if(text != null){
+			searchParams.put("text", text);
+		}
+
 		lazyModel.setSearchParams(searchParams);
 		lazyModel.setBillofladingDAO(billofladingDAO);
 		return lazyModel;
@@ -124,21 +129,19 @@ public class BillofloadingBB implements Serializable {
 		}
 
 	}
-	
+
 	private boolean validate() {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		boolean result = false;
 
-		if(idCargo == null){
+		if (idCargo == null) {
 			ctx.addMessage(null, new FacesMessage("idCargo Wymagane"));
 		}
-		
+
 		if (text == null) {
 			ctx.addMessage(null, new FacesMessage("text Wymagane"));
 		}
-		
 
-		
 		if (ctx.getMessageList().isEmpty()) {
 			billoflading.setTekst(text);
 			Cargo cargofind = cargoDAO.find(idCargo);
@@ -147,7 +150,6 @@ public class BillofloadingBB implements Serializable {
 		}
 
 		return result;
-
 	}
 
 	public void edit(Billoflading billofladingObject) {
@@ -178,9 +180,10 @@ public class BillofloadingBB implements Serializable {
 		}
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Success"));
 	}
-	
-	public String deleate(Billoflading billofladingObject){
+
+	public String deleate(Billoflading billofladingObject) {
 		billofladingDAO.remove(billofladingObject);
-		return null;
-		}
+		return PAGE_BILL_OF_LOADING;
+
+	}
 }

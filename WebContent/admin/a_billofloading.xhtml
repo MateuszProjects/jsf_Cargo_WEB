@@ -19,8 +19,13 @@
 				<fieldset style="border-radius: 0.2em;">
 					<legend>Opcje wyszukiwania</legend>
 					<h:panelGrid columns="2" cellpadding="5">
+					
 						<p:outputLabel value="idBillofLoading" />
 						<p:inputText value="#{billofloadingBB.idBillofLoading}" />
+					
+						<p:outputLabel value="text" />	
+						<p:inputText value="#{billofloadingBB.text}" />
+						
 						<p:commandButton value="Szukaj" update="table" />
 					</h:panelGrid>
 				</fieldset>
@@ -53,7 +58,7 @@
 						</p:cellEditor>
 					</p:column>
 
-					<p:column headerText="Price">
+					<p:column headerText="text">
 						<p:cellEditor>
 							<f:facet name="output">
 								<h:outputText value="#{billof.tekst}" />
@@ -105,12 +110,12 @@
 							<p:messages />
 							<h:panelGrid columns="2" columnClasses="label, value">
 
-	
-								
+
+
 								<h:outputText value="IdCargo" style="color:black;" />
 								<p:inputText value="#{billofloadingBB.idCargo}" label="IdCargo" />
 
-								<h:outputText value="Amount" style="color:black;"/>
+								<h:outputText value="Amount" style="color:black;" />
 								<p:inputText value="#{billofloadingBB.text}" label="Amount" />
 
 							</h:panelGrid>
@@ -123,12 +128,12 @@
 								columnClasses="grid,grid,grid">
 								<h:panelGrid columns="2" columnClasses="label, value">
 
-										
-									<h:outputText value="IdCargo" />
+
+									<h:outputText value="IdCargo" style="color:black;"/>
 									<h:outputText value="#{billofloadingBB.idCargo}"
 										styleClass="outputLabel" />
 
-									<h:outputText value="Amount" />
+									<h:outputText value="Amount" style="color:black;"/>
 									<h:outputText value="#{billofloadingBB.text}"
 										styleClass="outputLabel" />
 								</h:panelGrid>

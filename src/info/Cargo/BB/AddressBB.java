@@ -30,7 +30,8 @@ public class AddressBB implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	private final String PAGE_ADDRESS = "a_address?faces-redirect=true";
+	
 	private Integer idAddress;
 	private Integer idUser;
 	private String cityCode;
@@ -38,7 +39,7 @@ public class AddressBB implements Serializable {
 	private String telephone;
 	private String email;
 
-	User user = new User();
+	User userObject = null;
 	Address address = new Address();
 	private boolean skip;
 
@@ -115,6 +116,15 @@ public class AddressBB implements Serializable {
 
 	@PostConstruct
 	public void init() {
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);		
+		
+		userObject = (User) session.getAttribute("userObject");
+		
+		if(userObject != null){
+			setIdUser(userObject.getIdusers());
+			session.removeAttribute("userObject");
+		}
+		
 		lazyModel = new LazyDataModelAddress();
 	}
 
@@ -123,6 +133,14 @@ public class AddressBB implements Serializable {
 
 		if (idAddress != null) {
 			searchParams.put("idAddress", idAddress);
+		}
+		
+		if(cityCode != null){
+			searchParams.put("cityCode", cityCode);
+		}
+		
+		if(street != null){
+			searchParams.put("street", street);
 		}
 
 		lazyModel.setSearchParams(searchParams);
@@ -156,7 +174,7 @@ public class AddressBB implements Serializable {
 			address.setTelephone(telephone);
 			address.setStreet(street);
 			address.setEmail(email);
-			address.setUser(user);
+			address.setUser(userObject);
 			result = true;
 		}
 		return result;
@@ -172,18 +190,19 @@ public class AddressBB implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
-	public void edit(Address a) {
+	public void edit(Address addressObject) {
 
-		a.setCityCode(a.getCityCode());
-		a.setEmail(a.getEmail());
-		a.setStreet(a.getStreet());
-		a.setTelephone(a.getTelephone());
+		addressObject.setCityCode(addressObject.getCityCode());
+		addressObject.setEmail(addressObject.getEmail());
+		addressObject.setStreet(addressObject.getStreet());
+		addressObject.setTelephone(addressObject.getTelephone());
+		
 		try {
-			addressDAO.merge(a);
+			addressDAO.merge(addressObject);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		FacesMessage msg = new FacesMessage("Updata Success");
+		FacesMessage msg = new FacesMessage("Update Success");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
@@ -202,6 +221,12 @@ public class AddressBB implements Serializable {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-
+		FacesMessage msg = new FacesMessage("Create Success");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+	
+	public String deleate(Address address){
+		addressDAO.remove(address);
+		return PAGE_ADDRESS;
 	}
 }

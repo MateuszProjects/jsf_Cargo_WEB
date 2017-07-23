@@ -10,6 +10,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FlowEvent;
@@ -17,6 +18,7 @@ import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.LazyDataModel;
 
 import info.dao.UserDAO;
+import info.entities.Address;
 import info.entities.User;
 import info.lazydatamodel.LazyDataModelEmployee;
 
@@ -25,6 +27,7 @@ import info.lazydatamodel.LazyDataModelEmployee;
 public class EmployeeBB implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	private final String PAGE_ADDRESS = "a_address?faces-redirect=true";
 
 	// private Integer Iduser;
 	private String Name;
@@ -208,6 +211,12 @@ public class EmployeeBB implements Serializable {
 			ex.printStackTrace();
 		}
 
+	}
+	
+	public String addAddress(User userObject){
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+		session.setAttribute("userObject", userObject);
+		return PAGE_ADDRESS;
 	}
 
 }

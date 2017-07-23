@@ -19,8 +19,16 @@
 				<fieldset style="border-radius: 0.2em;">
 					<legend>Opcje wyszukiwania</legend>
 					<h:panelGrid columns="2" cellpadding="5">
+						
 						<p:outputLabel value="idAddress" />
 						<p:inputText value="#{addressBB.idAddress}" />
+						
+						<p:outputLabel value="street" />
+						<p:inputText value="#{addressBB.street}" />
+						
+						<p:outputLabel value="cityCode" />
+						<p:inputText value="#{addressBB.cityCode}" />
+						
 						<p:commandButton value="Szukaj" update="table" />
 					</h:panelGrid>
 				</fieldset>
@@ -37,7 +45,7 @@
 
 					<p:ajax event="rowEdit" listener="#{addressBB.onRowEdit}"
 						update=":form:msgs" />
-						
+
 					<p:ajax event="rowEditCancel" listener="#{addressBB.onRowCancel}"
 						update=":form:msgs" />
 
@@ -55,7 +63,7 @@
 
 						</p:cellEditor>
 					</p:column>
-					
+
 					<p:column headerText="City code">
 						<p:cellEditor>
 							<f:facet name="output">
@@ -77,16 +85,6 @@
 						</p:cellEditor>
 					</p:column>
 
-					<p:column headerText="Address">
-						<p:cellEditor>
-							<f:facet name="output">
-								<h:outputText value="#{address.street}" />
-							</f:facet>
-							<f:facet name="input">
-								<p:inputText value="#{address.street}" style="width:100%" />
-							</f:facet>
-						</p:cellEditor>
-					</p:column>
 
 					<p:column headerText="Streat">
 						<p:cellEditor>
@@ -116,6 +114,12 @@
 
 					</p:column>
 
+					<p:column headerText="Deleate">
+
+						<p:commandButton value="del" action="#{addressBB.deleate(address)}"
+							update=":form:msgs" />
+
+					</p:column>
 					<p:column style="width:32px">
 						<p:rowEditor />
 					</p:column>
@@ -124,7 +128,86 @@
 			</h:form>
 
 		</p:panel>
+		<br />
+		<p:panel id="button_panel1" widgetVar="testPanel1" closable="true"
+			toggleable="true" header="Create Address" collapsed="true">
+			<h1>Create Address</h1>
+			<h:form id="createAddress">
+				<p:growl id="growl" sticky="true" showDetail="true" />
 
+				<p:wizard flowListener="#{addressBB.onFlowProcess}">
+
+					<p:tab id="personal" title="Details">
+						<p:panel header="Details">
+							<p:messages />
+							<h:panelGrid columns="2" columnClasses="label, value">
+
+								<h:outputText value="cityCode" style="color:black;" />
+								<p:inputText value="#{addressBB.cityCode}" label="citycode" />
+
+								<h:outputText value="email" style="color:black;" />
+								<p:inputText value="#{addressBB.email}" label="email" />
+
+								<h:outputText value="street" style="color:black;" />
+								<p:inputText value="#{addressBB.street}" label="street" />
+
+								<h:outputText value="telephone" style="color:black;" />
+								<p:inputText value="#{addressBB.telephone}" label="telephone" />
+
+							</h:panelGrid>
+						</p:panel>
+					</p:tab>
+
+					<p:tab id="user" title="User">
+						<p:panel header="Details">
+							<p:messages />
+							<h:panelGrid columns="2" columnClasses="label, value">
+
+								<h:outputText value="IdUser" style="color:black;" />
+								<p:inputText value="#{addressBB.idUser}" label="iduser" />
+
+							</h:panelGrid>
+						</p:panel>
+					</p:tab>
+
+					<p:tab id="confirm" title="Confirmation">
+						<p:panel id="conf" header="Confirmation">
+							<h:panelGrid id="confirmation" columns="3"
+								columnClasses="grid,grid,grid">
+								<h:panelGrid columns="2" columnClasses="label, value">
+
+									<h:outputText value="cityCode" style="color:black;" />
+									<h:outputText  value="#{addressBB.cityCode}"
+										styleClass="outputLabel" />
+
+									<h:outputText value="Email" style="color:black;" />
+									<h:outputText value="#{addressBB.email}"
+										styleClass="outputLabel" />
+										
+									<h:outputText value="Street" style="color:black;" />
+									<h:outputText value="#{addressBB.street}"
+										styleClass="outputLabel" />
+
+									<h:outputText value="Telephone" style="color:black;" />
+									<h:outputText value="#{addressBB.telephone}"
+										styleClass="outputLabel" />
+									
+									<h:outputText value="IdUser" style="color:black;" />
+									<h:outputText  value="#{addressBB.idUser}"
+										styleClass="outputLabel" />
+										
+								</h:panelGrid>
+							</h:panelGrid>
+
+							<p:commandButton value="Submit"
+								actionListener="#{addressBB.save()}" update="growl"
+								process="@this" />
+						</p:panel>
+					</p:tab>
+
+				</p:wizard>
+			</h:form>
+		</p:panel>
 
 
 
