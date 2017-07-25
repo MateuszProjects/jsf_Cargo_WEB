@@ -81,6 +81,14 @@ public class LoactionDAO {
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
 
+		if(description != null){
+			query.setParameter("description", description);
+		}
+		
+		if(idLocation != null){
+			query.setParameter("idlocation", idLocation);
+		}
+		
 		try {
 			list = query.getResultList();
 		} catch (Exception e) {
