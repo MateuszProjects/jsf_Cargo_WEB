@@ -20,16 +20,16 @@ public class AccessDAO {
 	public User getLogin(String login, String pass) {
 		User user = null;
 
-		String select = "";
-		String from = "";
+		String select = "SELECT e ";
+		String from = "From User e";
 		String join = "";
-		String where = "";
+		String where = " where e.login=:login and e.pass=:pass";
 		String groupBY = "";
 		String having = "";
 		String orderBY = "";
 		
 		
-		Query query = em.createQuery("SELECT e From User e where e.login=:login and e.pass=:pass");
+		Query query = em.createQuery(select + from + join + where + groupBY + having + orderBY );
 		query.setParameter("login", login);
 		query.setParameter("pass", pass);
 

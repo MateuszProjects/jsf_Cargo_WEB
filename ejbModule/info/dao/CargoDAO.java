@@ -65,7 +65,7 @@ public class CargoDAO {
 			e.printStackTrace();
 		}
 
-		Query query = em.createQuery(select + from + join + where);
+		Query query = em.createQuery(select + from + join + where + groupBY + having + orderBY);
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
 

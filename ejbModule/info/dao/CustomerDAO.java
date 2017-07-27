@@ -43,6 +43,7 @@ public class CustomerDAO {
 		String group_by = "";
 		String having = "";
 		String join = " JOIN  p.addresses a ";
+		String orderBY = "";
 
 		Integer idEmployee = (Integer) searchParams.get("idEmployee");
 		String address = (String) searchParams.get("address");
@@ -76,7 +77,7 @@ public class CustomerDAO {
 			e.printStackTrace();
 		}
 
-		Query query = em.createQuery(select + from + join + where);
+		Query query = em.createQuery(select + from + join + where + group_by + having + orderBY);
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
 
