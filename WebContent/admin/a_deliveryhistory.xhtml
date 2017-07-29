@@ -99,11 +99,16 @@
 					</p:column>
 					<p:column headerText="edit">
 
-						<p:commandButton value="Edit" action="#{addressBB.edit(address)}"
+						<p:commandButton value="Edit" action="#{deliveryHistoryBB.edit(deliveryhistory)}"
 							update=":form:msgs" />
 
 					</p:column>
+					<p:column headerText="delete">
 
+						<p:commandButton value="del" action="#{deliveryHistoryBB.delete(deliveryhistory)}"
+							update=":form:msgs" />
+
+					</p:column>
 					<p:column style="width:32px">
 						<p:rowEditor />
 					</p:column>

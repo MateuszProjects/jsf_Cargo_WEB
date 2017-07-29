@@ -30,6 +30,8 @@ public class TransportBB implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Transport transport = new Transport();
+	
+	private final String PAGE_TRANSPORT = "a_transport?faces-redirect=true";
 
 	@EJB
 	TransportDAO transportDAO;
@@ -135,6 +137,11 @@ public class TransportBB implements Serializable {
 		}
 		FacesMessage msg = new FacesMessage(" Success");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+	
+	public String delete(Transport transportObject){
+		transportDAO.remove(transportObject);
+		return PAGE_TRANSPORT;
 	}
 
 }

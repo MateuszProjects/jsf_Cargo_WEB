@@ -30,6 +30,7 @@ public class DeliverSpecificationBB implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private final String PAGE_DELIVERYSPECYFICATION = "a_deliveryspecyfication?faces-redirect=true";
 
 	private Deliveryspecification deliveryspcification = new Deliveryspecification();
 	private Date date = new Date();
@@ -123,5 +124,10 @@ public class DeliverSpecificationBB implements Serializable {
 		FacesMessage msg = new FacesMessage(" Success");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 
+	}
+	
+	public String delete(Deliveryspecification deliveryspecification){
+		deliveryspecificationDAO.remove(deliveryspecification);
+		return PAGE_DELIVERYSPECYFICATION;
 	}
 }

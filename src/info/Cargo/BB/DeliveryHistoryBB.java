@@ -26,7 +26,8 @@ public class DeliveryHistoryBB implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	private final String PAGE_DELIVERY_HISTORY = "a_deliveryhistory?faces-redirect=true";
+	
 	@EJB
 	DeliveryhistoryDAO deliveryhistoryDAO;
 	Deliveryhistory deliveryHistory = new Deliveryhistory();
@@ -95,5 +96,10 @@ public class DeliveryHistoryBB implements Serializable {
 		}
 		FacesMessage msg = new FacesMessage(" Success");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+	
+	public String delete(Deliveryhistory deliveryhistory){
+		deliveryhistoryDAO.remove(deliveryhistory);
+		return PAGE_DELIVERY_HISTORY;
 	}
 }

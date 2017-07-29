@@ -79,7 +79,12 @@
 							action="#{handingeventBB.edit(handlist)}" update=":form:msgs" />
 
 					</p:column>
+					<p:column headerText="delete">
 
+						<p:commandButton value="del"
+							action="#{handingeventBB.delete(handlist)}" update=":form:msgs" />
+
+					</p:column>
 					<p:column style="width:32px">
 						<p:rowEditor />
 					</p:column>

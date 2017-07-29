@@ -26,6 +26,7 @@ public class HandingeventBB implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private final String PAGE_HANDINGEVENT = "a_handingevent?faces-redirect=true";
 
 	@EJB
 	HandingeventDAO handingeventDAO;
@@ -84,5 +85,10 @@ public class HandingeventBB implements Serializable {
 		}
 		FacesMessage msg = new FacesMessage(" Success");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+	
+	public String delete(Handlingevent handlingevent){
+		handingeventDAO.remove(handlingevent);
+		return PAGE_HANDINGEVENT;
 	}
 }
