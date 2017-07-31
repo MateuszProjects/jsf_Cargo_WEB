@@ -7,8 +7,6 @@ import javax.persistence.Query;
 
 import info.entities.User;
 
-
-
 @Stateless
 public class AccessDAO {
 
@@ -23,22 +21,45 @@ public class AccessDAO {
 		String select = "SELECT e ";
 		String from = "From User e";
 		String join = "";
-		String where = " where e.login=:login and e.pass=:pass";
+		String where = "";
 		String groupBY = "";
 		String having = "";
 		String orderBY = "";
-		
-		
-		Query query = em.createQuery(select + from + join + where + groupBY + having + orderBY );
-		query.setParameter("login", login);
-		query.setParameter("pass", pass);
 
+		if (login != null) {
+			if (where.isEmpty()) {
+				where = "where ";
+			} else {
+				where += " and ";
+			}
+			where += "e.login=:login";
+		}
+
+		if (pass != null) {
+			if (where.isEmpty()) {
+				where = "where ";
+			} else {
+				where += " and ";
+			}
+			where += " e.pass=:pass";
+		}
+
+		Query query = em.createQuery(select + from + join + where + groupBY + having + orderBY);
+		
+		if (login != null) {
+			query.setParameter("login", login);
+		}
+
+		if (pass != null) {
+			query.setParameter("pass", pass);
+		}
+		
 		try {
 			user = (User) query.getSingleResult();
 			if (user == null) {
 				return null;
 			} else {
-				
+
 				try {
 					user.getRoles();
 				} catch (Exception ex) {
@@ -51,5 +72,5 @@ public class AccessDAO {
 
 		return user;
 	}
-	
+
 }

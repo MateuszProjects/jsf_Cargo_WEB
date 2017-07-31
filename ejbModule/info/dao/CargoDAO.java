@@ -45,6 +45,8 @@ public class CargoDAO {
 		String orderBY = "";
 
 		Integer idCargo = (Integer) searchParams.get("idCargo");
+		String name = (String) searchParams.get("name");
+		Integer weight = (Integer) searchParams.get("weight");
 
 		if (idCargo != null) {
 			if (where.isEmpty()) {
@@ -55,6 +57,24 @@ public class CargoDAO {
 			where += " c.idcargo like :idCargo ";
 		}
 
+		if (name != null) {
+			if (where.isEmpty()) {
+				where = "where ";
+			} else {
+				where += " or ";
+			}
+			where += " c.name like :name ";
+		}
+		
+		if (weight != null) {
+			if (where.isEmpty()) {
+				where = "where ";
+			} else {
+				where += " or ";
+			}
+			where += " c.weight like :weight ";
+		}
+		
 		Query querycount = em.createQuery("SELECT COUNT(c.idcargo) " + from + join + where);
 
 		try {
@@ -71,6 +91,14 @@ public class CargoDAO {
 
 		if(idCargo != null){
 			query.setParameter("idCargo", idCargo);
+		}
+		
+		if(name != null){
+			query.setParameter("name", name);
+		}
+		
+		if(weight !=null){
+			query.setParameter("weight", weight);
 		}
 		
 		try {
