@@ -29,8 +29,8 @@ public class CustomerDAO {
 	public void remove(User user) {
 		em.remove(em.merge(user));
 	}
-	
-	public User merge(User user){
+
+	public User merge(User user) {
 		return em.merge(user);
 	}
 
@@ -42,29 +42,34 @@ public class CustomerDAO {
 		String where = "";
 		String group_by = "";
 		String having = "";
-		String join = " JOIN  p.addresses a ";
+		String join = "";
 		String orderBY = "";
 
 		Integer idEmployee = (Integer) searchParams.get("idEmployee");
 		String address = (String) searchParams.get("address");
-		
-		
+
 		if (idEmployee != null) {
 			if (where.isEmpty()) {
 				where = " where ";
-			}else{
+			} else {
 				where += " or ";
 			}
 			where += " p.idusers like :idEmployee";
 		}
-		
-		if(address != null){
+
+		if (address != null) {
 			if (where.isEmpty()) {
 				where = " where ";
-			}else{
+			} else {
 				where += " or ";
 			}
+			if(join.isEmpty()){
+				join = " JOIN ";
+			}
+			
 			where += " p.address like :address";
+			join += " p.address a ";
+			
 		}
 
 		Query querycount = em.createQuery("SELECT COUNT(p.idusers) " + from + join);
@@ -84,8 +89,8 @@ public class CustomerDAO {
 		if (idEmployee != null) {
 			query.setParameter("idEmployee", idEmployee);
 		}
-		
-		if(address != null){
+
+		if (address != null) {
 			query.setParameter("address", address);
 		}
 
