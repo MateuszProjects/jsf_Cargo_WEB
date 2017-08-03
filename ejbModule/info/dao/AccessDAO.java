@@ -19,7 +19,7 @@ public class AccessDAO {
 		User user = null;
 
 		String select = "SELECT e ";
-		String from = "From User e";
+		String from = "From User e ";
 		String join = "";
 		String where = "";
 		String groupBY = "";
@@ -28,16 +28,16 @@ public class AccessDAO {
 
 		if (login != null) {
 			if (where.isEmpty()) {
-				where = "where ";
+				where = " where ";
 			} else {
 				where += " and ";
 			}
-			where += "e.login=:login";
+			where += " e.login=:login";
 		}
 
 		if (pass != null) {
 			if (where.isEmpty()) {
-				where = "where ";
+				where = " where ";
 			} else {
 				where += " and ";
 			}

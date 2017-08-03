@@ -29,35 +29,33 @@ public class TransportDAO {
 	public void remove(Transport transport) {
 		em.remove(em.merge(transport));
 	}
-	
-	public Transport merge(Transport transport){
+
+	public Transport merge(Transport transport) {
 		return em.merge(transport);
 	}
 
 	public List<Transport> getSearchList(Map<String, Object> searchParams, PaginationInfo info) {
 
 		List<Transport> list = null;
-		
+
 		String select = "SELECT t ";
 		String from = "FROM Transport t ";
 		String join = "";
 		String where = "";
-		String groupBY ="";
+		String groupBY = "";
 		String having = "";
 		String orderBY = "";
 
-		
-		/*if (idAddress != null) {
-		if (where.isEmpty()) {
-			where = "where ";
-		} else {
-			where += " or ";
+		Integer idTransport = (Integer) searchParams.get("idTransport");
+
+		if (idTransport != null) {
+			if (where.isEmpty()) {
+				where = "where ";
+			} else {
+				where += " or ";
+			}
+			where += " t.idTransport like :idTransport ";
 		}
-		if (join.isEmpty()) {
-			join = " join p.idaddress p  ";
-		}
-		where += " c.idCustomer like :idCustomer ";
-	}*/
 
 		Query querycount = em.createQuery("SELECT COUNT(t.idtransport) " + from);
 
@@ -72,6 +70,10 @@ public class TransportDAO {
 		Query query = em.createQuery(select + from + join + where);
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
+		
+		if(idTransport != null){
+			query.setParameter("idTransport", idTransport);
+		}
 
 		try {
 			list = query.getResultList();
