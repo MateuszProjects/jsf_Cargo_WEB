@@ -45,14 +45,33 @@ public class UserDAO {
 		String join = "JOIN  p.addresses a ";
 
 		Integer idEmployee = (Integer) searchParams.get("idEmployee");
+		String name = (String) searchParams.get("name");
+		String surname = (String) searchParams.get("surname");
 
 		if (idEmployee != null) {
 			if (where.isEmpty()) {
 				where = " where ";
+			}else{
+				where += " and ";
 			}
 			where += " p.idusers like :idEmployee";
 		}
-
+		if (name != null) {
+			if (where.isEmpty()) {
+				where = " where ";
+			}else{
+				where += " and ";
+			}
+			where += " p.name like :name";
+		}
+		if (surname != null) {
+			if (where.isEmpty()) {
+				where = " where ";
+			}else{
+				where += " and ";
+			}
+			where += " p.surname like :surname";
+		}
 		Query querycount = em.createQuery("SELECT COUNT(p.idusers) " + from + join);
 
 		try {
@@ -70,7 +89,12 @@ public class UserDAO {
 		if (idEmployee != null) {
 			query.setParameter("idEmployee", idEmployee);
 		}
-
+		if (name != null) {
+			query.setParameter("name", name);
+		}
+		if (surname != null) {
+			query.setParameter("surname", surname);
+		}
 		try {
 			list = query.getResultList();
 		} catch (Exception e) {
@@ -78,6 +102,5 @@ public class UserDAO {
 		}
 		return list;
 	}
-
 
 }
