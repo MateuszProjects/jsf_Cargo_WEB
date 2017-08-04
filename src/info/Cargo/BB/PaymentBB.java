@@ -33,11 +33,12 @@ public class PaymentBB implements Serializable {
 	private final String PAGE_PAYMENT = "a_payment?faces-redirect=true";
 	
 	private Payment payment = new Payment();
-	User user = new User();
+	private User user = null;
 
 	private Integer idPayment;
 	private Double amount;
-
+	private boolean skip;
+	
 	public Integer getIdPayment() {
 		return idPayment;
 	}
@@ -54,7 +55,6 @@ public class PaymentBB implements Serializable {
 		this.amount = amount;
 	}
 
-	private boolean skip;
 
 	public boolean isSkip() {
 		return skip;
@@ -86,13 +86,22 @@ public class PaymentBB implements Serializable {
 
 	public LazyDataModel<Payment> getLazyList() {
 		Map<String, Object> searchParams = new HashMap<String, Object>();
+		
+		if(idPayment != null){
+			searchParams.put("idPayment", idPayment);
+		}
+		
+		if(amount != null){
+			searchParams.put("amount", amount);
+		}
+		
 		lazyModel.setSearchParams(searchParams);
 		lazyModel.setPaymentDAO(paymentDAO);
 		return lazyModel;
 	}
 
 	public void onRowEdit(RowEditEvent event) {
-		FacesMessage msg = new FacesMessage("Car Edited");
+		FacesMessage msg = new FacesMessage("Payment Edited");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 

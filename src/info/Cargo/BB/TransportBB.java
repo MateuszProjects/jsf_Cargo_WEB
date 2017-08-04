@@ -30,8 +30,38 @@ public class TransportBB implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Transport transport = new Transport();
-	
+
 	private final String PAGE_TRANSPORT = "a_transport?faces-redirect=true";
+
+	private Integer idTransport;
+	private String name;
+	private Double payKm;
+
+	private boolean skip;
+
+	public Integer getIdTransport() {
+		return idTransport;
+	}
+
+	public void setIdTransport(Integer idTransport) {
+		this.idTransport = idTransport;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Double getPayKm() {
+		return payKm;
+	}
+
+	public void setPayKm(Double payKm) {
+		this.payKm = payKm;
+	}
 
 	@EJB
 	TransportDAO transportDAO;
@@ -57,13 +87,16 @@ public class TransportBB implements Serializable {
 
 	public LazyDataModel<Transport> getLazyList() {
 		Map<String, Object> searchParams = new HashMap<String, Object>();
+
+		if (idTransport != null) {
+			searchParams.put("idTransport", idTransport);
+		}
+
 		lazyModel.setSearchParams(searchParams);
 		lazyModel.setTransportDAO(transportDAO);
 		return lazyModel;
 
 	}
-
-	private boolean skip;
 
 	public boolean isSkip() {
 		return skip;
@@ -96,12 +129,13 @@ public class TransportBB implements Serializable {
 	private boolean validate() {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		boolean result = false;
-		
-		if(ctx.getMessageList().isEmpty()){
-			// add geters for transport
+
+		if (ctx.getMessageList().isEmpty()) {
+			transport.setName(name);
+			transport.setPaykm(payKm);
 			result = true;
 		}
-		
+
 		return result;
 
 	}
@@ -110,7 +144,7 @@ public class TransportBB implements Serializable {
 
 		transportObject.setName(transportObject.getName());
 		transportObject.setPaykm(transportObject.getPaykm());
-		
+
 		try {
 			transportDAO.merge(transportObject);
 		} catch (Exception ex) {
@@ -122,14 +156,14 @@ public class TransportBB implements Serializable {
 
 	public void save() {
 
-		if(transport == null){
+		if (transport == null) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Brak objektu transport"));
 		}
-		
-		if(!validate()){
+
+		if (!validate()) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("validate false"));
 		}
-		
+
 		try {
 			transportDAO.createTransport(transport);
 		} catch (Exception ex) {
@@ -138,8 +172,8 @@ public class TransportBB implements Serializable {
 		FacesMessage msg = new FacesMessage(" Success");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
-	
-	public String delete(Transport transportObject){
+
+	public String delete(Transport transportObject) {
 		transportDAO.remove(transportObject);
 		return PAGE_TRANSPORT;
 	}

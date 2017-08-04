@@ -30,10 +30,10 @@ public class EmployeeBB implements Serializable {
 	private final String PAGE_ADDRESS = "a_address?faces-redirect=true";
 	private final String PAGE_EMPLOYEE = "a_employee?faces-redirect=true";
 
-	// params for looking for
+	// param for looking for
 	private Integer idEmployee;
 
-	// private Integer Iduser;
+
 	private String name;
 	private String surname;
 	private String login;
@@ -170,14 +170,6 @@ public class EmployeeBB implements Serializable {
 		return result;
 	}
 
-	public void reset(FlowEvent event) {
-		this.name = null;
-		this.surname = null;
-		this.login = null;
-		this.pass = null;
-		skip = true;
-	}
-
 	public void edit(User userObject) {
 
 		userObject.setName(userObject.getName());
@@ -190,7 +182,7 @@ public class EmployeeBB implements Serializable {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		FacesMessage msg = new FacesMessage("Updata Success" + userObject.getName());
+		FacesMessage msg = new FacesMessage("Update Success" + userObject.getName());
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 

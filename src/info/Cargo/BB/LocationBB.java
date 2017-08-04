@@ -75,6 +75,15 @@ public class LocationBB implements Serializable {
 
 	public LazyDataModel<Location> getLazyList() {
 		Map<String, Object> searchParams = new HashMap<String, Object>();
+		
+		if(idLocation != null){
+			searchParams.put("idlocation", idLocation);
+		}
+		
+		if(description != null){
+			searchParams.put("description", description);
+		}
+		
 		lazyModel.setSearchParams(searchParams);
 		lazyModel.setLocationDAO(locationDAO);
 		return lazyModel;

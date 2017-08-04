@@ -30,34 +30,45 @@ public class CustomerBB implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private final String PAGE_CUSTOMER = "a_customer?faces-redirect=true";
 	private boolean skip;
-	
-	private String Name;
-	private String Surname;
-	private String Login;
+	private User user = new User();
+
+	private Integer idCustomer;
+
+	private String name;
+	private String surname;
+	private String login;
 	private String pass;
 
+	public Integer getIdCustomer() {
+		return idCustomer;
+	}
+
+	public void setIdCustomer(Integer idCustomer) {
+		this.idCustomer = idCustomer;
+	}
+
 	public String getName() {
-		return Name;
+		return name;
 	}
 
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 
 	public String getSurname() {
-		return Surname;
+		return surname;
 	}
 
 	public void setSurname(String surname) {
-		Surname = surname;
+		this.surname = surname;
 	}
 
 	public String getLogin() {
-		return Login;
+		return login;
 	}
 
 	public void setLogin(String login) {
-		Login = login;
+		this.login = login;
 	}
 
 	public String getPass() {
@@ -81,12 +92,22 @@ public class CustomerBB implements Serializable {
 	public LazyDataModel<User> getLazylist() {
 		Map<String, Object> searchParams = new HashMap<String, Object>();
 
+		if (idCustomer != null) {
+			searchParams.put("idEmployee", idCustomer);
+		}
+
+		if (name != null) {
+			searchParams.put("name", name);
+		}
+
+		if (surname != null) {
+			searchParams.put("surname", surname);
+		}
+
 		lazyModel.setSearchParams(searchParams);
 		lazyModel.setCustomerDAO(customerDAO);
 		return lazyModel;
 	}
-	
-
 
 	public boolean isSkip() {
 		return skip;
@@ -105,24 +126,73 @@ public class CustomerBB implements Serializable {
 		}
 
 	}
-	
-	public void edit(User u) {
 
-		u.setName(u.getName());
-		u.setSurname(u.getSurname());
-		u.setPass(u.getPass());
-		u.setLogin(u.getLogin());
+	private boolean validate() {
+		FacesContext ctx = FacesContext.getCurrentInstance();
+		boolean result = false;
+
+		if (name == null) {
+			ctx.addMessage(null, new FacesMessage("Name Wymagane"));
+		}
+
+		if (surname == null) {
+			ctx.addMessage(null, new FacesMessage("Surname Wymagane"));
+		}
+
+		if (login == null) {
+			ctx.addMessage(null, new FacesMessage("idAddress Wymagane"));
+		}
+
+		if (pass == null) {
+			ctx.addMessage(null, new FacesMessage("pass Wymagane"));
+		}
+
+		if (ctx.getMessageList().isEmpty()) {
+			user.setName(name);
+			user.setSurname(surname);
+			user.setLogin(login);
+			user.setPass(pass);
+			result = true;
+		}
+
+		return result;
+
+	}
+
+	public void save() {
+		if (user == null) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Brak objektu user"));
+		}
+
+		if (!validate()) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Validate wrong"));
+		}
 
 		try {
-			customerDAO.merge(u);
+			customerDAO.createUserCustomer(user);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		FacesMessage msg = new FacesMessage("Updata Success" + u.getName());
+
+	}
+
+	public void edit(User userObject) {
+
+		userObject.setName(userObject.getName());
+		userObject.setSurname(userObject.getSurname());
+		userObject.setPass(userObject.getPass());
+		userObject.setLogin(userObject.getLogin());
+
+		try {
+			customerDAO.merge(userObject);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		FacesMessage msg = new FacesMessage("Updata Success" + userObject.getName());
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
-	
-	public String delete(User userObject){
+
+	public String delete(User userObject) {
 		customerDAO.remove(userObject);
 		return PAGE_CUSTOMER;
 	}
@@ -136,7 +206,5 @@ public class CustomerBB implements Serializable {
 		FacesMessage msg = new FacesMessage("Customer Cancelled");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
-
-	
 
 }
