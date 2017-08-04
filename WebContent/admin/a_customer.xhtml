@@ -171,16 +171,19 @@
 						<p:panel header="Contact Information">
 							<p:messages />
 							<h:panelGrid columns="2" columnClasses="label, value">
+
+								<h:outputText value="Name " />
+								<p:inputText value="#{employeeBB.name}" label="name" />
+
+								<h:outputText value="pass: " />
+								<p:inputText value="#{employeeBB.surname}" label="surname " />
+								
 								<h:outputText value="login " />
 								<p:inputText value="#{employeeBB.login}" label="login" />
 
 								<h:outputText value="pass: " />
 								<p:inputText value="#{employeeBB.pass}" label="pass " />
 
-								<h:outputText value="Passsdfa "
-									rendered="#{employeeBB.renderIs('Jan')}" />
-								<h:outputText value="Passsdfa "
-									rendered="#{employeeBB.renderIs('Jan')}" />
 							</h:panelGrid>
 						</p:panel>
 					</p:tab>
@@ -215,11 +218,8 @@
 							</h:panelGrid>
 
 							<p:commandButton value="Submit"
-								actionListener="#{employeeBB.save()}" update="growl"
+								actionListener="#{employeeBB.save}" update="growl"
 								process="@this" />
-							<h:commandButton value="Reset p:ajax" style="margin-right:20px;">
-								<p:ajax update="conf" resetValues="true" />
-							</h:commandButton>
 
 						</p:panel>
 					</p:tab>

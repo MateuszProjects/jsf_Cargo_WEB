@@ -118,46 +118,32 @@
 		</p:panel>
 		<br />
 		<p:panel id="button_panel1" widgetVar="testPanel1" closable="true"
-			toggleable="true" header="Create Cargo" collapsed="true">
-			<h1>Create BillofLoading</h1>
+			toggleable="true" header="Create DeliveryHistory" collapsed="true">
+			<h1>Create DeliveryHistory </h1>
 			<h:form id="createDeliveryhistory">
 				<p:growl id="growl" sticky="true" showDetail="true" />
 
-				<p:wizard flowListener="#{employeeBB.onFlowProcess}">
+				<p:wizard flowListener="#{deliveryHistoryBB.onFlowProcess}">
 					<p:tab id="personal" title="Personal">
 						<p:panel header="Personal Details">
 							<p:messages />
 							<h:panelGrid columns="2" columnClasses="label, value">
 
 
-								<h:outputText value="Name" />
-								<p:inputText value="#{employeeBB.name}" label="Name" />
+								<h:outputText value="ArriveDate" />
+								<p:inputText value="#{deliveryHistoryBB.arriveDate}" label="arriveDate" />
 
-								<h:outputText value="Surname:" />
-								<p:inputText value="#{employeeBB.surname}" label="Surname:" />
+								<h:outputText value="LeaveDate:" />
+								<p:inputText value="#{deliveryHistoryBB.leaveDate}" label="leaveDate" />
+
+								<h:outputText value="Comment" />
+								<p:inputText value="#{deliveryHistoryBB.comment}" label="comment" />
 
 							</h:panelGrid>
 						</p:panel>
 					</p:tab>
 
 
-					<p:tab id="contact" title="Contact">
-						<p:panel header="Contact Information">
-							<p:messages />
-							<h:panelGrid columns="2" columnClasses="label, value">
-								<h:outputText value="login " />
-								<p:inputText value="#{employeeBB.login}" label="login" />
-
-								<h:outputText value="pass: " />
-								<p:inputText value="#{employeeBB.pass}" label="pass " />
-
-								<h:outputText value="Passsdfa "
-									rendered="#{employeeBB.renderIs('Jan')}" />
-								<h:outputText value="Passsdfa "
-									rendered="#{employeeBB.renderIs('Jan')}" />
-							</h:panelGrid>
-						</p:panel>
-					</p:tab>
 
 					<p:tab id="confirm" title="Confirmation">
 						<p:panel id="conf" header="Confirmation">
@@ -166,34 +152,27 @@
 								<h:panelGrid columns="2" columnClasses="label, value">
 
 
-									<h:outputText value="Name: " />
-									<h:outputText value="#{employeeBB.name}"
+									<h:outputText value="arriveDate " />
+									<h:outputText value="#{deliveryHistoryBB.arriveDate}"
 										styleClass="outputLabel" />
 
-									<h:outputText value="Surname " />
-									<h:outputText value="#{employeeBB.surname}"
+									<h:outputText value="LeaveDate" />
+									<h:outputText value="#{deliveryHistoryBB.leaveDate}"
 										styleClass="outputLabel" />
 								</h:panelGrid>
 
 								<h:panelGrid columns="2" columnClasses="label, value">
 
-									<h:outputText value="Login " />
-									<h:outputText value="#{employeeBB.login}"
-										styleClass="outputLabel" />
-
-									<h:outputText value="Pass " />
-									<h:outputText value="#{employeeBB.pass}"
+									<h:outputText value="Comment " />
+									<h:outputText value="#{deliveryHistoryBB.comment}"
 										styleClass="outputLabel" />
 
 								</h:panelGrid>
 							</h:panelGrid>
 
 							<p:commandButton value="Submit"
-								actionListener="#{employeeBB.save()}" update="growl"
+								actionListener="#{deliveryHistoryBB.save}" update="growl"
 								process="@this" />
-							<h:commandButton value="Reset p:ajax" style="margin-right:20px;">
-								<p:ajax update="conf" resetValues="true" />
-							</h:commandButton>
 
 						</p:panel>
 					</p:tab>

@@ -29,6 +29,7 @@ public class CustomerBB implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private final String PAGE_CUSTOMER = "a_customer?faces-redirect=true";
+	private boolean skip;
 	
 	private String Name;
 	private String Surname;
@@ -85,7 +86,7 @@ public class CustomerBB implements Serializable {
 		return lazyModel;
 	}
 	
-	private boolean skip;
+
 
 	public boolean isSkip() {
 		return skip;

@@ -30,14 +30,15 @@ public class EmployeeBB implements Serializable {
 	private final String PAGE_ADDRESS = "a_address?faces-redirect=true";
 	private final String PAGE_EMPLOYEE = "a_employee?faces-redirect=true";
 
-	// private Integer Iduser;
-	private String Name;
-	private String Surname;
-	private String Login;
-	private String pass;
-
 	// params for looking for
-	private Integer idEmployee = 1;
+	private Integer idEmployee;
+
+	// private Integer Iduser;
+	private String name;
+	private String surname;
+	private String login;
+	private String pass;
+	private boolean skip;
 
 	public Integer getIdEmployee() {
 		return idEmployee;
@@ -48,27 +49,27 @@ public class EmployeeBB implements Serializable {
 	}
 
 	public String getName() {
-		return Name;
+		return name;
 	}
 
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 
 	public String getSurname() {
-		return Surname;
+		return surname;
 	}
 
 	public void setSurname(String surname) {
-		Surname = surname;
+		this.surname = surname;
 	}
 
 	public String getLogin() {
-		return Login;
+		return login;
 	}
 
 	public void setLogin(String login) {
-		Login = login;
+		this.login = login;
 	}
 
 	public String getPass() {
@@ -98,12 +99,18 @@ public class EmployeeBB implements Serializable {
 			searchParams.put("idEmployee", idEmployee);
 		}
 
+		if (name != null) {
+			searchParams.put("name", name);
+		}
+
+		if (surname != null) {
+			searchParams.put("surname", surname);
+		}
+
 		lazyModel.setSearchParams(searchParams);
 		lazyModel.setUserDAO(userDAO);
 		return lazyModel;
 	}
-
-	private boolean skip;
 
 	public boolean isSkip() {
 		return skip;
@@ -125,7 +132,7 @@ public class EmployeeBB implements Serializable {
 
 	public boolean renderIs(String name) {
 		boolean result = false;
-		if (name.equals(Surname)) {
+		if (name.equals(surname)) {
 			result = true;
 		}
 		return result;
@@ -135,15 +142,15 @@ public class EmployeeBB implements Serializable {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		boolean result = false;
 
-		if (Name == null) {
+		if (name == null) {
 			ctx.addMessage(null, new FacesMessage("Name Wymagane"));
 		}
 
-		if (Surname == null) {
+		if (surname == null) {
 			ctx.addMessage(null, new FacesMessage("Surname Wymagane"));
 		}
 
-		if (Login == null) {
+		if (login == null) {
 			ctx.addMessage(null, new FacesMessage("idAddress Wymagane"));
 		}
 
@@ -153,9 +160,9 @@ public class EmployeeBB implements Serializable {
 
 		if (ctx.getMessageList().isEmpty()) {
 
-			user.setName(Name);
-			user.setSurname(Surname);
-			user.setLogin(Login);
+			user.setName(name);
+			user.setSurname(surname);
+			user.setLogin(login);
 			user.setPass(pass);
 			result = true;
 		}
@@ -164,31 +171,31 @@ public class EmployeeBB implements Serializable {
 	}
 
 	public void reset(FlowEvent event) {
-		this.Name = null;
-		this.Surname = null;
-		this.Login = null;
+		this.name = null;
+		this.surname = null;
+		this.login = null;
 		this.pass = null;
 		skip = true;
 	}
 
-	public void edit(User u) {
+	public void edit(User userObject) {
 
-		u.setName(u.getName());
-		u.setSurname(u.getSurname());
-		u.setPass(u.getPass());
-		u.setLogin(u.getLogin());
+		userObject.setName(userObject.getName());
+		userObject.setSurname(userObject.getSurname());
+		userObject.setPass(userObject.getPass());
+		userObject.setLogin(userObject.getLogin());
 
 		try {
-			userDAO.merge(u);
+			userDAO.merge(userObject);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		FacesMessage msg = new FacesMessage("Updata Success" + u.getName());
+		FacesMessage msg = new FacesMessage("Updata Success" + userObject.getName());
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
 	public void onRowEdit(RowEditEvent event) {
-		FacesMessage msg = new FacesMessage("Car Edited");
+		FacesMessage msg = new FacesMessage("User Edited");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
@@ -213,17 +220,16 @@ public class EmployeeBB implements Serializable {
 		}
 
 	}
-	
-	public String addAddress(User userObject){
+
+	public String addAddress(User userObject) {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		session.setAttribute("userObject", userObject);
 		return PAGE_ADDRESS;
 	}
-	
-	public String deleteUser(User userObject){
+
+	public String deleteUser(User userObject) {
 		userDAO.remove(userObject);
 		return PAGE_EMPLOYEE;
 	}
-	
 
 }

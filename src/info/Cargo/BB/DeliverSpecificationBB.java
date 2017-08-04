@@ -34,7 +34,9 @@ public class DeliverSpecificationBB implements Serializable {
 
 	private Deliveryspecification deliveryspcification = new Deliveryspecification();
 	private Date date = new Date();
-	
+
+	public String arrivaltime;
+
 	@EJB
 	DeliveryspecificationDAO deliveryspecificationDAO;
 
@@ -48,15 +50,15 @@ public class DeliverSpecificationBB implements Serializable {
 
 		cargo = (Cargo) session.getAttribute("cargo");
 		location = (Location) session.getAttribute("location");
-		
-		if(cargo != null){
+
+		if (cargo != null) {
 			session.removeAttribute("cargo");
 		}
-		
-		if(location != null){
+
+		if (location != null) {
 			session.removeAttribute("location");
-		}		
-		
+		}
+
 		lazyModel = new LazyDataModelDeliveryspecification();
 	}
 
@@ -80,22 +82,27 @@ public class DeliverSpecificationBB implements Serializable {
 	private boolean validate() {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		boolean result = false;
-		
-		if(ctx.getMessageList().isEmpty()){
-			
+
+		if (arrivaltime == null) {
+			ctx.addMessage(null, new FacesMessage("arrivaltime Wymagane"));
+		}
+
+		if (ctx.getMessageList().isEmpty()) {
+
+			// deliveryspcification.setArrivaltime(arrivaltime);
 			// add set for object deliveryspecyfication
-			
+
 			result = true;
 		}
-		
+
 		return result;
 
 	}
 
 	public void edit(Deliveryspecification deliveryspecificationObject) {
-	
+
 		deliveryspecificationObject.setArrivaltime(deliveryspecificationObject.getArrivaltime());
-		
+
 		try {
 			deliveryspecificationDAO.merge(deliveryspecificationObject);
 		} catch (Exception ex) {
@@ -106,16 +113,15 @@ public class DeliverSpecificationBB implements Serializable {
 	}
 
 	public void save() {
-		
-		if(deliveryspcification == null){
-			FacesContext.getCurrentInstance().addMessage(null, 
-					new FacesMessage("Brak objektu deliveryspecyfiaction"));
+
+		if (deliveryspcification == null) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Brak objektu deliveryspecyfiaction"));
 		}
-		
-		if(!validate()){
+
+		if (!validate()) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("validate false"));
 		}
-		
+
 		try {
 			deliveryspecificationDAO.createDeliveryspecyfication(deliveryspcification);
 		} catch (Exception ex) {
@@ -125,8 +131,8 @@ public class DeliverSpecificationBB implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 
 	}
-	
-	public String delete(Deliveryspecification deliveryspecification){
+
+	public String delete(Deliveryspecification deliveryspecification) {
 		deliveryspecificationDAO.remove(deliveryspecification);
 		return PAGE_DELIVERYSPECYFICATION;
 	}
