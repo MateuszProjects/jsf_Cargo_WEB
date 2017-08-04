@@ -56,7 +56,7 @@ public class PaymentDAO {
 				where += " or ";
 			}
 
-			where += " c.idPayment like :idPayment ";
+			where += " c.idpayment like :idPayment ";
 		}
 		
 		if(amount != null){
@@ -65,6 +65,8 @@ public class PaymentDAO {
 			}else{
 				where += " or ";
 			}
+			
+			where += " c.amoutn like :amount";
 			
 		}
 
@@ -81,6 +83,14 @@ public class PaymentDAO {
 		Query query = em.createQuery(select + from + join + where + groupBY + having + orderby);
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
+		
+		if(idPayemt != null){
+			query.setParameter("idPayment", idPayemt);
+		}
+		
+		if(amount != null){
+			query.setParameter("amount", amount);
+		}
 
 		try {
 			list = query.getResultList();

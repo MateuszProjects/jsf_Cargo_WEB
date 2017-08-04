@@ -33,7 +33,12 @@ public class BillofladingDAO {
 	public Billoflading merge(Billoflading billoflading) {
 		return em.merge(billoflading);
 	}
-
+	/**
+	 * 
+	 * @param searchParams
+	 * @param info
+	 * @return list
+	 */
 	public List<Billoflading> getBillofladingList(Map<String, Object> searchParams, PaginationInfo info) {
 		List<Billoflading> list = null;
 
@@ -79,15 +84,15 @@ public class BillofladingDAO {
 		Query query = em.createQuery(select + from + join + where + groupBY + having + orderBY);
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
-		
+
 		if (idBillofloading != null) {
 			query.setParameter("idBillofloading", idBillofloading);
-		} 
-		
-		if(text != null){
+		}
+
+		if (text != null) {
 			query.setParameter("Text", text);
 		}
-		
+
 		try {
 			list = query.getResultList();
 		} catch (Exception e) {

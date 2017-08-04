@@ -34,6 +34,13 @@ public class UserDAO {
 		return em.merge(user);
 	}
 
+	/**
+	 * Function for taking from Data Base object  Employee and looking for object with parameters  
+	 * and with lazy Data Base.
+	 * @param searchParams
+	 * @param info
+	 * @return list
+	 */
 	public List<User> getEmployeeList(Map<String, Object> searchParams, PaginationInfo info) {
 		List<User> list = null;
 
@@ -56,6 +63,7 @@ public class UserDAO {
 			}
 			where += " p.idusers like :idEmployee";
 		}
+		
 		if (name != null) {
 			if (where.isEmpty()) {
 				where = " where ";
@@ -64,6 +72,7 @@ public class UserDAO {
 			}
 			where += " p.name like :name";
 		}
+		
 		if (surname != null) {
 			if (where.isEmpty()) {
 				where = " where ";
@@ -72,6 +81,7 @@ public class UserDAO {
 			}
 			where += " p.surname like :surname";
 		}
+		
 		Query querycount = em.createQuery("SELECT COUNT(p.idusers) " + from + join);
 
 		try {
@@ -89,12 +99,15 @@ public class UserDAO {
 		if (idEmployee != null) {
 			query.setParameter("idEmployee", idEmployee);
 		}
+		
 		if (name != null) {
 			query.setParameter("name", name);
 		}
+		
 		if (surname != null) {
 			query.setParameter("surname", surname);
 		}
+		
 		try {
 			list = query.getResultList();
 		} catch (Exception e) {

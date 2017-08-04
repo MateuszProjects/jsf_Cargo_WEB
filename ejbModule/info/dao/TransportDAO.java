@@ -54,7 +54,7 @@ public class TransportDAO {
 			} else {
 				where += " or ";
 			}
-			where += " t.idTransport like :idTransport ";
+			where += " t.idtransport like :idTransport ";
 		}
 
 		Query querycount = em.createQuery("SELECT COUNT(t.idtransport) " + from);
