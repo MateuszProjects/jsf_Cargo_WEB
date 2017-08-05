@@ -30,16 +30,21 @@ public class HandingeventDAO {
 		em.remove(em.merge(handlingevent));
 	}
 
-	public Handlingevent  merge(Handlingevent handlingevent){
+	public Handlingevent merge(Handlingevent handlingevent) {
 		return em.merge(handlingevent);
 	}
-	
+
+	/**
+	 * 
+	 * @param searchParams
+	 * @param info
+	 * @return
+	 */
 	public List<Handlingevent> getHandingEventList(Map<String, Object> searchParams, PaginationInfo info) {
 		List<Handlingevent> list = null;
-		
 
-		// add searchParams 
-		
+		// add searchParams
+
 		String select = "select p ";
 		String from = "from Handlingevent p ";
 		String join = "";
@@ -48,41 +53,56 @@ public class HandingeventDAO {
 		String having = "";
 		String orderBY = "";
 
-		
-		/*if (idAddress != null) {
-		if (where.isEmpty()) {
-			where = "where ";
-		} else {
-			where += " or ";
+		Integer idhandingevent = (Integer) searchParams.get("idhandingevent");
+		String description = (String) searchParams.get("description");
+
+		if (idhandingevent != null) {
+			if (where.isEmpty()) {
+				where = "where ";
+			} else {
+				where += " or ";
+			}
+			where += " p.idhandlingEvent like :idhandlingEvent ";
 		}
-		if (join.isEmpty()) {
-			join = " join p.idaddress p  ";
+
+		if (description != null) {
+			if (where.isEmpty()) {
+				where = "where ";
+			} else {
+				where += " or ";
+			}
+			where += " p.decriptonEvent like :decriptonEvent ";
 		}
-		where += " c.idCustomer like :idCustomer ";
-	}*/
-		
-		
+
 		Query querycount = em.createQuery("SELECT COUNT(p.idhandlingEvent) " + from + join + where);
-		
-		
+
 		try {
 			Number n = (Number) querycount.getSingleResult();
 			info.setCount(n.intValue());
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		Query query = em.createQuery(select + from + join + where + groupBY + having + orderBY);
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
 		
+		if(idhandingevent != null){
+			query.setParameter("idhandlingEvent", idhandingevent);
+		}
+		
+		
+		if(description != null){
+			query.setParameter("decriptonEvent", description);
+		}
+
 		try {
 			list = query.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return list;
 	}
 }
