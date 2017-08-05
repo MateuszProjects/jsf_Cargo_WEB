@@ -17,7 +17,10 @@ import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.LazyDataModel;
 
 import info.dao.CargoDAO;
+import info.dao.CustomerDAO;
+import info.dao.TransportDAO;
 import info.entities.Cargo;
+import info.entities.User;
 import info.lazydatamodel.LazyDataModelCargo;
 
 @ManagedBean
@@ -30,10 +33,21 @@ public class CargoBB implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private final String BILL_OF_LOADING = "a_billofloading?faces-redirect=true";
+	private Cargo cargo = new Cargo();
+	private User user = null;
 
-	Integer idCargo = null;
-
+	private Integer idCargo;
+	private String name;
+	
 	private boolean skip;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public boolean isSkip() {
 		return skip;
@@ -53,16 +67,32 @@ public class CargoBB implements Serializable {
 
 	@EJB
 	CargoDAO cargoDAO;
+	
+	@EJB
+	TransportDAO transportDAO;
+	
+	@EJB
+	CustomerDAO customerDAO;
+	
+	
 
 	private LazyDataModelCargo lazyModel = null;
 
 	@PostConstruct
 	public void init() {
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+
+		user = (User) session.getAttribute("user");
 		lazyModel = new LazyDataModelCargo();
 	}
 
 	public LazyDataModel<Cargo> getLazyList() {
 		Map<String, Object> searchParams = new HashMap<String, Object>();
+		
+		if(idCargo != null){
+			searchParams.put("idcargo", idCargo);
+		}
+		
 		lazyModel.setSearchParams(searchParams);
 		lazyModel.setCargoDAO(cargoDAO);
 		return lazyModel;
@@ -91,8 +121,16 @@ public class CargoBB implements Serializable {
 	private boolean validate() {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		boolean result = false;
-
+		
+		if(name == null){
+			ctx.addMessage(null, new FacesMessage("name Wymagane"));
+		}
+		
+		
 		if (ctx.getMessageList().isEmpty()) {
+			cargo.setName(name);
+			cargo.setUser(user);
+			
 			result = true;
 		}
 
@@ -117,6 +155,10 @@ public class CargoBB implements Serializable {
 
 	public void save() {
 
+		if(cargo == null){
+			
+		}
+		
 		if (!validate()) {
 
 		}
