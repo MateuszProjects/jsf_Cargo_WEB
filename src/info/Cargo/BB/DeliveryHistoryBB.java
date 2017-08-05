@@ -1,6 +1,8 @@
 package info.Cargo.BB;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,13 +31,25 @@ public class DeliveryHistoryBB implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private final String PAGE_DELIVERY_HISTORY = "a_deliveryhistory?faces-redirect=true";
 	Deliveryhistory deliveryHistory = new Deliveryhistory();
+	private Date dateArrive = new Date();
+	private Date dateLeave = new Date();
 
 	private LazyDataModelDeliveryhistory lazyModel;
 
 	private boolean skip;
+
+	Integer idDeliveryHistory;
 	String arriveDate;
 	String leaveDate;
 	String comment;
+
+	public Integer getIdDeliveryHistory() {
+		return idDeliveryHistory;
+	}
+
+	public void setIdDeliveryHistory(Integer idDeliveryHistory) {
+		this.idDeliveryHistory = idDeliveryHistory;
+	}
 
 	public String getLeaveDate() {
 		return leaveDate;
@@ -101,13 +115,22 @@ public class DeliveryHistoryBB implements Serializable {
 	 */
 	public LazyDataModel<Deliveryhistory> getLazyList() {
 		Map<String, Object> searchParams = new HashMap<String, Object>();
+
+		if (idDeliveryHistory != null) {
+			searchParams.put("idDeliveryHistory", idDeliveryHistory);
+		}
+
+		if (comment != null) {
+			searchParams.put("comment", comment);
+		}
+
 		lazyModel.setSearchParams(searchParams);
 		lazyModel.setDeliveryhistoryDAO(deliveryhistoryDAO);
 		return lazyModel;
 	}
 
 	public void onRowEdit(RowEditEvent event) {
-		FacesMessage msg = new FacesMessage("Car Edited");
+		FacesMessage msg = new FacesMessage("Delivery History Edited");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
@@ -132,15 +155,19 @@ public class DeliveryHistoryBB implements Serializable {
 			ctx.addMessage(null, new FacesMessage("comment Wymagane"));
 		}
 
+		SimpleDateFormat arriveDate = new SimpleDateFormat("");
+		SimpleDateFormat leaveDate = new SimpleDateFormat("");
+
 		try {
+
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 
 		if (ctx.getMessageList().isEmpty()) {
 
-			// deliveryHistory.setArrivayDate(arriveDate);
-			// deliveryHistory.setLeaveDate(leaveDate);
+			deliveryHistory.setArrivayDate(dateArrive);
+			deliveryHistory.setLeaveDate(dateLeave);
 			deliveryHistory.setComent(comment);
 
 			result = true;
