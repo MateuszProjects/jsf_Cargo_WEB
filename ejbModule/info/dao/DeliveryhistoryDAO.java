@@ -10,7 +10,6 @@ import javax.persistence.Query;
 
 import info.entities.Deliveryhistory;
 
-
 @Stateless
 public class DeliveryhistoryDAO {
 
@@ -30,14 +29,20 @@ public class DeliveryhistoryDAO {
 	public void remove(Deliveryhistory deliveryhistory) {
 		em.remove(em.merge(deliveryhistory));
 	}
-	
-	public Deliveryhistory merge(Deliveryhistory deliveryhistory){
+
+	public Deliveryhistory merge(Deliveryhistory deliveryhistory) {
 		return em.merge(deliveryhistory);
 	}
-	
-	public List<Deliveryhistory>  getSearchList(Map<String, Object> searchParams,PaginationInfo info){
+
+	/**
+	 * 
+	 * @param searchParams
+	 * @param info
+	 * @return
+	 */
+	public List<Deliveryhistory> getSearchList(Map<String, Object> searchParams, PaginationInfo info) {
 		List<Deliveryhistory> list = null;
-		
+
 		String select = "select c ";
 		String from = "from Deliveryhistory c ";
 		String join = "";
@@ -46,21 +51,26 @@ public class DeliveryhistoryDAO {
 		String having = "";
 		String orderby = "";
 
+		String comment = (String) searchParams.get("comment");
+		Integer idDeliveryHistory = (Integer) searchParams.get("idDeliveryHistory");
 
-		
-		/*if (idAddress != null) {
-		if (where.isEmpty()) {
-			where = "where ";
-		} else {
-			where += " or ";
+		if (idDeliveryHistory != null) {
+			if (where.isEmpty()) {
+				where = "where ";
+			} else {
+				where += " or ";
+			}
+			where += " c.iddeliveryHistory like :idDeliveryHistory ";
 		}
-		if (join.isEmpty()) {
-			join = " join p.idaddress p  ";
+
+		if (comment != null) {
+			if (where.isEmpty()) {
+				where = "where ";
+			} else {
+				where += " or ";
+			}
+			where += " c.coment like :comment ";
 		}
-		where += " c.idCustomer like :idCustomer ";
-	}*/
-		
-		
 		Query querycount = em.createQuery("SELECT COUNT(c.iddeliveryHistory) " + from);
 
 		try {
@@ -75,6 +85,15 @@ public class DeliveryhistoryDAO {
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
 
+		if(idDeliveryHistory != null){
+			query.setParameter("idDeliveryHistory", idDeliveryHistory);
+		}
+		
+		if(comment != null){
+			query.setParameter("comment", comment);
+		}
+		
+		
 		try {
 			list = query.getResultList();
 		} catch (Exception e) {
