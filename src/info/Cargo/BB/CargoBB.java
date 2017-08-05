@@ -38,7 +38,7 @@ public class CargoBB implements Serializable {
 
 	private Integer idCargo;
 	private String name;
-	
+
 	private boolean skip;
 
 	public String getName() {
@@ -67,14 +67,12 @@ public class CargoBB implements Serializable {
 
 	@EJB
 	CargoDAO cargoDAO;
-	
+
 	@EJB
 	TransportDAO transportDAO;
-	
+
 	@EJB
 	CustomerDAO customerDAO;
-	
-	
 
 	private LazyDataModelCargo lazyModel = null;
 
@@ -86,13 +84,21 @@ public class CargoBB implements Serializable {
 		lazyModel = new LazyDataModelCargo();
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public LazyDataModel<Cargo> getLazyList() {
 		Map<String, Object> searchParams = new HashMap<String, Object>();
-		
-		if(idCargo != null){
+
+		if (idCargo != null) {
 			searchParams.put("idcargo", idCargo);
 		}
 		
+		if(name != null){
+			searchParams.put("name", name);
+		}
+
 		lazyModel.setSearchParams(searchParams);
 		lazyModel.setCargoDAO(cargoDAO);
 		return lazyModel;
@@ -118,26 +124,32 @@ public class CargoBB implements Serializable {
 
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	private boolean validate() {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		boolean result = false;
-		
-		if(name == null){
+
+		if (name == null) {
 			ctx.addMessage(null, new FacesMessage("name Wymagane"));
 		}
-		
-		
+
 		if (ctx.getMessageList().isEmpty()) {
 			cargo.setName(name);
 			cargo.setUser(user);
-			
+
 			result = true;
 		}
 
 		return result;
-
 	}
 
+	/**
+	 * 
+	 * @param cargoObject
+	 */
 	public void edit(Cargo cargoObject) {
 
 		cargoObject.setHazMat(cargoObject.getHazMat());
@@ -153,18 +165,21 @@ public class CargoBB implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
+	/**
+	 * 
+	 */
 	public void save() {
 
-		if(cargo == null){
-			
+		if (cargo == null) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Brak objektu cargo"));
 		}
-		
-		if (!validate()) {
 
+		if (!validate()) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Validate false"));
 		}
 
 		try {
-
+			cargoDAO.createCargo(cargo);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
