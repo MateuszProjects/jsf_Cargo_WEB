@@ -15,6 +15,13 @@ public class AccessDAO {
 	@PersistenceContext(unitName = UNIT_NAME)
 	protected EntityManager em;
 
+	/**
+	 * Function for multi login for users.
+	 * 
+	 * @param login
+	 * @param pass
+	 * @return user
+	 */
 	public User getLogin(String login, String pass) {
 		User user = null;
 
@@ -45,7 +52,7 @@ public class AccessDAO {
 		}
 
 		Query query = em.createQuery(select + from + join + where + groupBY + having + orderBY);
-		
+
 		if (login != null) {
 			query.setParameter("login", login);
 		}
@@ -53,7 +60,7 @@ public class AccessDAO {
 		if (pass != null) {
 			query.setParameter("pass", pass);
 		}
-		
+
 		try {
 			user = (User) query.getSingleResult();
 			if (user == null) {
@@ -65,6 +72,7 @@ public class AccessDAO {
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
+				
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
