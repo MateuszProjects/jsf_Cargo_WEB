@@ -31,7 +31,7 @@ public class DeliveryHistoryBB implements Serializable {
 	Deliveryhistory deliveryHistory = new Deliveryhistory();
 
 	private LazyDataModelDeliveryhistory lazyModel;
-	
+
 	private boolean skip;
 	String arriveDate;
 	String leaveDate;
@@ -68,7 +68,6 @@ public class DeliveryHistoryBB implements Serializable {
 	public void setDeliveryHistory(Deliveryhistory deliveryHistory) {
 		this.deliveryHistory = deliveryHistory;
 	}
-	
 
 	public boolean isSkip() {
 		return skip;
@@ -91,12 +90,15 @@ public class DeliveryHistoryBB implements Serializable {
 	@EJB
 	DeliveryhistoryDAO deliveryhistoryDAO;
 
-
 	@PostConstruct
 	public void init() {
 		lazyModel = new LazyDataModelDeliveryhistory();
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public LazyDataModel<Deliveryhistory> getLazyList() {
 		Map<String, Object> searchParams = new HashMap<String, Object>();
 		lazyModel.setSearchParams(searchParams);
@@ -117,36 +119,40 @@ public class DeliveryHistoryBB implements Serializable {
 	private boolean validate() {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		boolean result = false;
-		
-		if(arriveDate == null){
+
+		if (arriveDate == null) {
 			ctx.addMessage(null, new FacesMessage("arriveDate Wymagane"));
 		}
-		
-		if(leaveDate == null){
+
+		if (leaveDate == null) {
 			ctx.addMessage(null, new FacesMessage("leaveDate Wymagane"));
 		}
-		
-		if(comment == null){
+
+		if (comment == null) {
 			ctx.addMessage(null, new FacesMessage("comment Wymagane"));
 		}
-		
-		if(ctx.getMessageList().isEmpty()){
-			
-			try{
-			}catch(Exception ex){
-				ex.printStackTrace();
-			}
-			
+
+		try {
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		if (ctx.getMessageList().isEmpty()) {
+
 			// deliveryHistory.setArrivayDate(arriveDate);
 			// deliveryHistory.setLeaveDate(leaveDate);
-			
 			deliveryHistory.setComent(comment);
+
 			result = true;
 		}
 		return result;
 
 	}
 
+	/**
+	 * 
+	 * @param deliveryhistoryObject
+	 */
 	public void edit(Deliveryhistory deliveryhistoryObject) {
 
 		deliveryhistoryObject.setComent(deliveryhistoryObject.getComent());
@@ -158,10 +164,13 @@ public class DeliveryHistoryBB implements Serializable {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		FacesMessage msg = new FacesMessage(" Success");
+		FacesMessage msg = new FacesMessage("Success");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
+	/**
+	 * 
+	 */
 	public void save() {
 
 		if (deliveryHistory == null) {
@@ -177,7 +186,7 @@ public class DeliveryHistoryBB implements Serializable {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		
+
 		FacesMessage msg = new FacesMessage(" Success");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}

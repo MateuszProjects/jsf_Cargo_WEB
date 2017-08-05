@@ -39,7 +39,7 @@ public class AddressBB implements Serializable {
 	private String telephone;
 	private String email;
 
-	User userObject = null;
+	User user = null;
 	Address address = new Address();
 	private boolean skip;
 
@@ -118,10 +118,10 @@ public class AddressBB implements Serializable {
 	public void init() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);		
 		
-		userObject = (User) session.getAttribute("userObject");
+		user = (User) session.getAttribute("userObject");
 		
-		if(userObject != null){
-			setIdUser(userObject.getIdusers());
+		if(user != null){
+			setIdUser(user.getIdusers());
 			session.removeAttribute("userObject");
 		}
 		
@@ -174,7 +174,7 @@ public class AddressBB implements Serializable {
 			address.setTelephone(telephone);
 			address.setStreet(street);
 			address.setEmail(email);
-			address.setUser(userObject);
+			address.setUser(user);
 			result = true;
 		}
 		return result;
