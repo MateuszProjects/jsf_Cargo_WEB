@@ -8,7 +8,6 @@ import org.primefaces.model.SortOrder;
 
 import info.dao.CustomerDAO;
 import info.dao.PaginationInfo;
-import info.dao.UserDAO;
 import info.entities.User;
 
 public class LazyDataModelCustomer  extends LazyDataModel<User> {

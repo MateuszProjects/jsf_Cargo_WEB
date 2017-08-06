@@ -35,7 +35,16 @@ public class LocationBB implements Serializable {
 	private Location location = new Location();
 
 	private Integer idLocation;
+	private Integer idDeliverySpecyfication;
 	private String description;
+
+	public Integer getIdDeliverySpecyfication() {
+		return idDeliverySpecyfication;
+	}
+
+	public void setIdDeliverySpecyfication(Integer idDeliverySpecyfication) {
+		this.idDeliverySpecyfication = idDeliverySpecyfication;
+	}
 
 	@EJB
 	LoactionDAO locationDAO;
@@ -66,24 +75,24 @@ public class LocationBB implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);		
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 
 		lazyModel = new LazyDataModelLoaction();
 
-		 deliveryspecification = (Deliveryspecification) session.getAttribute("deliverySpec");
+		deliveryspecification = (Deliveryspecification) session.getAttribute("deliverySpec");
 	}
 
 	public LazyDataModel<Location> getLazyList() {
 		Map<String, Object> searchParams = new HashMap<String, Object>();
-		
-		if(idLocation != null){
+
+		if (idLocation != null) {
 			searchParams.put("idlocation", idLocation);
 		}
-		
-		if(description != null){
+
+		if (description != null) {
 			searchParams.put("description", description);
 		}
-		
+
 		lazyModel.setSearchParams(searchParams);
 		lazyModel.setLocationDAO(locationDAO);
 		return lazyModel;
@@ -102,7 +111,7 @@ public class LocationBB implements Serializable {
 	private boolean validate() {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		boolean result = false;
-		
+
 		if (idLocation != null) {
 			ctx.addMessage(null, new FacesMessage("idLocation Wymagane"));
 		}
@@ -110,7 +119,7 @@ public class LocationBB implements Serializable {
 		if (description != null) {
 			ctx.addMessage(null, new FacesMessage("description Wymagane"));
 		}
-		
+
 		if (ctx.getMessageList().isEmpty()) {
 
 			location.setDescription(description);

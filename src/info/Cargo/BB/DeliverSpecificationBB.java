@@ -35,7 +35,33 @@ public class DeliverSpecificationBB implements Serializable {
 	private Deliveryspecification deliveryspcification = new Deliveryspecification();
 	private Date date = new Date();
 
-	public String arrivaltime;
+	private Integer idDeliverySpecyfication;
+	private Integer idCargo;
+	private String arrivaltime;
+
+	public Integer getIdDeliverySpecyfication() {
+		return idDeliverySpecyfication;
+	}
+
+	public void setIdDeliverySpecyfication(Integer idDeliverySpecyfication) {
+		this.idDeliverySpecyfication = idDeliverySpecyfication;
+	}
+
+	public Integer getIdCargo() {
+		return idCargo;
+	}
+
+	public void setIdCargo(Integer idCargo) {
+		this.idCargo = idCargo;
+	}
+
+	public String getArrivaltime() {
+		return arrivaltime;
+	}
+
+	public void setArrivaltime(String arrivaltime) {
+		this.arrivaltime = arrivaltime;
+	}
 
 	@EJB
 	DeliveryspecificationDAO deliveryspecificationDAO;

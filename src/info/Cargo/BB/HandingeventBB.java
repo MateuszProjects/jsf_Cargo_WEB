@@ -33,7 +33,24 @@ public class HandingeventBB implements Serializable {
 	private Cargo cargo = null;
 
 	private Integer idHandlingevent;
+	private Integer idCargo;
 	private String description;
+
+	public Integer getIdHandlingevent() {
+		return idHandlingevent;
+	}
+
+	public void setIdHandlingevent(Integer idHandlingevent) {
+		this.idHandlingevent = idHandlingevent;
+	}
+
+	public Integer getIdCargo() {
+		return idCargo;
+	}
+
+	public void setIdCargo(Integer idCargo) {
+		this.idCargo = idCargo;
+	}
 
 	public Integer getIdHandingevent() {
 		return idHandlingevent;
@@ -104,6 +121,7 @@ public class HandingeventBB implements Serializable {
 
 	/**
 	 * validate correct inputs data for object handlingevent
+	 * 
 	 * @return
 	 */
 	private boolean validate() {

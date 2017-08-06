@@ -41,10 +41,19 @@ public class DeliveryHistoryBB implements Serializable {
 
 	private boolean skip;
 
-	Integer idDeliveryHistory;
-	String arriveDate;
-	String leaveDate;
-	String comment;
+	private Integer idDeliveryHistory;
+	private Integer idCargo;
+	private String arriveDate;
+	private String leaveDate;
+	private String comment;
+
+	public Integer getIdCargo() {
+		return idCargo;
+	}
+
+	public void setIdCargo(Integer idCargo) {
+		this.idCargo = idCargo;
+	}
 
 	public Integer getIdDeliveryHistory() {
 		return idDeliveryHistory;

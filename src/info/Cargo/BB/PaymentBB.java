@@ -1,6 +1,7 @@
 package info.Cargo.BB;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,15 +31,26 @@ public class PaymentBB implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	public Integer getIdCargo() {
+		return idCargo;
+	}
+
+	public void setIdCargo(Integer idCargo) {
+		this.idCargo = idCargo;
+	}
+
 	private final String PAGE_PAYMENT = "a_payment?faces-redirect=true";
-	
+
 	private Payment payment = new Payment();
 	private User user = null;
 
 	private Integer idPayment;
+	private Integer idCargo;
+	private Date date = new Date();
 	private Double amount;
 	private boolean skip;
-	
+
 	public Integer getIdPayment() {
 		return idPayment;
 	}
@@ -54,7 +66,6 @@ public class PaymentBB implements Serializable {
 	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
-
 
 	public boolean isSkip() {
 		return skip;
@@ -86,15 +97,15 @@ public class PaymentBB implements Serializable {
 
 	public LazyDataModel<Payment> getLazyList() {
 		Map<String, Object> searchParams = new HashMap<String, Object>();
-		
-		if(idPayment != null){
+
+		if (idPayment != null) {
 			searchParams.put("idPayment", idPayment);
 		}
-		
-		if(amount != null){
+
+		if (amount != null) {
 			searchParams.put("amount", amount);
 		}
-		
+
 		lazyModel.setSearchParams(searchParams);
 		lazyModel.setPaymentDAO(paymentDAO);
 		return lazyModel;
@@ -131,7 +142,7 @@ public class PaymentBB implements Serializable {
 
 		paymentOject.setAmoutn(paymentOject.getAmoutn());
 		paymentOject.setDate(paymentOject.getDate());
-		
+
 		try {
 			paymentDAO.merge(paymentOject);
 		} catch (Exception ex) {
@@ -160,7 +171,7 @@ public class PaymentBB implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
-	public String delete(Payment paymentObject){
+	public String delete(Payment paymentObject) {
 		paymentDAO.remove(paymentObject);
 		return PAGE_PAYMENT;
 	}

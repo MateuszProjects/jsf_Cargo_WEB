@@ -33,7 +33,6 @@ public class CustomerBB implements Serializable {
 	private User user = new User();
 
 	private Integer idCustomer;
-
 	private String name;
 	private String surname;
 	private String login;

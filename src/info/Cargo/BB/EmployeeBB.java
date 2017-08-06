@@ -33,12 +33,20 @@ public class EmployeeBB implements Serializable {
 	// param for looking for
 	private Integer idEmployee;
 
-
+	private Integer idCargo;
 	private String name;
 	private String surname;
 	private String login;
 	private String pass;
 	private boolean skip;
+
+	public Integer getIdCargo() {
+		return idCargo;
+	}
+
+	public void setIdCargo(Integer idCargo) {
+		this.idCargo = idCargo;
+	}
 
 	public Integer getIdEmployee() {
 		return idEmployee;

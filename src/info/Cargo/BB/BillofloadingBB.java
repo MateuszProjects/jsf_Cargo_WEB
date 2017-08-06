@@ -34,9 +34,10 @@ public class BillofloadingBB implements Serializable {
 	private Billoflading billoflading = new Billoflading();
 	private Cargo cargo = null;
 
+	private Integer idBillofLoading;
 	private String text;
 	private Integer idCargo;
-	private Integer idBillofLoading;
+	
 
 	private boolean skip;
 

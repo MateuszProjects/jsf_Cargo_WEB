@@ -36,14 +36,41 @@ public class CargoBB implements Serializable {
 	private final String DELIVERY_HISTORY = "a_deliveryhistory?faces-redirect=true";
 	private final String HANDING_EVENT = "a_handingevent?faces-redirect=true";
 	private final String DELIVERY_SPECYFIACATION = "a_deliveryspecification?faces-redirect=true";
-	
+
 	private Cargo cargo = new Cargo();
 	private User user = null;
 
 	private Integer idCargo;
+	private Integer idTransport;
+	private Double weight;
+	private Integer hazMat;
 	private String name;
 
 	private boolean skip;
+
+	public Integer getIdTransport() {
+		return idTransport;
+	}
+
+	public void setIdTransport(Integer idTransport) {
+		this.idTransport = idTransport;
+	}
+
+	public Double getWeight() {
+		return weight;
+	}
+
+	public void setWeight(Double weight) {
+		this.weight = weight;
+	}
+
+	public Integer getHazMat() {
+		return hazMat;
+	}
+
+	public void setHazMat(Integer hazMat) {
+		this.hazMat = hazMat;
+	}
 
 	public String getName() {
 		return name;
