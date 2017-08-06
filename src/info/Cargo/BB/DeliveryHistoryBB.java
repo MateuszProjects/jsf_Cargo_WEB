@@ -12,12 +12,14 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import org.primefaces.event.FlowEvent;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.LazyDataModel;
 
 import info.dao.DeliveryhistoryDAO;
+import info.entities.Cargo;
 import info.entities.Deliveryhistory;
 import info.lazydatamodel.LazyDataModelDeliveryhistory;
 
@@ -30,7 +32,8 @@ public class DeliveryHistoryBB implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private final String PAGE_DELIVERY_HISTORY = "a_deliveryhistory?faces-redirect=true";
-	Deliveryhistory deliveryHistory = new Deliveryhistory();
+	private Deliveryhistory deliveryHistory = new Deliveryhistory();
+	private Cargo cargo = null;
 	private Date dateArrive = new Date();
 	private Date dateLeave = new Date();
 
@@ -106,6 +109,13 @@ public class DeliveryHistoryBB implements Serializable {
 
 	@PostConstruct
 	public void init() {
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+
+		cargo = (Cargo) session.getAttribute("cargo");
+
+		if (cargo != null) {
+			session.removeAttribute("cargo");
+		}
 		lazyModel = new LazyDataModelDeliveryhistory();
 	}
 
@@ -166,6 +176,7 @@ public class DeliveryHistoryBB implements Serializable {
 
 		if (ctx.getMessageList().isEmpty()) {
 
+			deliveryHistory.setCargo(cargo);
 			deliveryHistory.setArrivayDate(dateArrive);
 			deliveryHistory.setLeaveDate(dateLeave);
 			deliveryHistory.setComent(comment);

@@ -39,8 +39,8 @@ public class AddressBB implements Serializable {
 	private String telephone;
 	private String email;
 
-	User user = null;
-	Address address = new Address();
+	private User user = null;
+	private Address address = new Address();
 	private boolean skip;
 
 	public boolean isSkip() {
@@ -58,7 +58,6 @@ public class AddressBB implements Serializable {
 		} else {
 			return event.getNewStep();
 		}
-
 	}
 
 	public Integer getIdAddress() {
@@ -181,7 +180,7 @@ public class AddressBB implements Serializable {
 	}
 
 	public void onRowEdit(RowEditEvent event) {
-		FacesMessage msg = new FacesMessage("Car Edited");
+		FacesMessage msg = new FacesMessage("Address Edited");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 

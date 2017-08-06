@@ -33,6 +33,10 @@ public class CargoBB implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private final String BILL_OF_LOADING = "a_billofloading?faces-redirect=true";
+	private final String DELIVERY_HISTORY = "a_deliveryhistory?faces-redirect=true";
+	private final String HANDING_EVENT = "a_handingevent?faces-redirect=true";
+	private final String DELIVERY_SPECYFIACATION = "a_deliveryspecification?faces-redirect=true";
+	
 	private Cargo cargo = new Cargo();
 	private User user = null;
 
@@ -94,8 +98,8 @@ public class CargoBB implements Serializable {
 		if (idCargo != null) {
 			searchParams.put("idcargo", idCargo);
 		}
-		
-		if(name != null){
+
+		if (name != null) {
 			searchParams.put("name", name);
 		}
 
@@ -192,4 +196,23 @@ public class CargoBB implements Serializable {
 		session.setAttribute("cargo", cargoObject);
 		return BILL_OF_LOADING;
 	}
+
+	public String addDeliverySpecyfication(Cargo cargoObject) {
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+		session.setAttribute("cargo", cargoObject);
+		return DELIVERY_SPECYFIACATION;
+	}
+
+	public String addHandingEvent(Cargo cargoObject) {
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+		session.setAttribute("cargo", cargoObject);
+		return HANDING_EVENT;
+	}
+
+	public String addDeliveryHistory(Cargo cargoObject) {
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+		session.setAttribute("cargo", cargoObject);
+		return DELIVERY_HISTORY;
+	}
+
 }
