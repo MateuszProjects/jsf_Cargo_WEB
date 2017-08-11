@@ -46,18 +46,16 @@ public class DeliveryspecificationDAO {
 		String having = "";
 		String orderBY = "";
 
+		Integer idDeliverySpec = (Integer) searchParams.get("idDeliverySpecyfication");
 
-		/*if (idAddress != null) {
+		if (idDeliverySpec != null) {
 		if (where.isEmpty()) {
 			where = "where ";
 		} else {
 			where += " or ";
 		}
-		if (join.isEmpty()) {
-			join = " join p.idaddress p  ";
-		}
-		where += " c.idCustomer like :idCustomer ";
-	}*/
+		where += " p.iddeliverySpecification like :idDeliverySpec ";
+	}
 		
 		Query querycount = em.createQuery("SELECT COUNT(p.iddeliverySpecification) " + from + join + where);
 
@@ -73,6 +71,10 @@ public class DeliveryspecificationDAO {
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
 
+		if(idDeliverySpec!= null){
+			query.setParameter("idDeliverySpec", idDeliverySpec);
+		}
+		
 		try {
 			list = query.getResultList();
 		} catch (Exception e) {
