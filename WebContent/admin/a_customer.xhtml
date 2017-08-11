@@ -9,7 +9,7 @@
 <ui:composition template="/templates/main-template.xhtml">
 
 	<ui:define name="content">
-		<p>Admin Customer</p>
+
 
 
 		<p:panel id="button_panel" widgetVar="testPanel" closable="true"
@@ -20,7 +20,13 @@
 				<fieldset style="border-radius: 0.2em;">
 					<legend>Opcje wyszukiwania</legend>
 					<h:panelGrid columns="2" cellpadding="5">
-						<p:outputLabel value="idSalary" />
+						<p:outputLabel value="idCustomer" />
+						<p:inputText value="" />
+						<p:outputLabel value="name" />
+						<p:inputText value="" />
+						<p:outputLabel value="surname" />
+						<p:inputText value="" />
+						<p:outputLabel value="" />
 						<p:inputText value="" />
 						<p:commandButton value="Szukaj" update="table" />
 					</h:panelGrid>
@@ -155,12 +161,11 @@
 							<p:messages />
 							<h:panelGrid columns="2" columnClasses="label, value">
 
+								<h:outputText value="Name" style="color:black;"/>
+								<p:inputText value="#{customerBB.name}" label="Name" />
 
-								<h:outputText value="Name" />
-								<p:inputText value="#{employeeBB.name}" label="Name" />
-
-								<h:outputText value="Surname:" />
-								<p:inputText value="#{employeeBB.surname}" label="Surname:" />
+								<h:outputText value="Surname:" style="color:black;"/>
+								<p:inputText value="#{customerBB.surname}" label="Surname:" />
 
 							</h:panelGrid>
 						</p:panel>
@@ -172,17 +177,17 @@
 							<p:messages />
 							<h:panelGrid columns="2" columnClasses="label, value">
 
-								<h:outputText value="Name " />
-								<p:inputText value="#{employeeBB.name}" label="name" />
+								<h:outputText value="Name " style="color:black;"/>
+								<p:inputText value="#{customerBB.name}" label="name" />
 
-								<h:outputText value="pass: " />
-								<p:inputText value="#{employeeBB.surname}" label="surname " />
-								
-								<h:outputText value="login " />
-								<p:inputText value="#{employeeBB.login}" label="login" />
+								<h:outputText value="pass: " style="color:black;"/>
+								<p:inputText value="#{customerBB.surname}" label="surname " />
 
-								<h:outputText value="pass: " />
-								<p:inputText value="#{employeeBB.pass}" label="pass " />
+								<h:outputText value="login " style="color:black;"/>
+								<p:inputText value="#{customerBB.login}" label="login" />
+
+								<h:outputText value="pass: " style="color:black;"/>
+								<p:inputText value="#{customerBB.pass}" label="pass " />
 
 							</h:panelGrid>
 						</p:panel>
@@ -195,19 +200,19 @@
 								<h:panelGrid columns="2" columnClasses="label, value">
 
 
-									<h:outputText value="Name: " />
-									<h:outputText value="#{employeeBB.name}"
+									<h:outputText value="Name: " style="color:black;"/>
+									<h:outputText value="#{customerBB.name}"
 										styleClass="outputLabel" />
 
-									<h:outputText value="Surname " />
-									<h:outputText value="#{employeeBB.surname}"
+									<h:outputText value="Surname " style="color:black;"/>
+									<h:outputText value="#{customerBB.surname}"
 										styleClass="outputLabel" />
 								</h:panelGrid>
 
 								<h:panelGrid columns="2" columnClasses="label, value">
 
-									<h:outputText value="Login " />
-									<h:outputText value="#{employeeBB.login}"
+									<h:outputText value="Login " style="color:black;"/>
+									<h:outputText value="#{customerBB.login}"
 										styleClass="outputLabel" />
 
 									<h:outputText value="Pass " />
@@ -218,7 +223,7 @@
 							</h:panelGrid>
 
 							<p:commandButton value="Submit"
-								actionListener="#{employeeBB.save}" update="growl"
+								actionListener="#{customerBB.save()}" update="growl"
 								process="@this" />
 
 						</p:panel>

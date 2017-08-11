@@ -13,6 +13,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.primefaces.event.FlowEvent;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.LazyDataModel;
 
@@ -33,11 +34,38 @@ public class DeliverSpecificationBB implements Serializable {
 	private final String PAGE_DELIVERYSPECYFICATION = "a_deliveryspecyfication?faces-redirect=true";
 
 	private Deliveryspecification deliveryspcification = new Deliveryspecification();
-	private Date date = new Date();
+	private Date date = null;
 
 	private Integer idDeliverySpecyfication;
 	private Integer idCargo;
 	private String arrivaltime;
+	
+	private boolean skip;
+
+	public boolean isSkip() {
+		return skip;
+	}
+
+	public void setSkip(boolean skip) {
+		this.skip = skip;
+	}
+
+	public String onFlowProcess(FlowEvent event) {
+		if (skip) {
+			skip = false; // reset in case user goes back
+			return "confirm";
+		} else {
+			return event.getNewStep();
+		}
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
 	public Integer getIdDeliverySpecyfication() {
 		return idDeliverySpecyfication;
@@ -90,6 +118,11 @@ public class DeliverSpecificationBB implements Serializable {
 
 	public LazyDataModel<Deliveryspecification> getLazyList() {
 		Map<String, Object> searchParams = new HashMap<String, Object>();
+
+		if (idDeliverySpecyfication != null) {
+			searchParams.put("idDeliverySpec", idDeliverySpecyfication);
+		}
+
 		lazyModel.setSearchParams(searchParams);
 		lazyModel.setDeliveryspecificationDAO(deliveryspecificationDAO);
 		return lazyModel;

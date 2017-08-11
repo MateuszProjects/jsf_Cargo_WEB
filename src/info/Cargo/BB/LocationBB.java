@@ -12,6 +12,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.primefaces.event.FlowEvent;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.LazyDataModel;
 
@@ -37,6 +38,24 @@ public class LocationBB implements Serializable {
 	private Integer idLocation;
 	private Integer idDeliverySpecyfication;
 	private String description;
+	private boolean skip;
+
+	public boolean isSkip() {
+		return skip;
+	}
+
+	public void setSkip(boolean skip) {
+		this.skip = skip;
+	}
+
+	public String onFlowProcess(FlowEvent event) {
+		if (skip) {
+			skip = false; // reset in case user goes back
+			return "confirm";
+		} else {
+			return event.getNewStep();
+		}
+	}
 
 	public Integer getIdDeliverySpecyfication() {
 		return idDeliverySpecyfication;
@@ -80,6 +99,11 @@ public class LocationBB implements Serializable {
 		lazyModel = new LazyDataModelLoaction();
 
 		deliveryspecification = (Deliveryspecification) session.getAttribute("deliverySpec");
+		
+		if(deliveryspecification != null){
+			location.setDeliveryspecification(deliveryspecification);
+			session.removeAttribute("deliverySpec");
+		}
 	}
 
 	public LazyDataModel<Location> getLazyList() {

@@ -20,6 +20,10 @@
 					<h:panelGrid columns="2" cellpadding="5">
 						<p:outputLabel value="idEmployee" />
 						<p:inputText value="#{employeeBB.idEmployee}" />
+						<p:outputLabel value="name" />
+						<p:inputText value="#{employeeBB.name}" />
+						<p:outputLabel value="surname" />
+						<p:inputText value="#{employeeBB.surname}" />
 						<p:commandButton value="Szukaj" update="table" />
 					</h:panelGrid>
 				</fieldset>
@@ -125,8 +129,8 @@
 					</p:column>
 					<p:column headerText="delete">
 
-						<p:commandButton value="del" action="#{employeeBB.deleteUser(empl)}"
-							update=":form:msgs" />
+						<p:commandButton value="del"
+							action="#{employeeBB.deleteUser(empl)}" update=":form:msgs" />
 
 					</p:column>
 					<p:column headerText="Add Address">
@@ -161,10 +165,10 @@
 							<h:panelGrid columns="2" columnClasses="label, value">
 
 
-								<h:outputText value="Name" />
+								<h:outputText value="Name" style="color:black;"/>
 								<p:inputText value="#{employeeBB.name}" label="Name" />
 
-								<h:outputText value="Surname:" />
+								<h:outputText value="Surname:" style="color:black;"/>
 								<p:inputText value="#{employeeBB.surname}" label="Surname:" />
 
 							</h:panelGrid>
@@ -176,16 +180,12 @@
 						<p:panel header="Contact Information">
 							<p:messages />
 							<h:panelGrid columns="2" columnClasses="label, value">
-								<h:outputText value="login " />
+								<h:outputText value="login " style="color:black;"/>
 								<p:inputText value="#{employeeBB.login}" label="login" />
 
-								<h:outputText value="pass: " />
+								<h:outputText value="pass: " style="color:black;"/>
 								<p:inputText value="#{employeeBB.pass}" label="pass " />
 
-								<h:outputText value="Passsdfa "
-									rendered="#{employeeBB.renderIs('Jan')}" />
-								<h:outputText value="Passsdfa "
-									rendered="#{employeeBB.renderIs('Jan')}" />
 							</h:panelGrid>
 						</p:panel>
 					</p:tab>
@@ -197,22 +197,22 @@
 								<h:panelGrid columns="2" columnClasses="label, value">
 
 
-									<h:outputText value="Name: " />
+									<h:outputText value="Name: " style="color:black;"/>
 									<h:outputText value="#{employeeBB.name}"
 										styleClass="outputLabel" />
 
-									<h:outputText value="Surname " />
+									<h:outputText value="Surname " style="color:black;"/>
 									<h:outputText value="#{employeeBB.surname}"
 										styleClass="outputLabel" />
 								</h:panelGrid>
 
 								<h:panelGrid columns="2" columnClasses="label, value">
 
-									<h:outputText value="Login " />
+									<h:outputText value="Login " style="color:black;"/>
 									<h:outputText value="#{employeeBB.login}"
 										styleClass="outputLabel" />
 
-									<h:outputText value="Pass " />
+									<h:outputText value="Pass " style="color:black;"/>
 									<h:outputText value="#{employeeBB.pass}"
 										styleClass="outputLabel" />
 
@@ -222,10 +222,6 @@
 							<p:commandButton value="Submit"
 								actionListener="#{employeeBB.save()}" update="growl"
 								process="@this" />
-							<h:commandButton value="Reset p:ajax" style="margin-right:20px;">
-								<p:ajax update="conf" resetValues="true" />
-							</h:commandButton>
-
 						</p:panel>
 					</p:tab>
 				</p:wizard>

@@ -9,8 +9,6 @@
 <ui:composition template="/templates/main-template.xhtml">
 
 	<ui:define name="content">
-		<p>Admin Delivery Specification</p>
-
 
 		<p:panel id="button_panel" widgetVar="testPanel" closable="true"
 			toggleable="true" header="Panel One">
@@ -20,8 +18,8 @@
 				<fieldset style="border-radius: 0.2em;">
 					<legend>Opcje wyszukiwania</legend>
 					<h:panelGrid columns="2" cellpadding="5">
-						<p:outputLabel value="idSalary" />
-						<p:inputText value="" />
+						<p:outputLabel value="idDeliverySpecyfication" />
+						<p:inputText value="#{deliverSpecificationBB.idDeliverySpecyfication}" />
 						<p:commandButton value="Szukaj" update="table" />
 					</h:panelGrid>
 				</fieldset>
@@ -105,7 +103,7 @@
 		</p:panel>
 		<br />
 		<p:panel id="button_panel1" widgetVar="testPanel1" closable="true"
-			toggleable="true" header="Create Cargo" collapsed="true">
+			toggleable="true" header="Create DeliverySpecyfication" collapsed="true">
 			<h1>Create BillofLoading</h1>
 			<h:form id="createDeliverySpeycication">
 				<p:growl id="growl" sticky="true" showDetail="true" />
@@ -117,11 +115,11 @@
 							<h:panelGrid columns="2" columnClasses="label, value">
 
 
-								<h:outputText value="Name" />
-								<p:inputText value="#{employeeBB.name}" label="Name" />
+								<h:outputText value="arrive Data:" />
+								<p:inputText value="#{deliverSpecificationBB.arrivaltime}" label="arriveData" />
 
-								<h:outputText value="Surname:" />
-								<p:inputText value="#{employeeBB.surname}" label="Surname:" />
+								<h:outputText value="idCargo:" />
+								<p:inputText value="#{deliverSpecificationBB.idCargo}" label="idCargo" />
 
 							</h:panelGrid>
 						</p:panel>
@@ -132,16 +130,10 @@
 						<p:panel header="Contact Information">
 							<p:messages />
 							<h:panelGrid columns="2" columnClasses="label, value">
-								<h:outputText value="login " />
-								<p:inputText value="#{employeeBB.login}" label="login" />
 
-								<h:outputText value="pass: " />
-								<p:inputText value="#{employeeBB.pass}" label="pass " />
+								<h:outputText value="idCargo:" />
+								<p:inputText value="#{deliverSpecificationBB.idCargo}" label="pass " />
 
-								<h:outputText value="Passsdfa "
-									rendered="#{employeeBB.renderIs('Jan')}" />
-								<h:outputText value="Passsdfa "
-									rendered="#{employeeBB.renderIs('Jan')}" />
 							</h:panelGrid>
 						</p:panel>
 					</p:tab>
@@ -150,37 +142,26 @@
 						<p:panel id="conf" header="Confirmation">
 							<h:panelGrid id="confirmation" columns="3"
 								columnClasses="grid,grid,grid">
+								
 								<h:panelGrid columns="2" columnClasses="label, value">
 
 
-									<h:outputText value="Name: " />
-									<h:outputText value="#{employeeBB.name}"
+									<h:outputText value="arrive Data:" />
+									<h:outputText value="#{deliverSpecificationBB.arrivaltime}"
 										styleClass="outputLabel" />
 
-									<h:outputText value="Surname " />
-									<h:outputText value="#{employeeBB.surname}"
+									<h:outputText value="idCargo:"  />
+									<h:outputText value="#{deliverSpecificationBB.idCargo}"
 										styleClass="outputLabel" />
 								</h:panelGrid>
 
-								<h:panelGrid columns="2" columnClasses="label, value">
 
-									<h:outputText value="Login " />
-									<h:outputText value="#{employeeBB.login}"
-										styleClass="outputLabel" />
-
-									<h:outputText value="Pass " />
-									<h:outputText value="#{employeeBB.pass}"
-										styleClass="outputLabel" />
-
-								</h:panelGrid>
 							</h:panelGrid>
 
 							<p:commandButton value="Submit"
-								actionListener="#{employeeBB.save()}" update="growl"
+								actionListener="#{deliverSpecificationBB.save()}" update="growl"
 								process="@this" />
-							<h:commandButton value="Reset p:ajax" style="margin-right:20px;">
-								<p:ajax update="conf" resetValues="true" />
-							</h:commandButton>
+
 
 						</p:panel>
 					</p:tab>

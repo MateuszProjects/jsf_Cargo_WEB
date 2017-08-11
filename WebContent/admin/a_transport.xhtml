@@ -12,15 +12,19 @@
 		<p>Admin Transport</p>
 
 
-			<p:panel id="button_panel" widgetVar="List Panel" closable="true"
-				toggleable="true" header="Panel One">
+		<p:panel id="button_panel" widgetVar="List Panel" closable="true"
+			toggleable="true" header="Panel One">
 			<h:form id="form">
 
 				<fieldset style="border-radius: 0.2em;">
 					<legend>Opcje wyszukiwania</legend>
 					<h:panelGrid columns="2" cellpadding="5">
-						<p:outputLabel value="idSalary" />
-						<p:inputText value="" />
+						<p:outputLabel value="idTransport" />
+						<p:inputText value="#{transportBB.idTransport}" />
+						<p:outputLabel value="name" />
+						<p:inputText value="#{transportBB.name}" />
+						<p:outputLabel value="payKM" />
+						<p:inputText value="#{transportBB.payKm}" />
 						<p:commandButton value="Szukaj" update="table" />
 					</h:panelGrid>
 				</fieldset>
@@ -63,8 +67,7 @@
 								<h:outputText value="#{transport.name}" />
 							</f:facet>
 							<f:facet name="input">
-								<p:inputText value="#{transport.name}"
-									style="width:100%" />
+								<p:inputText value="#{transport.name}" style="width:100%" />
 							</f:facet>
 						</p:cellEditor>
 
@@ -78,8 +81,7 @@
 								<h:outputText value="#{transport.paykm}" />
 							</f:facet>
 							<f:facet name="input">
-								<p:inputText value="#{transport.paykm}"
-									style="width:100%" />
+								<p:inputText value="#{transport.paykm}" style="width:100%" />
 							</f:facet>
 						</p:cellEditor>
 
@@ -93,14 +95,14 @@
 					</p:column>
 					<p:column headerText="edit">
 
-						<p:commandButton value="Edit" action="#{transportBB.edit(transport)}"
-							update=":form:msgs" />
+						<p:commandButton value="Edit"
+							action="#{transportBB.edit(transport)}" update=":form:msgs" />
 
 					</p:column>
 					<p:column headerText="delete">
 
-						<p:commandButton value="del" action="#{transportBB.delete(transport)}"
-							update=":form:msgs" />
+						<p:commandButton value="del"
+							action="#{transportBB.delete(transport)}" update=":form:msgs" />
 
 					</p:column>
 					<p:column style="width:32px">
@@ -112,8 +114,8 @@
 		</p:panel>
 		<br />
 		<p:panel id="button_panel1" widgetVar="testPanel1" closable="true"
-			toggleable="true" header="Create Cargo" collapsed="true">
-			<h1>Create BillofLoading</h1>
+			toggleable="true" header="Create Transport" collapsed="true">
+			<h1>Create Transport</h1>
 			<h:form id="CreaateTransport">
 				<p:growl id="growl" sticky="true" showDetail="true" />
 
@@ -124,31 +126,15 @@
 							<h:panelGrid columns="2" columnClasses="label, value">
 
 
-								<h:outputText value="Name" />
-								<p:inputText value="#{employeeBB.name}" label="Name" />
+								<h:outputText value="idTransport" style="color:black;"/>
+								<p:inputText value="#{transportBB.idTransport}" label="idTransport" />
 
-								<h:outputText value="Surname:" />
-								<p:inputText value="#{employeeBB.surname}" label="Surname:" />
+								<h:outputText value="Name:" style="color:black;"/>
+								<p:inputText value="#{transportBB.name}" label="Name" />
 
-							</h:panelGrid>
-						</p:panel>
-					</p:tab>
+								<h:outputText value="payKM" style="color:black;"/>
+								<p:inputText value="#{transportBB.payKm}" label="payKM" />
 
-
-					<p:tab id="contact" title="Contact">
-						<p:panel header="Contact Information">
-							<p:messages />
-							<h:panelGrid columns="2" columnClasses="label, value">
-								<h:outputText value="login " />
-								<p:inputText value="#{employeeBB.login}" label="login" />
-
-								<h:outputText value="pass: " />
-								<p:inputText value="#{employeeBB.pass}" label="pass " />
-
-								<h:outputText value="Passsdfa "
-									rendered="#{employeeBB.renderIs('Jan')}" />
-								<h:outputText value="Passsdfa "
-									rendered="#{employeeBB.renderIs('Jan')}" />
 							</h:panelGrid>
 						</p:panel>
 					</p:tab>
@@ -160,35 +146,24 @@
 								<h:panelGrid columns="2" columnClasses="label, value">
 
 
-									<h:outputText value="Name: " />
-									<h:outputText value="#{employeeBB.name}"
+									<h:outputText value="idTransport " style="color:black;"/>
+									<h:outputText value="#{transportBB.idTransport}"
 										styleClass="outputLabel" />
 
-									<h:outputText value="Surname " />
-									<h:outputText value="#{employeeBB.surname}"
+									<h:outputText value="Name " style="color:black;"/>
+									<h:outputText value="#{transportBB.name}"
+										styleClass="outputLabel" />
+
+									<h:outputText value="payKM " style="color:black;"/>
+									<h:outputText value="#{transportBB.payKm}"
 										styleClass="outputLabel" />
 								</h:panelGrid>
 
-								<h:panelGrid columns="2" columnClasses="label, value">
-
-									<h:outputText value="Login " />
-									<h:outputText value="#{employeeBB.login}"
-										styleClass="outputLabel" />
-
-									<h:outputText value="Pass " />
-									<h:outputText value="#{employeeBB.pass}"
-										styleClass="outputLabel" />
-
-								</h:panelGrid>
 							</h:panelGrid>
 
 							<p:commandButton value="Submit"
 								actionListener="#{employeeBB.save()}" update="growl"
 								process="@this" />
-							<h:commandButton value="Reset p:ajax" style="margin-right:20px;">
-								<p:ajax update="conf" resetValues="true" />
-							</h:commandButton>
-
 						</p:panel>
 					</p:tab>
 				</p:wizard>

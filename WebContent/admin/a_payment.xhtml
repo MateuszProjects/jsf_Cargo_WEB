@@ -21,7 +21,9 @@
 					<legend>Opcje wyszukiwania</legend>
 					<h:panelGrid columns="2" cellpadding="5">
 						<p:outputLabel value="idSalary" />
-						<p:inputText value="" />
+						<p:inputText value="#{paymentBB.idPayment}" />
+						<p:outputLabel value="amount" />
+						<p:inputText value="#{paymentBB.amount}" />
 						<p:commandButton value="Szukaj" update="table" />
 					</h:panelGrid>
 				</fieldset>
@@ -66,7 +68,7 @@
 							</f:facet>
 						</p:cellEditor>
 					</p:column>
-					
+
 					<p:column headerText="Date">
 						<p:cellEditor>
 							<f:facet name="output">
@@ -77,7 +79,7 @@
 							</f:facet>
 						</p:cellEditor>
 					</p:column>
-				
+
 					<p:column headerText="IdSalary">
 
 						<p:cellEditor>
@@ -90,7 +92,7 @@
 						</p:cellEditor>
 
 					</p:column>
-				
+
 					<p:column headerText="edit">
 
 						<p:commandButton value="Edit" action="#{paymentBB.edit(payment)}"
@@ -99,8 +101,8 @@
 					</p:column>
 					<p:column headerText="delete">
 
-						<p:commandButton value="del" action="#{paymentBB.deleate(payment)}"
-							update=":form:msgs" />
+						<p:commandButton value="del"
+							action="#{paymentBB.deleate(payment)}" update=":form:msgs" />
 
 					</p:column>
 					<p:column style="width:32px">
@@ -123,12 +125,11 @@
 							<p:messages />
 							<h:panelGrid columns="2" columnClasses="label, value">
 
+								<h:outputText value="Amount:" style="color:black;"/>
+								<p:inputText value="#{paymentBB.amount}" label="amount" />
 
-								<h:outputText value="Name" />
-								<p:inputText value="#{employeeBB.name}" label="Name" />
-
-								<h:outputText value="Surname:" />
-								<p:inputText value="#{employeeBB.surname}" label="Surname:" />
+								<h:outputText value="date:" style="color:black;"/>
+								<p:inputText value="#{paymentBB.date}" label="Surname:" />
 
 							</h:panelGrid>
 						</p:panel>
@@ -139,16 +140,8 @@
 						<p:panel header="Contact Information">
 							<p:messages />
 							<h:panelGrid columns="2" columnClasses="label, value">
-								<h:outputText value="login " />
-								<p:inputText value="#{employeeBB.login}" label="login" />
-
-								<h:outputText value="pass: " />
-								<p:inputText value="#{employeeBB.pass}" label="pass " />
-
-								<h:outputText value="Passsdfa "
-									rendered="#{employeeBB.renderIs('Jan')}" />
-								<h:outputText value="Passsdfa "
-									rendered="#{employeeBB.renderIs('Jan')}" />
+								<h:outputText value="userId: " style="color:black;"/>
+								<p:inputText value="#{paymentBB.idUser}" label="pass " />
 							</h:panelGrid>
 						</p:panel>
 					</p:tab>
@@ -160,34 +153,27 @@
 								<h:panelGrid columns="2" columnClasses="label, value">
 
 
-									<h:outputText value="Name: " />
-									<h:outputText value="#{employeeBB.name}"
+									<h:outputText value="Amount: " style="color:black;" />
+									<h:outputText value="#{paymentBB.amount}"
 										styleClass="outputLabel" />
 
-									<h:outputText value="Surname " />
-									<h:outputText value="#{employeeBB.surname}"
+									<h:outputText value="date: " style="color:black;"/>
+									<h:outputText value="#{paymentBB.date}"
 										styleClass="outputLabel" />
 								</h:panelGrid>
 
 								<h:panelGrid columns="2" columnClasses="label, value">
 
-									<h:outputText value="Login " />
-									<h:outputText value="#{employeeBB.login}"
-										styleClass="outputLabel" />
-
-									<h:outputText value="Pass " />
-									<h:outputText value="#{employeeBB.pass}"
+									<h:outputText value="userId: " style="color:black;"/>
+									<h:outputText value="#{paymentBB.idUser}"
 										styleClass="outputLabel" />
 
 								</h:panelGrid>
 							</h:panelGrid>
 
 							<p:commandButton value="Submit"
-								actionListener="#{employeeBB.save()}" update="growl"
+								actionListener="#{paymentBB.idUser}" update="growl"
 								process="@this" />
-							<h:commandButton value="Reset p:ajax" style="margin-right:20px;">
-								<p:ajax update="conf" resetValues="true" />
-							</h:commandButton>
 
 						</p:panel>
 					</p:tab>

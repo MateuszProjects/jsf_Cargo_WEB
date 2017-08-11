@@ -12,6 +12,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.view.facelets.FaceletException;
+import javax.servlet.http.HttpSession;
 
 import org.primefaces.event.FlowEvent;
 import org.primefaces.event.RowEditEvent;
@@ -46,10 +47,35 @@ public class PaymentBB implements Serializable {
 	private User user = null;
 
 	private Integer idPayment;
+	private Integer idUser;
 	private Integer idCargo;
-	private Date date = new Date();
+	private Date date = null;
 	private Double amount;
 	private boolean skip;
+
+	public boolean isSkip() {
+		return skip;
+	}
+
+	public void setSkip(boolean skip) {
+		this.skip = skip;
+	}
+
+	public Integer getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(Integer idUser) {
+		this.idUser = idUser;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
 	public Integer getIdPayment() {
 		return idPayment;
@@ -67,13 +93,6 @@ public class PaymentBB implements Serializable {
 		this.amount = amount;
 	}
 
-	public boolean isSkip() {
-		return skip;
-	}
-
-	public void setSkip(boolean skip) {
-		this.skip = skip;
-	}
 
 	public String onFlowProcess(FlowEvent event) {
 		if (skip) {
@@ -82,7 +101,6 @@ public class PaymentBB implements Serializable {
 		} else {
 			return event.getNewStep();
 		}
-
 	}
 
 	@EJB
@@ -92,6 +110,15 @@ public class PaymentBB implements Serializable {
 
 	@PostConstruct
 	public void init() {
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);		
+		user  = (User) session.getAttribute("userObject");
+		
+		if(user != null){
+			setIdUser(user.getIdusers());
+			session.removeAttribute("userObject");
+		}
+		
+		
 		lazyModel = new LazyDataModelPayment();
 	}
 

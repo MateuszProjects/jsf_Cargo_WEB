@@ -9,19 +9,18 @@
 <ui:composition template="/templates/main-template.xhtml">
 
 	<ui:define name="content">
-		<p>Admin Delivery History</p>
-
 
 		<p:panel id="button_panel" widgetVar="testPanel" closable="true"
 			toggleable="true" header="Panel One">
-			<h1>Testing</h1>
 			<h:form id="form">
 
 				<fieldset style="border-radius: 0.2em;">
 					<legend>Opcje wyszukiwania</legend>
 					<h:panelGrid columns="2" cellpadding="5">
-						<p:outputLabel value="idSalary" />
-						<p:inputText value="" />
+						<p:outputLabel value="idDeliveryHistory" />
+						<p:inputText value="#{deliveryHistoryBB.idDeliveryHistory}" />
+						<p:outputLabel value="comment" />
+						<p:inputText value="#{deliveryHistoryBB.comment}" />
 						<p:commandButton value="Szukaj" update="table" />
 					</h:panelGrid>
 				</fieldset>
@@ -50,12 +49,13 @@
 								<h:outputText value="#{deliveryhistory.iddeliveryHistory}" />
 							</f:facet>
 							<f:facet name="input">
-								<p:inputText value="#{deliveryhistory.iddeliveryHistory}" style="width:100%" />
+								<p:inputText value="#{deliveryhistory.iddeliveryHistory}"
+									style="width:100%" />
 							</f:facet>
 						</p:cellEditor>
 
 					</p:column>
-					
+
 					<p:column headerText="Coment">
 
 						<p:cellEditor>
@@ -99,13 +99,15 @@
 					</p:column>
 					<p:column headerText="edit">
 
-						<p:commandButton value="Edit" action="#{deliveryHistoryBB.edit(deliveryhistory)}"
+						<p:commandButton value="Edit"
+							action="#{deliveryHistoryBB.edit(deliveryhistory)}"
 							update=":form:msgs" />
 
 					</p:column>
 					<p:column headerText="delete">
 
-						<p:commandButton value="del" action="#{deliveryHistoryBB.delete(deliveryhistory)}"
+						<p:commandButton value="del"
+							action="#{deliveryHistoryBB.delete(deliveryhistory)}"
 							update=":form:msgs" />
 
 					</p:column>
@@ -119,7 +121,7 @@
 		<br />
 		<p:panel id="button_panel1" widgetVar="testPanel1" closable="true"
 			toggleable="true" header="Create DeliveryHistory" collapsed="true">
-			<h1>Create DeliveryHistory </h1>
+			<h1>Create DeliveryHistory</h1>
 			<h:form id="createDeliveryhistory">
 				<p:growl id="growl" sticky="true" showDetail="true" />
 
@@ -131,13 +133,16 @@
 
 
 								<h:outputText value="ArriveDate" />
-								<p:inputText value="#{deliveryHistoryBB.arriveDate}" label="arriveDate" />
+								<p:inputText value="#{deliveryHistoryBB.arriveDate}"
+									label="arriveDate" />
 
 								<h:outputText value="LeaveDate:" />
-								<p:inputText value="#{deliveryHistoryBB.leaveDate}" label="leaveDate" />
+								<p:inputText value="#{deliveryHistoryBB.leaveDate}"
+									label="leaveDate" />
 
 								<h:outputText value="Comment" />
-								<p:inputText value="#{deliveryHistoryBB.comment}" label="comment" />
+								<p:inputText value="#{deliveryHistoryBB.comment}"
+									label="comment" />
 
 							</h:panelGrid>
 						</p:panel>

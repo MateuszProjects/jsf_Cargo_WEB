@@ -9,19 +9,18 @@
 <ui:composition template="/templates/main-template.xhtml">
 
 	<ui:define name="content">
-		<p>Admin Handing Event</p>
-
 
 		<p:panel id="button_panel" widgetVar="testPanel" closable="true"
 			toggleable="true" header="Panel One">
-			<h1>Testing</h1>
 			<h:form id="form">
 
 				<fieldset style="border-radius: 0.2em;">
 					<legend>Opcje wyszukiwania</legend>
 					<h:panelGrid columns="2" cellpadding="5">
-						<p:outputLabel value="idSalary" />
-						<p:inputText value="" />
+						<p:outputLabel value="idHandlingevent" />
+						<p:inputText value="#{handingeventBB.idHandingevent}" />
+						<p:outputLabel value="description" />
+						<p:inputText value="#{handingeventBB.description}" />
 						<p:commandButton value="Szukaj" update="table" />
 					</h:panelGrid>
 				</fieldset>
@@ -49,7 +48,7 @@
 								<h:outputText value="#{handlist.idhandlingEvent}" />
 							</f:facet>
 							<f:facet name="input">
-								<p:inputText value="#{handlist.idhandlingEvent}" 
+								<p:inputText value="#{handlist.idhandlingEvent}"
 									style="width:100%" />
 							</f:facet>
 						</p:cellEditor>
@@ -94,8 +93,8 @@
 		</p:panel>
 		<br />
 		<p:panel id="button_panel1" widgetVar="testPanel1" closable="true"
-			toggleable="true" header="Create Cargo" collapsed="true">
-			<h1>Create BillofLoading</h1>
+			toggleable="true" header="Handling Event" collapsed="true">
+			<h1>Create Handling Event</h1>
 			<h:form id="createHandingEvent">
 				<p:growl id="growl" sticky="true" showDetail="true" />
 
@@ -106,11 +105,11 @@
 							<h:panelGrid columns="2" columnClasses="label, value">
 
 
-								<h:outputText value="Name" />
-								<p:inputText value="#{employeeBB.name}" label="Name" />
+								<h:outputText value="idHandlingevent" />
+								<p:inputText value="#{handingeventBB.idHandingevent}" label="idHandlingevent" />
 
 								<h:outputText value="Surname:" />
-								<p:inputText value="#{employeeBB.surname}" label="Surname:" />
+								<p:inputText value="#{handingeventBB.idCargo}" label="Surname:" />
 
 							</h:panelGrid>
 						</p:panel>
