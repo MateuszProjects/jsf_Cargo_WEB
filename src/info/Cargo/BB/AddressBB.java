@@ -11,6 +11,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.management.relation.Role;
 import javax.servlet.http.HttpSession;
 
 import org.primefaces.event.FlowEvent;
@@ -34,12 +35,14 @@ public class AddressBB implements Serializable {
 	
 	private Integer idAddress;
 	private Integer idUser;
+	private Integer idRoleUser;
 	private String cityCode;
 	private String street;
 	private String telephone;
 	private String email;
 
 	private User user = null;
+	private User userObject = null;
 	private Address address = new Address();
 	private boolean skip;
 
@@ -58,6 +61,14 @@ public class AddressBB implements Serializable {
 		} else {
 			return event.getNewStep();
 		}
+	}
+
+	public Integer getIdRoleUser() {
+		return idRoleUser;
+	}
+
+	public void setIdRoleUser(Integer idRoleUser) {
+		this.idRoleUser = idRoleUser;
 	}
 
 	public Integer getIdAddress() {
@@ -117,10 +128,15 @@ public class AddressBB implements Serializable {
 	public void init() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);		
 		
-		user = (User) session.getAttribute("userObject");
+		userObject = (User) session.getAttribute("userObject");
+		user = (User) session.getAttribute("user");
 		
 		if(user != null){
-			setIdUser(user.getIdusers());
+			// 
+		}
+
+		if(user != null){
+			
 			session.removeAttribute("userObject");
 		}
 		

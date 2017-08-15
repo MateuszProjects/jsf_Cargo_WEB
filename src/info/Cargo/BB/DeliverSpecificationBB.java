@@ -1,6 +1,8 @@
 package info.Cargo.BB;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,7 +36,7 @@ public class DeliverSpecificationBB implements Serializable {
 	private final String PAGE_DELIVERYSPECYFICATION = "a_deliveryspecyfication?faces-redirect=true";
 
 	private Deliveryspecification deliveryspcification = new Deliveryspecification();
-	private Date date = null;
+	private String date = null;
 
 	private Integer idDeliverySpecyfication;
 	private Integer idCargo;
@@ -59,11 +61,11 @@ public class DeliverSpecificationBB implements Serializable {
 		}
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
@@ -146,11 +148,18 @@ public class DeliverSpecificationBB implements Serializable {
 			ctx.addMessage(null, new FacesMessage("arrivaltime Wymagane"));
 		}
 
+		Date arrival_time = null;
+		
+		try{
+			arrival_time = new SimpleDateFormat("dd-MM-yyyy").parse(arrivaltime);
+		}catch(ParseException ex){
+			ex.printStackTrace();
+		}
+		
 		if (ctx.getMessageList().isEmpty()) {
 
-			// deliveryspcification.setArrivaltime(arrivaltime);
-			// add set for object deliveryspecyfication
-
+			deliveryspcification.setArrivaltime(arrival_time);
+			deliveryspcification.setCargo(cargo);
 			result = true;
 		}
 

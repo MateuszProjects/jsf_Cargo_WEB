@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.LazyDataModel;
-
+import java.text.ParseException;
 import info.dao.DeliveryhistoryDAO;
 import info.entities.Cargo;
 import info.entities.Deliveryhistory;
@@ -34,9 +34,6 @@ public class DeliveryHistoryBB implements Serializable {
 	private final String PAGE_DELIVERY_HISTORY = "a_deliveryhistory?faces-redirect=true";
 	private Deliveryhistory deliveryHistory = new Deliveryhistory();
 	private Cargo cargo = null;
-	private Date dateArrive = new Date();
-	private Date dateLeave = new Date();
-
 	private LazyDataModelDeliveryhistory lazyModel;
 
 	private boolean skip;
@@ -174,20 +171,21 @@ public class DeliveryHistoryBB implements Serializable {
 			ctx.addMessage(null, new FacesMessage("comment Wymagane"));
 		}
 
-		SimpleDateFormat arriveDate = new SimpleDateFormat("");
-		SimpleDateFormat leaveDate = new SimpleDateFormat("");
+		Date arrive_Date = null;
+		Date leave_Date = null;
 
 		try {
-
-		} catch (Exception ex) {
+			arrive_Date = new SimpleDateFormat("dd-MM-yyyy").parse(arriveDate);
+			leave_Date = new SimpleDateFormat("dd-MM-yyyy").parse(leaveDate);
+		} catch (ParseException ex) {
 			ex.printStackTrace();
 		}
 
 		if (ctx.getMessageList().isEmpty()) {
 
 			deliveryHistory.setCargo(cargo);
-			deliveryHistory.setArrivayDate(dateArrive);
-			deliveryHistory.setLeaveDate(dateLeave);
+			deliveryHistory.setArrivayDate(arrive_Date);
+			deliveryHistory.setLeaveDate(leave_Date);
 			deliveryHistory.setComent(comment);
 
 			result = true;
