@@ -32,7 +32,7 @@ public class LocationBB implements Serializable {
 	private final String PAGE_LOCATION = "a_location?faces-redirect=true";
 
 	private LazyDataModelLoaction lazyModel;
-	Deliveryspecification deliveryspecification = null;
+	private Deliveryspecification deliveryspecification = null;
 	private Location location = new Location();
 
 	private Integer idLocation;
@@ -96,14 +96,14 @@ public class LocationBB implements Serializable {
 	public void init() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 
-		lazyModel = new LazyDataModelLoaction();
-
 		deliveryspecification = (Deliveryspecification) session.getAttribute("deliverySpec");
-		
-		if(deliveryspecification != null){
+
+		if (deliveryspecification != null) {
 			location.setDeliveryspecification(deliveryspecification);
 			session.removeAttribute("deliverySpec");
 		}
+
+		lazyModel = new LazyDataModelLoaction();
 	}
 
 	public LazyDataModel<Location> getLazyList() {
@@ -123,7 +123,7 @@ public class LocationBB implements Serializable {
 	}
 
 	public void onRowEdit(RowEditEvent event) {
-		FacesMessage msg = new FacesMessage("Car Edited");
+		FacesMessage msg = new FacesMessage("Location Edited");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
@@ -147,7 +147,7 @@ public class LocationBB implements Serializable {
 		if (ctx.getMessageList().isEmpty()) {
 
 			location.setDescription(description);
-			location.setDeliveryspecification(deliveryspecification);
+			// location.setDeliveryspecification(deliveryspecification);
 			result = true;
 		}
 

@@ -200,8 +200,15 @@ public class DeliverSpecificationBB implements Serializable {
 
 	}
 
+	/**
+	 * 
+	 * @param deliveryspecification
+	 * @return
+	 */
 	public String delete(Deliveryspecification deliveryspecification) {
 		deliveryspecificationDAO.remove(deliveryspecification);
 		return PAGE_DELIVERYSPECYFICATION;
 	}
+	
+	
 }
