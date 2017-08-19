@@ -1,6 +1,8 @@
 package info.Cargo.BB;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +15,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.view.facelets.FaceletException;
 import javax.servlet.http.HttpSession;
-
+import java.text.ParseException;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.LazyDataModel;
@@ -49,7 +51,7 @@ public class PaymentBB implements Serializable {
 	private Integer idPayment;
 	private Integer idUser;
 	private Integer idCargo;
-	private Date date = null;
+	private String date = null;
 	private Double amount;
 	private boolean skip;
 
@@ -69,11 +71,13 @@ public class PaymentBB implements Serializable {
 		this.idUser = idUser;
 	}
 
-	public Date getDate() {
+	
+
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
@@ -156,9 +160,18 @@ public class PaymentBB implements Serializable {
 			ctx.addMessage(null, new FacesMessage("amount Wymagane"));
 		}
 
+		Date payment_date  = null;
+		
+		try{
+			payment_date = new SimpleDateFormat("dd-MM-yyyy").parse(date);
+		}catch(ParseException ex){
+			ex.printStackTrace();
+		}
+		
 		if (ctx.getMessageList().isEmpty()) {
 			payment.setAmoutn(amount);
 			payment.setUser(user);
+			payment.setDate(payment_date);
 			result = true;
 		}
 

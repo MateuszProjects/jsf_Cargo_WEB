@@ -21,13 +21,11 @@
 					<legend>Opcje wyszukiwania</legend>
 					<h:panelGrid columns="2" cellpadding="5">
 						<p:outputLabel value="idCustomer" />
-						<p:inputText value="" />
+						<p:inputText value="#{customerBB.idCustomer}" />
 						<p:outputLabel value="name" />
-						<p:inputText value="" />
+						<p:inputText value="#{customerBB.name}" />
 						<p:outputLabel value="surname" />
-						<p:inputText value="" />
-						<p:outputLabel value="" />
-						<p:inputText value="" />
+						<p:inputText value="#{customerBB.surname}" />
 						<p:commandButton value="Szukaj" update="table" />
 					</h:panelGrid>
 				</fieldset>

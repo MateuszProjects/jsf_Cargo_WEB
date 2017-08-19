@@ -91,6 +91,14 @@ public class TransportBB implements Serializable {
 		if (idTransport != null) {
 			searchParams.put("idTransport", idTransport);
 		}
+		
+		if(name != null){
+			searchParams.put("name", name);
+		}
+		
+		if(payKm != null){
+			searchParams.put("payKM", payKm);
+		}
 
 		lazyModel.setSearchParams(searchParams);
 		lazyModel.setTransportDAO(transportDAO);

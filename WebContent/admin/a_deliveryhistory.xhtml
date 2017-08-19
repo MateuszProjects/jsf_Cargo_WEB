@@ -121,7 +121,6 @@
 		<br />
 		<p:panel id="button_panel1" widgetVar="testPanel1" closable="true"
 			toggleable="true" header="Create DeliveryHistory" collapsed="true">
-			<h1>Create DeliveryHistory</h1>
 			<h:form id="createDeliveryhistory">
 				<p:growl id="growl" sticky="true" showDetail="true" />
 
@@ -132,15 +131,15 @@
 							<h:panelGrid columns="2" columnClasses="label, value">
 
 
-								<h:outputText value="ArriveDate" />
-								<p:inputText value="#{deliveryHistoryBB.arriveDate}"
-									label="arriveDate" />
+								<h:outputText value="ArriveDate" style="color:black;"/>
+								<p:calendar  id="button" value="#{deliveryHistoryBB.arriveDate}"
+									label="arriveDate" showOn="button"/>
 
-								<h:outputText value="LeaveDate:" />
-								<p:inputText value="#{deliveryHistoryBB.leaveDate}"
+								<h:outputText value="LeaveDate:" style="color:black;"/>
+								<p:calendar id="popup" value="#{deliveryHistoryBB.leaveDate}"
 									label="leaveDate" />
 
-								<h:outputText value="Comment" />
+								<h:outputText value="Comment" style="color:black;"/>
 								<p:inputText value="#{deliveryHistoryBB.comment}"
 									label="comment" />
 
@@ -157,18 +156,18 @@
 								<h:panelGrid columns="2" columnClasses="label, value">
 
 
-									<h:outputText value="arriveDate " />
+									<h:outputText value="arriveDate " style="color:black;"/>
 									<h:outputText value="#{deliveryHistoryBB.arriveDate}"
 										styleClass="outputLabel" />
 
-									<h:outputText value="LeaveDate" />
+									<h:outputText value="LeaveDate" style="color:black;"/>
 									<h:outputText value="#{deliveryHistoryBB.leaveDate}"
 										styleClass="outputLabel" />
 								</h:panelGrid>
 
 								<h:panelGrid columns="2" columnClasses="label, value">
 
-									<h:outputText value="Comment " />
+									<h:outputText value="Comment " style="color:black;" />
 									<h:outputText value="#{deliveryHistoryBB.comment}"
 										styleClass="outputLabel" />
 

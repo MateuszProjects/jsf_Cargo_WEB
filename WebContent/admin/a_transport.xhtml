@@ -87,12 +87,6 @@
 
 					</p:column>
 
-
-					<p:column headerText="id ">
-						<f:facet name="output">
-							<h:outputText value="#{transport.cargos.get(0).idcargo}" />
-						</f:facet>
-					</p:column>
 					<p:column headerText="edit">
 
 						<p:commandButton value="Edit"
@@ -125,10 +119,6 @@
 							<p:messages />
 							<h:panelGrid columns="2" columnClasses="label, value">
 
-
-								<h:outputText value="idTransport" style="color:black;"/>
-								<p:inputText value="#{transportBB.idTransport}" label="idTransport" />
-
 								<h:outputText value="Name:" style="color:black;"/>
 								<p:inputText value="#{transportBB.name}" label="Name" />
 
@@ -146,10 +136,6 @@
 								<h:panelGrid columns="2" columnClasses="label, value">
 
 
-									<h:outputText value="idTransport " style="color:black;"/>
-									<h:outputText value="#{transportBB.idTransport}"
-										styleClass="outputLabel" />
-
 									<h:outputText value="Name " style="color:black;"/>
 									<h:outputText value="#{transportBB.name}"
 										styleClass="outputLabel" />
@@ -162,7 +148,7 @@
 							</h:panelGrid>
 
 							<p:commandButton value="Submit"
-								actionListener="#{employeeBB.save()}" update="growl"
+								actionListener="#{transportBB.save()}" update="growl"
 								process="@this" />
 						</p:panel>
 					</p:tab>

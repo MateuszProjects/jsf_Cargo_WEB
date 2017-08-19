@@ -16,6 +16,7 @@ import org.primefaces.event.FlowEvent;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.LazyDataModel;
 
+import info.dao.CargoDAO;
 import info.dao.HandingeventDAO;
 import info.entities.Cargo;
 import info.entities.Handlingevent;
@@ -38,6 +39,8 @@ public class HandingeventBB implements Serializable {
 	private String description;
 	
 	private boolean skip;
+	
+
 
 	public boolean isSkip() {
 		return skip;
@@ -89,7 +92,10 @@ public class HandingeventBB implements Serializable {
 
 	@EJB
 	HandingeventDAO handlingeventDAO;
-
+	
+	@EJB
+	CargoDAO cargoDAO;
+	
 	private LazyDataModelHandingevent lazyModel;
 
 	@PostConstruct
@@ -98,6 +104,7 @@ public class HandingeventBB implements Serializable {
 		cargo = (Cargo) session.getAttribute("cargo");
 
 		if (cargo != null) {
+			setIdCargo(cargo.getIdcargo());
 			session.removeAttribute("cargo");
 		}
 
@@ -153,6 +160,7 @@ public class HandingeventBB implements Serializable {
 
 		if (ctx.getMessageList().isEmpty()) {
 			handingevent.setDecriptonEvent(description);
+			cargo = cargoDAO.find(idCargo);
 			handingevent.setCargo(cargo);
 			result = true;
 		}
@@ -200,6 +208,8 @@ public class HandingeventBB implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
+	
+	
 	/**
 	 * function for remove object handlingevent
 	 * 

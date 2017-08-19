@@ -77,13 +77,11 @@
 
 					</p:column>
 
-					<p:column headerText="IdCargo">
+					<p:column headerText="add Location">
 
-
-						<f:facet name="output">
-							<h:outputText value="#{deliveryspec.cargo.idcargo}" />
-						</f:facet>
-
+						<p:commandButton value="Edit"
+							action="#{deliverSpecificationBB.edit(deliveryspec)}"
+							update=":form:msgs" />
 
 					</p:column>
 					<p:column headerText="edit">
@@ -104,7 +102,6 @@
 		<br />
 		<p:panel id="button_panel1" widgetVar="testPanel1" closable="true"
 			toggleable="true" header="Create DeliverySpecyfication" collapsed="true">
-			<h1>Create BillofLoading</h1>
 			<h:form id="createDeliverySpeycication">
 				<p:growl id="growl" sticky="true" showDetail="true" />
 
@@ -115,10 +112,10 @@
 							<h:panelGrid columns="2" columnClasses="label, value">
 
 
-								<h:outputText value="arrive Data:" />
+								<h:outputText value="arrive Data:" style="color:black;"/>
 								<p:inputText value="#{deliverSpecificationBB.arrivaltime}" label="arriveData" />
 
-								<h:outputText value="idCargo:" />
+								<h:outputText value="idCargo:" style="color:black;"/>
 								<p:inputText value="#{deliverSpecificationBB.idCargo}" label="idCargo" />
 
 							</h:panelGrid>
@@ -131,7 +128,7 @@
 							<p:messages />
 							<h:panelGrid columns="2" columnClasses="label, value">
 
-								<h:outputText value="idCargo:" />
+								<h:outputText value="idCargo:" style="color:black;"/>
 								<p:inputText value="#{deliverSpecificationBB.idCargo}" label="pass " />
 
 							</h:panelGrid>
@@ -146,11 +143,11 @@
 								<h:panelGrid columns="2" columnClasses="label, value">
 
 
-									<h:outputText value="arrive Data:" />
+									<h:outputText value="arrive Data:" style="color:black;"/>
 									<h:outputText value="#{deliverSpecificationBB.arrivaltime}"
 										styleClass="outputLabel" />
 
-									<h:outputText value="idCargo:"  />
+									<h:outputText value="idCargo:"  style="color:black;"/>
 									<h:outputText value="#{deliverSpecificationBB.idCargo}"
 										styleClass="outputLabel" />
 								</h:panelGrid>

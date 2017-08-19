@@ -90,15 +90,26 @@
 						</p:cellEditor>
 
 					</p:column>
-					<p:column headerText="Weight">
+					<p:column headerText="User">
 
 						<p:cellEditor>
 							<f:facet name="output">
-								<h:outputText
-									value="#{cargo.deliveryhistories.get(0).iddeliveryHistory}" />
+								<h:outputText value="#{cargo.user.idusers}" />
 							</f:facet>
 							<f:facet name="input">
 								<p:inputText value="#{cargo.weight}" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+
+					</p:column>
+					<p:column headerText="idTransport">
+
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{cargo.transport.idtransport}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{cargo.transport.idtransport}" style="width:100%" />
 							</f:facet>
 						</p:cellEditor>
 
@@ -111,8 +122,27 @@
 					</p:column>
 					<p:column headerText="add Bill">
 
-						<p:commandButton value="add" action="#{cargoBB.addBillofLoading(cargo)}"
+						<p:commandButton value="add"
+							action="#{cargoBB.addBillofLoading(cargo)}" update=":form:msgs" />
+
+					</p:column>
+					<p:column headerText="add delSpec">
+
+						<p:commandButton value="add"
+							action="#{cargoBB.addDeliverySpecyfication(cargo)}"
 							update=":form:msgs" />
+
+					</p:column>
+					<p:column headerText="add handingEvent">
+
+						<p:commandButton value="add"
+							action="#{cargoBB.addHandingEvent(cargo)}" update=":form:msgs" />
+
+					</p:column>
+					<p:column headerText="add delivHistory">
+
+						<p:commandButton value="add"
+							action="#{cargoBB.addDeliveryHistory(cargo)}" update=":form:msgs" />
 
 					</p:column>
 					<p:column style="width:32px">
@@ -122,9 +152,9 @@
 				</p:dataTable>
 			</h:form>
 		</p:panel>
-		
-		
-		
+
+
+
 		<br />
 		<p:panel id="button_panel1" widgetVar="testPanel1" closable="true"
 			toggleable="true" header="Create Cargo" collapsed="true">
@@ -139,11 +169,14 @@
 							<h:panelGrid columns="2" columnClasses="label, value">
 
 
-								<h:outputText value="Name" />
-								<p:inputText value="#{employeeBB.name}" label="Name" />
+								<h:outputText value="Name" style="color:black;" />
+								<p:inputText value="#{cargoBB.name}" label="name" />
 
-								<h:outputText value="Surname:" />
-								<p:inputText value="#{employeeBB.surname}" label="Surname:" />
+								<h:outputText value="Weight" style="color:black;" />
+								<p:inputText value="#{cargoBB.weight}" label="weight:" />
+
+								<h:outputText value="HazMat" style="color:black;" />
+								<p:inputText value="#{cargoBB.hazMat}" label="hazmat" />
 
 							</h:panelGrid>
 						</p:panel>
@@ -154,16 +187,12 @@
 						<p:panel header="Contact Information">
 							<p:messages />
 							<h:panelGrid columns="2" columnClasses="label, value">
-								<h:outputText value="login " />
-								<p:inputText value="#{employeeBB.login}" label="login" />
 
-								<h:outputText value="pass: " />
-								<p:inputText value="#{employeeBB.pass}" label="pass " />
+								<h:outputText value="idUser " style="color:black;" />
+								<p:inputText value="#{cargoBB.idCargo}" label="idUser" />
 
-								<h:outputText value="Passsdfa "
-									rendered="#{employeeBB.renderIs('Jan')}" />
-								<h:outputText value="Passsdfa "
-									rendered="#{employeeBB.renderIs('Jan')}" />
+								<h:outputText value="idTransport" style="color:black;" />
+								<p:inputText value="#{cargoBB.idTransport}" label="idTransport" />
 							</h:panelGrid>
 						</p:panel>
 					</p:tab>
@@ -175,19 +204,20 @@
 								<h:panelGrid columns="2" columnClasses="label, value">
 
 
-									<h:outputText value="Name: " />
-									<h:outputText value="#{employeeBB.name}"
-										styleClass="outputLabel" />
+									<h:outputText value="Name" style="color:black;" />
+									<h:outputText value="#{cargoBB.name}" styleClass="outputLabel" />
 
-									<h:outputText value="Surname " />
-									<h:outputText value="#{employeeBB.surname}"
-										styleClass="outputLabel" />
+									<h:outputText value="Weight" style="color:black;" />
+									<h:outputText value="#{cargoBB.weight}" styleClass="outputLabel" />
+
+									<h:outputText value="HazMat" style="color:black;" />
+									<h:outputText value="#{cargoBB.hazMat}" styleClass="outputLabel" />
 								</h:panelGrid>
 
 								<h:panelGrid columns="2" columnClasses="label, value">
 
-									<h:outputText value="Login " />
-									<h:outputText value="#{employeeBB.login}"
+									<h:outputText value="idUser " style="color:black;" />
+									<h:outputText value="#{cargoBB.idCargo}"
 										styleClass="outputLabel" />
 
 									<h:outputText value="Pass " />
@@ -200,9 +230,6 @@
 							<p:commandButton value="Submit"
 								actionListener="#{employeeBB.save()}" update="growl"
 								process="@this" />
-							<h:commandButton value="Reset p:ajax" style="margin-right:20px;">
-								<p:ajax update="conf" resetValues="true" />
-							</h:commandButton>
 
 						</p:panel>
 					</p:tab>
