@@ -34,6 +34,12 @@ public class TransportDAO {
 		return em.merge(transport);
 	}
 
+	/**
+	 * 
+	 * @param searchParams
+	 * @param info
+	 * @return
+	 */
 	public List<Transport> getSearchList(Map<String, Object> searchParams, PaginationInfo info) {
 
 		List<Transport> list = null;
@@ -47,6 +53,8 @@ public class TransportDAO {
 		String orderBY = "";
 
 		Integer idTransport = (Integer) searchParams.get("idTransport");
+		String name = (String) searchParams.get("name");
+		Double payKm = (Double) searchParams.get("payKM");
 
 		if (idTransport != null) {
 			if (where.isEmpty()) {
@@ -57,6 +65,23 @@ public class TransportDAO {
 			where += " t.idtransport like :idTransport ";
 		}
 
+		if (name != null) {
+			if (where.isEmpty()) {
+				where = "where ";
+			} else {
+				where += " or ";
+			}
+			where += " t.name like :name ";
+		}
+
+		if (payKm != null) {
+			if (where.isEmpty()) {
+				where = "where ";
+			} else {
+				where += " or ";
+			}
+			where += " t.paykm like :payKM ";
+		}
 		Query querycount = em.createQuery("SELECT COUNT(t.idtransport) " + from);
 
 		try {
@@ -67,14 +92,19 @@ public class TransportDAO {
 			e.printStackTrace();
 		}
 
-		Query query = em.createQuery(select + from + join + where);
+		Query query = em.createQuery(select + from + join + where + groupBY + having + orderBY);
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
-		
-		if(idTransport != null){
+
+		if (idTransport != null) {
 			query.setParameter("idTransport", idTransport);
 		}
-
+		if (name != null) {
+			query.setParameter("name", name);
+		}
+		if (payKm != null) {
+			query.setParameter("payKM", payKm);
+		}
 		try {
 			list = query.getResultList();
 		} catch (Exception e) {
