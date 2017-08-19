@@ -34,6 +34,12 @@ public class AddressDAO {
 		return em.merge(address);
 	}
 
+	/**
+	 * 
+	 * @param searchParams
+	 * @param info
+	 * @return
+	 */
 	public List<Address> getAddressList(Map<String, Object> searchParams, PaginationInfo info) {
 		List<Address> list = null;
 
