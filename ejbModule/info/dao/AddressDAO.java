@@ -54,7 +54,7 @@ public class AddressDAO {
 		Integer idAddress = (Integer) searchParams.get("idAddress");
 		String cityCode = (String) searchParams.get("cityCode");
 		String street = (String) searchParams.get("street");
-		Integer idUser = (Integer) searchParams.get("user");
+		Integer idUser = (Integer) searchParams.get("idUserWhere");
 
 		if (idAddress != null) {
 			if (where.isEmpty()) {
@@ -92,12 +92,14 @@ public class AddressDAO {
 			}else{
 				where += " and ";
 			}
+			/*
 			if(join.isEmpty()){
 				join += "  inner join users u ";
 				groupBY += " a.idaddress ";
 				orderBY += " a.idaddress ";
 			}
-			
+			*/
+			where += " a.users_idusers = idUser";
 		}
 		
 		Query querycount = em.createQuery("SELECT COUNT(a.idaddress) " + from);
@@ -124,6 +126,10 @@ public class AddressDAO {
 
 		if (cityCode != null) {
 			query.setParameter("CityCode", cityCode);
+		}
+		
+		if(idUser != null){
+			query.setParameter("idUser", idUser);
 		}
 
 		try {
