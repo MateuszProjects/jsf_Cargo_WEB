@@ -33,6 +33,7 @@ public class AddressBB implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private final String PAGE_ADDRESS = "a_address?faces-redirect=true";
 	
+	private Integer idUserWhere;
 	private Integer idAddress;
 	private Integer idUser;
 	private Integer idRoleUser;
@@ -61,6 +62,14 @@ public class AddressBB implements Serializable {
 		} else {
 			return event.getNewStep();
 		}
+	}
+
+	public Integer getIdUserWhere() {
+		return idUserWhere;
+	}
+
+	public void setIdUserWhere(Integer idUserWhere) {
+		this.idUserWhere = idUserWhere;
 	}
 
 	public Integer getIdRoleUser() {
@@ -131,12 +140,12 @@ public class AddressBB implements Serializable {
 		userObject = (User) session.getAttribute("userObject");
 		user = (User) session.getAttribute("user");
 		
-		if(user != null){
-			// 
+		if(user.getRoles().get(0).equals("user")){
+			setIdUserWhere(user.getIdusers());
 		}
 
-		if(user != null){
-			
+		if(userObject != null){
+			setIdUser(userObject.getIdusers());
 			session.removeAttribute("userObject");
 		}
 		
@@ -156,6 +165,10 @@ public class AddressBB implements Serializable {
 		
 		if(street != null){
 			searchParams.put("street", street);
+		}
+		
+		if(idUserWhere != null){
+			searchParams.put("idUserWhere", idUserWhere);
 		}
 
 		lazyModel.setSearchParams(searchParams);
