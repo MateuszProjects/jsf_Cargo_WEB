@@ -20,6 +20,7 @@ import info.dao.CargoDAO;
 import info.dao.CustomerDAO;
 import info.dao.TransportDAO;
 import info.entities.Cargo;
+import info.entities.Transport;
 import info.entities.User;
 import info.lazydatamodel.LazyDataModelCargo;
 
@@ -39,14 +40,24 @@ public class CargoBB implements Serializable {
 
 	private Cargo cargo = new Cargo();
 	private User user = null;
-
+	private Transport transport = null;
+	
 	private Integer idCargo;
 	private Integer idTransport;
+	private Integer idUser;
 	private Double weight;
-	private Integer hazMat;
+	private String hazMat;
 	private String name;
 
 	private boolean skip;
+
+	public Integer getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(Integer idUser) {
+		this.idUser = idUser;
+	}
 
 	public Integer getIdTransport() {
 		return idTransport;
@@ -64,11 +75,11 @@ public class CargoBB implements Serializable {
 		this.weight = weight;
 	}
 
-	public Integer getHazMat() {
+	public String getHazMat() {
 		return hazMat;
 	}
 
-	public void setHazMat(Integer hazMat) {
+	public void setHazMat(String hazMat) {
 		this.hazMat = hazMat;
 	}
 
@@ -166,11 +177,31 @@ public class CargoBB implements Serializable {
 		if (name == null) {
 			ctx.addMessage(null, new FacesMessage("name Wymagane"));
 		}
+		
+		if(hazMat == null){
+			ctx.addMessage(null, new FacesMessage("hazMat Wymagane"));	
+		}
+		
+		if(weight == null){
+			ctx.addMessage(null, new FacesMessage("weight Wymagane"));
+		}
+		
+		if(idTransport == null){
+			ctx.addMessage(null, new FacesMessage("idTransport Wymagane"));
+		}
+		
+		if(idUser == null){
+			ctx.addMessage(null, new FacesMessage("idUser Wymagane"));
+		}
+		
 
 		if (ctx.getMessageList().isEmpty()) {
+			cargo.setHazMat(hazMat);
 			cargo.setName(name);
+			user = customerDAO.find(idUser);
 			cargo.setUser(user);
-
+		    transport =  transportDAO.find(idTransport);
+			cargo.setTransport(transport);
 			result = true;
 		}
 
@@ -240,6 +271,22 @@ public class CargoBB implements Serializable {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		session.setAttribute("cargo", cargoObject);
 		return DELIVERY_HISTORY;
+	}
+	
+	public void addUser(User user){
+		setIdUser(user.getIdusers());
+		FacesMessage msg = new FacesMessage("setUser");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		System.out.println("setUser");
+	}
+	
+	public void addTransport(Transport transport){
+		setIdTransport(transport.getIdtransport());
+		FacesMessage msg = new FacesMessage("setTransport");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		System.out.println("setTransport");
+		
+		
 	}
 
 }

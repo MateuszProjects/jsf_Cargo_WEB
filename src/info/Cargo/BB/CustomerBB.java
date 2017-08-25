@@ -205,5 +205,7 @@ public class CustomerBB implements Serializable {
 		FacesMessage msg = new FacesMessage("Customer Cancelled");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
+	
+	
 
 }

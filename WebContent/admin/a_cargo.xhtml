@@ -109,7 +109,8 @@
 								<h:outputText value="#{cargo.transport.idtransport}" />
 							</f:facet>
 							<f:facet name="input">
-								<p:inputText value="#{cargo.transport.idtransport}" style="width:100%" />
+								<p:inputText value="#{cargo.transport.idtransport}"
+									style="width:100%" />
 							</f:facet>
 						</p:cellEditor>
 
@@ -155,14 +156,24 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 		<br />
 		<p:panel id="button_panel1" widgetVar="testPanel1" closable="true"
 			toggleable="true" header="Create Cargo" collapsed="true">
-			<h1>Create Cargo</h1>
-			<h:form id="createCargo">
-				<p:growl id="growl" sticky="true" showDetail="true" />
 
-				<p:wizard flowListener="#{employeeBB.onFlowProcess}">
+			<h:form>
+
+				<p:wizard flowListener="#{cargoBB.onFlowProcess}">
 					<p:tab id="personal" title="Personal">
 						<p:panel header="Personal Details">
 							<p:messages />
@@ -183,19 +194,164 @@
 					</p:tab>
 
 
-					<p:tab id="contact" title="Contact">
+					<p:tab id="users" title="Users">
 						<p:panel header="Contact Information">
 							<p:messages />
 							<h:panelGrid columns="2" columnClasses="label, value">
 
-								<h:outputText value="idUser " style="color:black;" />
-								<p:inputText value="#{cargoBB.idCargo}" label="idUser" />
 
-								<h:outputText value="idTransport" style="color:black;" />
-								<p:inputText value="#{cargoBB.idTransport}" label="idTransport" />
+
+								<p:dataTable id="table" var="customer" paginator="true"
+									rows="10" value="#{customerBB.lazylist}"
+									paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} 
+					{PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+									editable="true" rowsPerPageTemplate="5,10,15"
+									selectionMode="single" lazy="true">
+
+
+									<p:column headerText="Id Employee">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{customer.idusers}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText id="modelInput" value="#{customer.idusers}"
+													style="width:100%" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+
+									<p:column headerText="Login">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{customer.login}" />
+											</f:facet>
+											<f:facet name="input">
+
+												<p:inputText value="#{customer.login}" style="width:100%" />
+
+											</f:facet>
+
+										</p:cellEditor>
+									</p:column>
+									<p:column headerText="Pass">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{customer.pass}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText value="#{customer.pass}" style="width:100%" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+									<p:column headerText="Name">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{customer.name}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText value="#{customer.name}" style="width:100%" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+
+									<p:column headerText="Surname">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{customer.surname}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText value="#{customer.surname}" style="width:100%" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+									<p:column headerText="user">
+
+
+										<p:commandButton value="addUser"
+											action="#{cargoBB.addUser(user)}" />
+									</p:column>
+
+								</p:dataTable>
+
 							</h:panelGrid>
 						</p:panel>
 					</p:tab>
+
+
+					<p:tab id="transport" title="Transport">
+						<p:panel header="Contact Information">
+							<p:messages />
+
+							<h:panelGrid columns="2" columnClasses="label, value">
+
+								<p:dataTable id="tableSecond" var="transport" paginator="true"
+									rows="10" value="#{transportBB.lazyList}"
+									paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} 
+					{PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+									editable="true" rowsPerPageTemplate="5,10,15"
+									selectionMode="single" lazy="true">
+
+									<p:column headerText="idTransport">
+
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{transport.idtransport}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText value="#{transport.idtransport}"
+													style="width:100%" />
+											</f:facet>
+										</p:cellEditor>
+
+									</p:column>
+
+
+									<p:column headerText="Name">
+
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{transport.name}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText value="#{transport.name}" style="width:100%" />
+											</f:facet>
+										</p:cellEditor>
+
+
+									</p:column>
+
+									<p:column headerText="Pay KM">
+
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{transport.paykm}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText value="#{transport.paykm}" style="width:100%" />
+											</f:facet>
+										</p:cellEditor>
+
+									</p:column>
+
+									<p:column headerText="AddTransport">
+
+										<p:commandButton value="addTransport"
+											action="#{cargoBB.addTransport(transport)}" />
+
+
+
+									</p:column>
+
+
+								</p:dataTable>
+
+
+							</h:panelGrid>
+
+						</p:panel>
+					</p:tab>
+
 
 					<p:tab id="confirm" title="Confirmation">
 						<p:panel id="conf" header="Confirmation">
@@ -208,28 +364,31 @@
 									<h:outputText value="#{cargoBB.name}" styleClass="outputLabel" />
 
 									<h:outputText value="Weight" style="color:black;" />
-									<h:outputText value="#{cargoBB.weight}" styleClass="outputLabel" />
+									<h:outputText value="#{cargoBB.weight}"
+										styleClass="outputLabel" />
 
 									<h:outputText value="HazMat" style="color:black;" />
-									<h:outputText value="#{cargoBB.hazMat}" styleClass="outputLabel" />
+									<h:outputText value="#{cargoBB.hazMat}"
+										styleClass="outputLabel" />
 								</h:panelGrid>
 
 								<h:panelGrid columns="2" columnClasses="label, value">
 
 									<h:outputText value="idUser " style="color:black;" />
-									<h:outputText value="#{cargoBB.idCargo}"
+									<h:outputText value="#{cargoBB.idUser}"
 										styleClass="outputLabel" />
 
-									<h:outputText value="Pass " />
-									<h:outputText value="#{employeeBB.pass}"
+									<h:outputText value="idTransport " style="color:black;" />
+									<h:outputText value="#{cargoBB.idTransport}"
 										styleClass="outputLabel" />
 
 								</h:panelGrid>
+								<p:commandButton value="Submit"
+									actionListener="#{cargoBB.save()}"
+									process="@this" />
 							</h:panelGrid>
 
-							<p:commandButton value="Submit"
-								actionListener="#{employeeBB.save()}" update="growl"
-								process="@this" />
+
 
 						</p:panel>
 					</p:tab>
