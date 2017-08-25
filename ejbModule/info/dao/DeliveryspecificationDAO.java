@@ -34,9 +34,15 @@ public class DeliveryspecificationDAO {
 		return em.merge(deliveryspecification);
 	}
 
+	/**
+	 * 
+	 * @param searchParams
+	 * @param info
+	 * @return
+	 */
 	public List<Deliveryspecification> getDeliberySpecyficationList(Map<String, Object> searchParams, PaginationInfo info) {
 		List<Deliveryspecification> list = null;
-		// add searchParams
+		
 
 		String select = "select p ";
 		String from = "from Deliveryspecification p ";

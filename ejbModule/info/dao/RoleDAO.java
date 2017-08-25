@@ -34,6 +34,12 @@ public class RoleDAO {
 		return em.merge(role);
 	}
 
+	/**
+	 * 
+	 * @param searchParams
+	 * @param info
+	 * @return
+	 */
 	public List<Role> getSearchList(Map<String, Object> searchParams, PaginationInfo info) {
 		List<Role> list = null;
 
@@ -79,7 +85,7 @@ public class RoleDAO {
 			e.printStackTrace();
 		}
 
-		Query query = em.createQuery(select + from + join + where);
+		Query query = em.createQuery(select + from + join + where + groupBY + having + orderBY);
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
 
