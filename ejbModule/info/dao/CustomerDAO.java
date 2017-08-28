@@ -47,6 +47,7 @@ public class CustomerDAO {
 
 		Integer idEmployee = (Integer) searchParams.get("idEmployee");
 		String address = (String) searchParams.get("address");
+		Integer idUser = (Integer) searchParams.get("idUser");
 
 		if (idEmployee != null) {
 			if (where.isEmpty()) {
@@ -63,13 +64,22 @@ public class CustomerDAO {
 			} else {
 				where += " or ";
 			}
-			if(join.isEmpty()){
+			if (join.isEmpty()) {
 				join = " JOIN ";
 			}
-			
+
 			where += " p.address like :address";
 			join += " p.address a ";
-			
+
+		}
+
+		if (idUser != null) {
+			if (where.isEmpty()) {
+				where = " where ";
+			} else {
+				where += " and ";
+			}
+			where += " p.idusers like :idUser";
 		}
 
 		Query querycount = em.createQuery("SELECT COUNT(p.idusers) " + from + join);
@@ -92,6 +102,10 @@ public class CustomerDAO {
 
 		if (address != null) {
 			query.setParameter("address", address);
+		}
+		
+		if(idUser != null){
+			query.setParameter("idUser", idUser);
 		}
 
 		try {

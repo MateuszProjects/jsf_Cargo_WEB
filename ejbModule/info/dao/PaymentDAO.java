@@ -56,7 +56,7 @@ public class PaymentDAO {
 				where += " or ";
 			}
 
-			where += " c.idpayment like :idPayment ";
+			where += " c.idpayment like :idPayment";
 		}
 		
 		if(amount != null){
@@ -70,7 +70,7 @@ public class PaymentDAO {
 			
 		}
 
-		Query querycount = em.createQuery("SELECT COUNT(c.idpayment) " + from + join + where);
+		Query querycount = em.createQuery("SELECT COUNT(c.idpayment) " + from);
 
 		try {
 			Number n = (Number) querycount.getSingleResult();
