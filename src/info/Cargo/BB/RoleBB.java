@@ -11,6 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.event.FlowEvent;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.LazyDataModel;
 
@@ -27,11 +28,29 @@ public class RoleBB implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Role role = new Role();
-	private String name = new String();
+	private String nameRole = new String();
 	private final String PAGE_ROLE = "a_role?faces-redirect=true";
-	
+	private boolean skip;
+	private Integer idRole;
+	private String name;
 	private LazyDataModelRole lazyModel;
-	
+
+	public Integer getIdRole() {
+		return idRole;
+	}
+
+	public void setIdRole(Integer idRole) {
+		this.idRole = idRole;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	@EJB
 	RoleDAO roleDAO;
 
@@ -46,7 +65,7 @@ public class RoleBB implements Serializable {
 		lazyModel.setRoleDAO(roleDAO);
 		return lazyModel;
 	}
-	
+
 	public void onRowEdit(RowEditEvent event) {
 		FacesMessage msg = new FacesMessage("Car Edited");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -56,32 +75,28 @@ public class RoleBB implements Serializable {
 		FacesMessage msg = new FacesMessage("Edit Cancelled");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
-	
+
 	private boolean validate() {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		boolean result = false;
-		
-		if(name == null){
-			
+
+		if (name == null) {
+			ctx.addMessage(null, new FacesMessage("name Wymagane"));
 		}
-		
-		if(ctx.getMessageList().isEmpty()){
-			
-			// add seter for role
-			
+
+		if (ctx.getMessageList().isEmpty()) {
+			role.setNameRole(name);
 			result = true;
 		}
-		
+
 		return result;
-	
-	
 	}
-	
-	public void edit(Role roleObject){
-		
+
+	public void edit(Role roleObject) {
+
 		roleObject.setNameRole(roleObject.getNameRole());
 		roleObject.setUsers(roleObject.getUsers());
-		
+
 		try {
 			roleDAO.merge(roleObject);
 		} catch (Exception ex) {
@@ -90,17 +105,17 @@ public class RoleBB implements Serializable {
 		FacesMessage msg = new FacesMessage(" Success");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
-	
+
 	public void save() {
-		
-		if(role == null){
+
+		if (role == null) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Brak objektu role"));
 		}
-		
-		if(!validate()){
+
+		if (!validate()) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("validate false"));
 		}
-		
+
 		try {
 			roleDAO.createRole(role);
 		} catch (Exception ex) {
@@ -109,8 +124,24 @@ public class RoleBB implements Serializable {
 		FacesMessage msg = new FacesMessage(" Success");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
-	
-	public String delete(Role roleObject){
+	public boolean isSkip() {
+		return skip;
+	}
+
+	public void setSkip(boolean skip) {
+		this.skip = skip;
+	}
+	public String onFlowProcess(FlowEvent event) {
+		if (skip) {
+			skip = false; // reset in case user goes back
+			return "personal";
+		} else {
+			return event.getNewStep();
+		}
+
+	}
+
+	public String delete(Role roleObject) {
 		roleDAO.remove(roleObject);
 		return PAGE_ROLE;
 	}

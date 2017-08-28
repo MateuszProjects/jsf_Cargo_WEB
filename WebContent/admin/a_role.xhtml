@@ -9,9 +9,6 @@
 <ui:composition template="/templates/main-template.xhtml">
 
 	<ui:define name="content">
-		<p>Admin Role</p>
-
-
 		<p:panel id="button_panel" widgetVar="testPanel" closable="true"
 			toggleable="true" header="Panel One">
 			<h:form id="form">
@@ -19,8 +16,8 @@
 				<fieldset style="border-radius: 0.2em;">
 					<legend>Opcje wyszukiwania</legend>
 					<h:panelGrid columns="2" cellpadding="5">
-						<p:outputLabel value="idSalary" />
-						<p:inputText value="" />
+						<p:outputLabel value="idRole" />
+						<p:inputText value="#{roleBB.idRole}" />
 						<p:commandButton value="Szukaj" update="table" />
 					</h:panelGrid>
 				</fieldset>
@@ -67,12 +64,6 @@
 						</p:cellEditor>
 
 					</p:column>
-
-					<p:column headerText="Users">
-						<f:facet name="output">
-							<h:outputText value="#{role.users.get(0).idusers}" />
-						</f:facet>
-					</p:column>
 					
 					<p:column headerText="edit">
 
@@ -96,7 +87,6 @@
 		<br />
 		<p:panel id="button_panel1" widgetVar="testPanel1" closable="true"
 			toggleable="true" header="Create Cargo" collapsed="true">
-			<h1>Create BillofLoading</h1>
 			<h:form id="CreateRole">
 				<p:growl id="growl" sticky="true" showDetail="true" />
 

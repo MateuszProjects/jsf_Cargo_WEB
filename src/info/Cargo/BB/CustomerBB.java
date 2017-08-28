@@ -10,6 +10,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.annotation.ServletSecurity.EmptyRoleSemantic;
+import javax.servlet.http.HttpSession;
 
 import org.primefaces.event.FlowEvent;
 import org.primefaces.event.RowEditEvent;
@@ -17,6 +19,7 @@ import org.primefaces.model.LazyDataModel;
 
 import info.dao.CustomerDAO;
 import info.dao.UserDAO;
+import info.entities.Role;
 import info.entities.User;
 import info.lazydatamodel.LazyDataModelCustomer;
 
@@ -31,12 +34,22 @@ public class CustomerBB implements Serializable {
 	private final String PAGE_CUSTOMER = "a_customer?faces-redirect=true";
 	private boolean skip;
 	private User user = new User();
+	private User check = null;
 
 	private Integer idCustomer;
+	private Integer idUser;
 	private String name;
 	private String surname;
 	private String login;
 	private String pass;
+
+	public Integer getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(Integer idUser) {
+		this.idUser = idUser;
+	}
 
 	public Integer getIdCustomer() {
 		return idCustomer;
@@ -85,6 +98,16 @@ public class CustomerBB implements Serializable {
 
 	@PostConstruct
 	public void init() {
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+		
+		check = (User) session.getAttribute("user");
+		// check role in system and set variable idUser if role is user
+		for(Role r:check.getRoles()){
+			if(r.equals("user")){
+				setIdUser(check.getIdusers());
+			}
+		}
+		
 		lazyModel = new LazyDataModelCustomer();
 	}
 
@@ -102,7 +125,11 @@ public class CustomerBB implements Serializable {
 		if (surname != null) {
 			searchParams.put("surname", surname);
 		}
-
+		
+		if(idUser != null){
+			searchParams.put("idUser", idUser);
+		}
+		
 		lazyModel.setSearchParams(searchParams);
 		lazyModel.setCustomerDAO(customerDAO);
 		return lazyModel;
@@ -205,7 +232,5 @@ public class CustomerBB implements Serializable {
 		FacesMessage msg = new FacesMessage("Customer Cancelled");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
-	
-	
 
 }

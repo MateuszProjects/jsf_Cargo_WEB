@@ -13,19 +13,11 @@
 		<h:form>
 			<p:commandButton onclick="PF('testPanel').toggle().close();"
 				value="Panel One" type="button" />
-				
-				<p:commandButton onclick="PF('testPanel1').toggle().close();"
-					value="Panel Second" type="button" />
-
+			
 			<p:panel id="button_panel" widgetVar="testPanel" closable="true"
-				toggleable="true" header="Panel One" collapsed="true">
-				<h1>Testing</h1>
+				toggleable="true" header="Panel One" collapsed="false">
+				<h1>Linear Chart</h1>
 
-			</p:panel>
-
-			<p:panel id="button_panel1" widgetVar="testPanel1" closable="true"
-				toggleable="true" header="Panel Second" collapsed="true">
-				<h1>Testing22</h1>
 			</p:panel>
 		</h:form>
 	</ui:define>
