@@ -48,6 +48,7 @@ public class CargoDAO {
 		String name = (String) searchParams.get("name");
 		Integer weight = (Integer) searchParams.get("weight");
 		String hazMat = (String) searchParams.get("hazMat");
+		Integer idUser = (Integer) searchParams.get("idUser");
 
 		if (idCargo != null) {
 			if (where.isEmpty()) {
@@ -85,6 +86,16 @@ public class CargoDAO {
 			where += "c.hazMat lik :hazMat";
 		}
 
+		if(idUser != null){
+			if(where.isEmpty()){
+				where = "where ";
+			}else{
+				where += " and ";
+			}
+			
+			where += "c.user.iduser liki: idUser";
+		}
+		
 		Query querycount = em.createQuery("SELECT COUNT(c.idcargo) " + from + join + where);
 
 		try {
@@ -113,6 +124,9 @@ public class CargoDAO {
 
 		if (hazMat != null) {
 			query.setParameter("hazMat", hazMat);
+		}
+		if(idUser != null){
+			query.setParameter("idUser", idUser);
 		}
 		
 		try {
