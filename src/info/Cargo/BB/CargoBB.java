@@ -123,6 +123,12 @@ public class CargoBB implements Serializable {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 
 		user = (User) session.getAttribute("user");
+		
+		if(user.getRoles().get(0).equals("user")){
+			setIdUser(user.getIdusers());
+		}
+		
+		
 		lazyModel = new LazyDataModelCargo();
 	}
 
@@ -139,6 +145,10 @@ public class CargoBB implements Serializable {
 
 		if (name != null) {
 			searchParams.put("name", name);
+		}
+		
+		if(idUser != null){
+			searchParams.put("idUser", idUser);
 		}
 
 		lazyModel.setSearchParams(searchParams);
