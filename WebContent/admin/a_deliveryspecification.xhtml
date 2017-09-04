@@ -12,7 +12,6 @@
 
 		<p:panel id="button_panel" widgetVar="testPanel" closable="true"
 			toggleable="true" header="Panel One">
-			<h1>Testing</h1>
 			<h:form id="form">
 
 				<fieldset style="border-radius: 0.2em;">
@@ -79,8 +78,8 @@
 
 					<p:column headerText="add Location">
 
-						<p:commandButton value="Edit"
-							action="#{deliverSpecificationBB.edit(deliveryspec)}"
+						<p:commandButton value="add Location"
+							action="#{deliverSpecificationBB.addLocation(deliveryspec)}"
 							update=":form:msgs" />
 
 					</p:column>

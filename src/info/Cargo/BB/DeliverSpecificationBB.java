@@ -34,6 +34,7 @@ public class DeliverSpecificationBB implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private final String PAGE_DELIVERYSPECYFICATION = "a_deliveryspecyfication?faces-redirect=true";
+	private final String PAGE_LOCATION = "a_location?faces-redirect=true";
 
 	private Deliveryspecification deliveryspcification = new Deliveryspecification();
 	private String date = null;
@@ -41,7 +42,7 @@ public class DeliverSpecificationBB implements Serializable {
 	private Integer idDeliverySpecyfication;
 	private Integer idCargo;
 	private String arrivaltime;
-	
+
 	private boolean skip;
 
 	public boolean isSkip() {
@@ -149,13 +150,13 @@ public class DeliverSpecificationBB implements Serializable {
 		}
 
 		Date arrival_time = null;
-		
-		try{
+
+		try {
 			arrival_time = new SimpleDateFormat("dd-MM-yyyy").parse(arrivaltime);
-		}catch(ParseException ex){
+		} catch (ParseException ex) {
 			ex.printStackTrace();
 		}
-		
+
 		if (ctx.getMessageList().isEmpty()) {
 
 			deliveryspcification.setArrivaltime(arrival_time);
@@ -183,7 +184,8 @@ public class DeliverSpecificationBB implements Serializable {
 	public void save() {
 
 		if (deliveryspcification == null) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Brak objektu deliveryspecyfiaction"));
+			FacesContext.getCurrentInstance().addMessage(null, 
+					new FacesMessage("Brak objektu deliveryspecyfiaction"));
 		}
 
 		if (!validate()) {
@@ -209,6 +211,12 @@ public class DeliverSpecificationBB implements Serializable {
 		deliveryspecificationDAO.remove(deliveryspecification);
 		return PAGE_DELIVERYSPECYFICATION;
 	}
+
 	
+	public String addLocation(Deliveryspecification deliveryspecificationObject){
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+		session.setAttribute("deliverySpec", deliveryspecificationObject);
+		return PAGE_LOCATION;
+	}
 	
 }

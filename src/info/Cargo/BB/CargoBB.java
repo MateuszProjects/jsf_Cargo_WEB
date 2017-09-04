@@ -285,8 +285,6 @@ public class CargoBB implements Serializable {
 		FacesMessage msg = new FacesMessage("setTransport");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		System.out.println("setTransport");
-		
-		
 	}
 
 }

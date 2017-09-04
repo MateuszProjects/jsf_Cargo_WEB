@@ -16,6 +16,7 @@ import org.primefaces.event.FlowEvent;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.LazyDataModel;
 
+import info.dao.DeliveryspecificationDAO;
 import info.dao.LoactionDAO;
 import info.entities.Deliveryspecification;
 import info.entities.Location;
@@ -34,6 +35,7 @@ public class LocationBB implements Serializable {
 	private LazyDataModelLoaction lazyModel;
 	private Deliveryspecification deliveryspecification = null;
 	private Location location = new Location();
+	
 
 	private Integer idLocation;
 	private Integer idDeliverySpecyfication;
@@ -67,6 +69,9 @@ public class LocationBB implements Serializable {
 
 	@EJB
 	LoactionDAO locationDAO;
+	
+	@EJB
+	DeliveryspecificationDAO deliveryspecificationDAO;
 
 	public Integer getIdLocation() {
 		return idLocation;
@@ -99,7 +104,7 @@ public class LocationBB implements Serializable {
 		deliveryspecification = (Deliveryspecification) session.getAttribute("deliverySpec");
 
 		if (deliveryspecification != null) {
-			location.setDeliveryspecification(deliveryspecification);
+			setIdDeliverySpecyfication(deliveryspecification.getIddeliverySpecification());
 			session.removeAttribute("deliverySpec");
 		}
 
@@ -136,18 +141,15 @@ public class LocationBB implements Serializable {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		boolean result = false;
 
-		if (idLocation != null) {
-			ctx.addMessage(null, new FacesMessage("idLocation Wymagane"));
-		}
-
-		if (description != null) {
+		if (description == null) {
 			ctx.addMessage(null, new FacesMessage("description Wymagane"));
 		}
 
 		if (ctx.getMessageList().isEmpty()) {
 
 			location.setDescription(description);
-			// location.setDeliveryspecification(deliveryspecification);
+			deliveryspecification =  deliveryspecificationDAO.find(idDeliverySpecyfication);
+			location.setDeliveryspecification(deliveryspecification);
 			result = true;
 		}
 
