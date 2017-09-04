@@ -33,6 +33,12 @@ public class CargoDAO {
 		return em.merge(cargo);
 	}
 
+	/**
+	 * 
+	 * @param searchParams
+	 * @param info
+	 * @return
+	 */
 	public List<Cargo> getCargoList(Map<String, Object> searchParams, PaginationInfo info) {
 		List<Cargo> list = null;
 
@@ -96,7 +102,7 @@ public class CargoDAO {
 			where += "c.user.iduser liki: idUser";
 		}
 		
-		Query querycount = em.createQuery("SELECT COUNT(c.idcargo) " + from + join + where);
+		Query querycount = em.createQuery("SELECT COUNT(c.idcargo) " + from );
 
 		try {
 			Number n = (Number) querycount.getSingleResult();

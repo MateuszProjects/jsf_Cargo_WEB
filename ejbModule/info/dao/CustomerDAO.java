@@ -34,6 +34,12 @@ public class CustomerDAO {
 		return em.merge(user);
 	}
 
+	/**
+	 * 
+	 * @param searchParams
+	 * @param info
+	 * @return
+	 */
 	public List<User> getCustomerList(Map<String, Object> searchParams, PaginationInfo info) {
 		List<User> list = null;
 

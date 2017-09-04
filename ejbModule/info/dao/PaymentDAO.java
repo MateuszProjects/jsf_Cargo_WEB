@@ -34,6 +34,12 @@ public class PaymentDAO {
 		return em.merge(payment);
 	}
 
+	/**
+	 * 
+	 * @param searchParams
+	 * @param info
+	 * @return
+	 */
 	public List<Payment> getSearchList(Map<String, Object> searchParams, PaginationInfo info) {
 		List<Payment> list = null;
 

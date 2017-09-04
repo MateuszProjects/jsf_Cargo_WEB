@@ -43,8 +43,6 @@ public class HandingeventDAO {
 	public List<Handlingevent> getHandingEventList(Map<String, Object> searchParams, PaginationInfo info) {
 		List<Handlingevent> list = null;
 
-		// add searchParams
-
 		String select = "select p ";
 		String from = "from Handlingevent p ";
 		String join = "";

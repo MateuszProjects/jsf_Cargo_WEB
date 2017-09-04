@@ -82,7 +82,7 @@ public class UserDAO {
 			where += " p.surname like :surname";
 		}
 		
-		Query querycount = em.createQuery("SELECT COUNT(p.idusers) " + from + join);
+		Query querycount = em.createQuery("SELECT COUNT(p.idusers) " + from);
 
 		try {
 			Number n = (Number) querycount.getSingleResult();

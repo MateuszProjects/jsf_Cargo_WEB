@@ -34,6 +34,12 @@ public class LoactionDAO {
 		return em.merge(location);
 	}
 
+	/**
+	 * 
+	 * @param searchParams
+	 * @param info
+	 * @return
+	 */
 	public List<Location> getSearchList(Map<String, Object> searchParams, PaginationInfo info) {
 		List<Location> list = null;
 
