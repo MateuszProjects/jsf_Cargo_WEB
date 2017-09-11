@@ -53,7 +53,18 @@ public class DeliveryhistoryDAO {
 
 		String comment = (String) searchParams.get("comment");
 		Integer idDeliveryHistory = (Integer) searchParams.get("idDeliveryHistory");
+		Integer idUserRole = (Integer) searchParams.get("idUserRole");
 
+		if(idUserRole != null){
+			if(where.isEmpty()){
+				where = "where ";
+			}else{
+				where += " and ";
+			}
+			// subQuery JPQL.
+			where += "c.idCargo like :(select u.iduser where )";
+		}
+		
 		if (idDeliveryHistory != null) {
 			if (where.isEmpty()) {
 				where = "where ";
