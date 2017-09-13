@@ -93,7 +93,7 @@ public class AddressDAO {
 				where += " and ";
 			}
 			
-			where += " a.users_idusers = idUser";
+			where += " a.users_idusers = :idUser";
 		}
 		
 		Query querycount = em.createQuery("SELECT COUNT(a.idaddress) " + from);
