@@ -92,13 +92,7 @@ public class AddressDAO {
 			}else{
 				where += " and ";
 			}
-			/*
-			if(join.isEmpty()){
-				join += "  inner join users u ";
-				groupBY += " a.idaddress ";
-				orderBY += " a.idaddress ";
-			}
-			*/
+			
 			where += " a.users_idusers = idUser";
 		}
 		
