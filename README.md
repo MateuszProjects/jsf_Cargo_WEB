@@ -15,20 +15,23 @@ Multi login for Employees and Customer. Function check your role in system.
  
 Module User: </br>
 
-Customer - User:
-- Edit own Address </br>
+User:
+- Edit Address </br>
 - Payment </br>
+- Add new Cargo</br>
 
-Employee - Admin
+Admin:
 - Add/Edit Customer </br>
 - Add/Edit Employeee </br>
 - Add/Edit Role </br>
 - Add/Edit Address </br>
 - Add/Edit Cargo </br>
 - Add/Edit Transport </br>
+- Add/Edit Delivery History </br>
+- Add/Edit Delivery Specification </br>
+- Add/Edit Bill of Loading </br>
 
-#Cargo </br>
-- add new transport </br>
-- add or edit Delivery History </br>
-- add or edit Spedition </br>
-- add or edit Delivery specification </br>
+#Create new Cargo </br>
+- add Delivery History </br>
+- add Delivery Specyfication </br>
+- add Bill of Loading </br>
