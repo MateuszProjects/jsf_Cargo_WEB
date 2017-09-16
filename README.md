@@ -23,6 +23,7 @@ User:
 Admin:
 - Add/Edit Customer </br>
 - Add/Edit Employeee </br>
+- Add/Edit Salary(Payment)</br>
 - Add/Edit Role </br>
 - Add/Edit Address </br>
 - Add/Edit Cargo </br>
@@ -30,8 +31,11 @@ Admin:
 - Add/Edit Delivery History </br>
 - Add/Edit Delivery Specification </br>
 - Add/Edit Bill of Loading </br>
+- Add/Edit Location </br>
+- Add/Edit HandlingEvent
 
 #Create new Cargo </br>
 - add Delivery History </br>
 - add Delivery Specyfication </br>
 - add Bill of Loading </br>
+- add HandlingEvent </br>
