@@ -14,5 +14,6 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/jsf_Cargo_EJB"/>
+	<classpathentry kind="lib" path="C:/Informatyka inżynierska UŚ/Semestr VI/Seminarium Dyplomowe/selenium-server-standalone-3.5.3.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
