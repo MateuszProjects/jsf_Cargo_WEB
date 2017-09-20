@@ -51,9 +51,9 @@ public class PaymentDAO {
 		String having = "";
 		String orderby = "";
 
-
 		Integer idPayemt = (Integer) searchParams.get("idPayment");
 		Double amount = (Double) searchParams.get("amount");
+		Integer idUser = (Integer) searchParams.get("idUser");
 
 		if (idPayemt != null) {
 			if (where.isEmpty()) {
@@ -64,16 +64,25 @@ public class PaymentDAO {
 
 			where += " c.idpayment like :idPayment";
 		}
-		
-		if(amount != null){
-			if(where.isEmpty()){
+
+		if (idUser != null) {
+			if (where.isEmpty()) {
 				where = "where ";
-			}else{
+			} else {
+				where += " and ";
+			}
+			where += "c.iduser like :idUser";
+		}
+
+		if (amount != null) {
+			if (where.isEmpty()) {
+				where = "where ";
+			} else {
 				where += " or ";
 			}
-			
+
 			where += " c.amoutn like :amount";
-			
+
 		}
 
 		Query querycount = em.createQuery("SELECT COUNT(c.idpayment) " + from);
@@ -89,12 +98,16 @@ public class PaymentDAO {
 		Query query = em.createQuery(select + from + join + where + groupBY + having + orderby);
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
-		
-		if(idPayemt != null){
+
+		if (idPayemt != null) {
 			query.setParameter("idPayment", idPayemt);
 		}
-		
-		if(amount != null){
+
+		if (idUser != null) {
+			query.setParameter("IdUser", idUser);
+		}
+
+		if (amount != null) {
 			query.setParameter("amount", amount);
 		}
 
