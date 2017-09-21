@@ -51,9 +51,9 @@ public class RoleDAO {
 		String having = "";
 		String orderBY = "";
 
-
 		Integer idRole = (Integer) searchParams.get("idRole");
 		String name = (String) searchParams.get("name");
+		Integer idUser = (Integer) searchParams.get("idUser");
 
 		if (idRole != null) {
 			if (where.isEmpty()) {
@@ -63,6 +63,16 @@ public class RoleDAO {
 			}
 
 			where += idRole + ": ";
+		}
+
+		if (idUser != null) {
+			if (where.isEmpty()) {
+				where = "where ";
+			} else {
+				where += " and ";
+			}
+
+			where += " c.users.iduser like :idUser";
 		}
 
 		if (name != null) {
@@ -88,6 +98,10 @@ public class RoleDAO {
 		Query query = em.createQuery(select + from + join + where + groupBY + having + orderBY);
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
+
+		if (idUser != null) {
+			query.setParameter("idUser", idUser);
+		}
 
 		try {
 			list = query.getResultList();
