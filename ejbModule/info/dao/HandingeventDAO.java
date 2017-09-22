@@ -53,6 +53,17 @@ public class HandingeventDAO {
 
 		Integer idhandingevent = (Integer) searchParams.get("idhandingevent");
 		String description = (String) searchParams.get("description");
+		Integer idCargo = (Integer) searchParams.get("idCargo");
+
+		if (idCargo != null) {
+			if (where.isEmpty()) {
+				where = "where ";
+			} else {
+				where += " or ";
+			}
+
+			where += " p.cargo.idcargo like :idCargo";
+		}
 
 		if (idhandingevent != null) {
 			if (where.isEmpty()) {
@@ -85,14 +96,17 @@ public class HandingeventDAO {
 		Query query = em.createQuery(select + from + join + where + groupBY + having + orderBY);
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
-		
-		if(idhandingevent != null){
+
+		if (idhandingevent != null) {
 			query.setParameter("idhandlingEvent", idhandingevent);
 		}
-		
-		
-		if(description != null){
+
+		if (description != null) {
 			query.setParameter("decriptonEvent", description);
+		}
+
+		if (idCargo != null) {
+			query.setParameter("idCargo", idCargo);
 		}
 
 		try {
