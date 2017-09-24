@@ -29,8 +29,8 @@ public class DeliveryspecificationDAO {
 	public void remove(Deliveryspecification deliveryspecification) {
 		em.remove(em.merge(deliveryspecification));
 	}
-	
-	public Deliveryspecification  merge(Deliveryspecification deliveryspecification){
+
+	public Deliveryspecification merge(Deliveryspecification deliveryspecification) {
 		return em.merge(deliveryspecification);
 	}
 
@@ -40,9 +40,9 @@ public class DeliveryspecificationDAO {
 	 * @param info
 	 * @return
 	 */
-	public List<Deliveryspecification> getDeliberySpecyficationList(Map<String, Object> searchParams, PaginationInfo info) {
+	public List<Deliveryspecification> getDeliberySpecyficationList(Map<String, Object> searchParams,
+			PaginationInfo info) {
 		List<Deliveryspecification> list = null;
-		
 
 		String select = "select p ";
 		String from = "from Deliveryspecification p ";
@@ -53,16 +53,26 @@ public class DeliveryspecificationDAO {
 		String orderBY = "";
 
 		Integer idDeliverySpec = (Integer) searchParams.get("idDeliverySpecyfication");
+		Integer idCargo = (Integer) searchParams.get("idCargo");
 
 		if (idDeliverySpec != null) {
-		if (where.isEmpty()) {
-			where = "where ";
-		} else {
-			where += " or ";
+			if (where.isEmpty()) {
+				where = "where ";
+			} else {
+				where += " or ";
+			}
+			where += " p.iddeliverySpecification like :idDeliverySpec ";
 		}
-		where += " p.iddeliverySpecification like :idDeliverySpec ";
-	}
-		
+
+		if (idCargo != null) {
+			if (where.isEmpty()) {
+				where = "where ";
+			} else {
+				where += " and ";
+			}
+			where += "p.cargo.idcargo like :idCargo";
+		}
+
 		Query querycount = em.createQuery("SELECT COUNT(p.iddeliverySpecification) " + from + join + where);
 
 		try {
@@ -77,10 +87,14 @@ public class DeliveryspecificationDAO {
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
 
-		if(idDeliverySpec!= null){
+		if (idDeliverySpec != null) {
 			query.setParameter("idDeliverySpec", idDeliverySpec);
 		}
-		
+
+		if (idCargo != null) {
+			query.setParameter("idCargo", idCargo);	
+		}
+
 		try {
 			list = query.getResultList();
 		} catch (Exception e) {
