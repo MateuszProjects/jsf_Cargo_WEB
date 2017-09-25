@@ -33,6 +33,7 @@ public class BillofladingDAO {
 	public Billoflading merge(Billoflading billoflading) {
 		return em.merge(billoflading);
 	}
+
 	/**
 	 * 
 	 * @param searchParams
@@ -52,6 +53,17 @@ public class BillofladingDAO {
 
 		Integer idBillofloading = (Integer) searchParams.get("idBillofLoading");
 		String text = (String) searchParams.get("text");
+		Integer idCargo = (Integer) searchParams.get("idCargo");
+
+		if (idCargo != null) {
+			if (where.isEmpty()) {
+				where = "where ";
+			} else {
+				where += "and ";
+			}
+
+			where += "p.cargo.idcargo like :idCargo";
+		}
 
 		if (idBillofloading != null) {
 			if (where.isEmpty()) {
@@ -91,6 +103,10 @@ public class BillofladingDAO {
 
 		if (text != null) {
 			query.setParameter("Text", text);
+		}
+
+		if (idCargo != null) {
+			query.setParameter("idCargo", idCargo);
 		}
 
 		try {
