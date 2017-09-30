@@ -54,6 +54,17 @@ public class LoactionDAO {
 
 		Integer idLocation = (Integer) searchParams.get("idlocation");
 		String description = (String) searchParams.get("description");
+		Integer idDeliverySpecyfication = (Integer) searchParams.get("idDeliverySpecyf");
+		
+		if(idDeliverySpecyfication != null){
+			if(where.isEmpty()){
+				where = "where ";
+			}else{
+				where += " and ";
+			}
+			
+			where += " c.deliveryspecification.iddeliverySpecification like :idDeliverySpec";
+		}
 
 		if (idLocation != null) {
 			if (where.isEmpty()) {
@@ -93,6 +104,10 @@ public class LoactionDAO {
 		
 		if(idLocation != null){
 			query.setParameter("idlocation", idLocation);
+		}
+		
+		if(idDeliverySpecyfication != null){
+			query.setParameter("idDeliverySpec", idDeliverySpecyfication);
 		}
 		
 		try {
