@@ -44,11 +44,11 @@ public class CargoDAO {
 
 		String select = "select c ";
 		String from = "from Cargo c ";
-		String join = "";
+		String join = " join ";
 		String where = "";
-		String groupBY = "";
-		String having = "";
-		String orderBY = "";
+		String groupBY = " group by ";
+		String having = " having ";
+		String orderBY = " order by ";
 
 		Integer idCargo = (Integer) searchParams.get("idCargo");
 		String name = (String) searchParams.get("name");
@@ -92,17 +92,17 @@ public class CargoDAO {
 			where += "c.hazMat lik :hazMat";
 		}
 
-		if(idUser != null){
-			if(where.isEmpty()){
+		if (idUser != null) {
+			if (where.isEmpty()) {
 				where = "where ";
-			}else{
+			} else {
 				where += " and ";
 			}
-			
+
 			where += "c.user.iduser liki: idUser";
 		}
-		
-		Query querycount = em.createQuery("SELECT COUNT(c.idcargo) " + from );
+
+		Query querycount = em.createQuery("SELECT COUNT(c.idcargo) " + from);
 
 		try {
 			Number n = (Number) querycount.getSingleResult();
@@ -131,10 +131,11 @@ public class CargoDAO {
 		if (hazMat != null) {
 			query.setParameter("hazMat", hazMat);
 		}
-		if(idUser != null){
+
+		if (idUser != null) {
 			query.setParameter("idUser", idUser);
 		}
-		
+
 		try {
 			list = query.getResultList();
 		} catch (Exception e) {
