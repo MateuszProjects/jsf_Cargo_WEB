@@ -45,11 +45,11 @@ public class AddressDAO {
 
 		String select = "select a ";
 		String from = "from Address a ";
-		String join = "";
+		String join = " join ";
 		String where = "";
-		String groupBY = "";
-		String having = "";
-		String orderBY = "";
+		String groupBY = " group by ";
+		String having = " having ";
+		String orderBY = " order by ";
 
 		Integer idAddress = (Integer) searchParams.get("idAddress");
 		String cityCode = (String) searchParams.get("cityCode");
