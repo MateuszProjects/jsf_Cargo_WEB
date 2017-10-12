@@ -27,11 +27,12 @@ public class AccessDAO {
 
 		String select = "SELECT e ";
 		String from = "From User e ";
-		String join = "";
+		String join = " join ";
 		String where = "";
-		String groupBY = "";
-		String having = "";
-		String orderBY = "";
+		String groupBY = " group by ";
+		String having = " having ";
+		String orderBY = " order by ";
+
 
 		if (login != null) {
 			if (where.isEmpty()) {
