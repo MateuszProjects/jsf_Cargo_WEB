@@ -83,7 +83,7 @@ public class BillofladingDAO {
 			where += " p.tekst like :Text";
 		}
 
-		Query querycount = em.createQuery("SELECT COUNT(p.idbillofLading) " + from + join);
+		Query querycount = em.createQuery("SELECT COUNT(p.idbillofLading) " + from);
 
 		try {
 			Number n = (Number) querycount.getSingleResult();
