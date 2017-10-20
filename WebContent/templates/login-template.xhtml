@@ -4,53 +4,19 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
-
-
 <h:head>
-	<meta charset="utf-8" content="" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>AdminLTE 2 | Log in</title>
-	<!-- Tell the browser to be responsive to screen width -->
-	<meta
-		content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-		name="viewport" />
-	<!-- Bootstrap 3.3.6 -->
-	<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
-	<!-- Font Awesome -->
-	<link rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" />
-	<!-- Ionicons -->
-	<link rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" />
-	<!-- Theme style -->
-	<h:outputStylesheet library="css" name="AdminLTE.min.css"></h:outputStylesheet>
-	<!-- iCheck -->
-	<link rel="stylesheet" href="resources/plugins/iCheck/square/blue.css" />
-
-
+	<link type="text/css" rel="stylesheet"
+		href="../resources/css/primefaces.css" />
+	<style type="text/css">
+.ui-widget, .ui-widget .ui-widget {
+	font-size: 90% !important;
+}
+</style>
+	<title>Login JSF Cargo</title>
 </h:head>
-<h:body class="hold-transition login-page">
-
+<h:body>
 	<ui:insert name="content">
 
 	</ui:insert>
-	<!-- /.login-box -->
-
-	<!-- jQuery 2.2.3 -->
-	<script src="resources/plugins/jQuery/jquery-2.2.3.min.js"></script>
-	<!-- Bootstrap 3.3.6 -->
-	<script src="resources/bootstrap/js/bootstrap.min.js"></script>
-	<!-- iCheck -->
-	<script src="resources/plugins/iCheck/icheck.min.js"></script>
-	<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' // optional
-    });
-  });
-</script>
-
 </h:body>
 </html>

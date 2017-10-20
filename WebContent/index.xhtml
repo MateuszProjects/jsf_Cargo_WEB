@@ -7,22 +7,30 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:composition template="/templates/login-template.xhtml">
-
 	<ui:define name="content">
-		<h:form >
-				<fieldset style="padding: 1em; border-radius: 0.2em;">
-					<legend>Login Admin</legend>
-					<h:panelGrid columns="2" cellpadding="5">
-						<h:outputLabel  value="Login"  />
-						<p:inputText id="p-login"  value="#{loginBB.login}" />
-						<h:outputLabel for="Password" value="password:" />
-						<p:password id="p-password" value="#{loginBB.pass}" />
-					</h:panelGrid>
-					    <p:messages showDetail="true" autoUpdate="true" />
-					<h:commandButton  value="Login"  
-					 update="msg" styleClass="ui-priority-primary" action="#{loginBB.doLogin()}" />
-				</fieldset>
-			</h:form>
+		<h:form id="login">
+			<p:panel id="panel" header="Login"
+				style="width:500px; height:250px; position:absolute; left:400px; top:100px;">
+				<p:focus context="panel" />
+				<p:messages />
+				<h:panelGrid columns="3">
+					<p:outputLabel for="username" value="Username" />
+					<p:inputText id="username" value="#{loginBB.login}" required="true"
+						label="Firstname">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="username" />
+
+					<p:outputLabel for="password" value="Password" />
+					<p:password id="password" value="#{loginBB.pass}" required="true"
+						label="Surname" />
+					<p:message for="password" />
+				</h:panelGrid>
+				<p:commandButton id="submitButton" value="Sign In"
+					action="#{loginBB.doLogin()}" update="@parent" />
+			</p:panel>
+		</h:form>
+
 	</ui:define>
 
 
