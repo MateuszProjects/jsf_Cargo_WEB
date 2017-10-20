@@ -47,9 +47,9 @@ public class PaymentDAO {
 		String from = "from Payment c ";
 		String join = " join ";
 		String where = "";
-		String groupBY = " group by ";
-		String having = " having ";
-		String orderBY = " order by ";
+		String groupBY = "";
+		String having = "";
+		String orderBY = "";
 
 		Integer idPayemt = (Integer) searchParams.get("idPayment");
 		Double amount = (Double) searchParams.get("amount");
@@ -95,7 +95,7 @@ public class PaymentDAO {
 			e.printStackTrace();
 		}
 
-		Query query = em.createQuery(select + from + where + groupBY + having + orderBY);
+		Query query = em.createQuery(select + from + where);
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
 

@@ -47,9 +47,9 @@ public class RoleDAO {
 		String from = "from Role c ";
 		String join = " join ";
 		String where = "";
-		String groupBY = " group by ";
-		String having = " having ";
-		String orderBY = " order by ";
+		String groupBY = "";
+		String having = "";
+		String orderBY = "";
 
 		Integer idRole = (Integer) searchParams.get("idRole");
 		String name = (String) searchParams.get("name");
@@ -95,7 +95,7 @@ public class RoleDAO {
 			e.printStackTrace();
 		}
 
-		Query query = em.createQuery(select + from + join + where + groupBY + having + orderBY);
+		Query query = em.createQuery(select + from  + where);
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
 

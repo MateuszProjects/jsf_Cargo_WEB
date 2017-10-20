@@ -45,11 +45,11 @@ public class BillofladingDAO {
 
 		String select = "select p ";
 		String from = "from Billoflading p ";
-		String join = " join ";
+		String join = "";
 		String where = "";
-		String groupBY = " group by ";
-		String having = " having ";
-		String orderBY = " order by ";
+		String groupBY = "";
+		String having = "";
+		String orderBY = "";
 
 		Integer idBillofloading = (Integer) searchParams.get("idBillofLoading");
 		String text = (String) searchParams.get("text");
@@ -93,7 +93,7 @@ public class BillofladingDAO {
 			e.printStackTrace();
 		}
 
-		Query query = em.createQuery(select + from + join + where + groupBY + having + orderBY);
+		Query query = em.createQuery(select + from  + where);
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
 

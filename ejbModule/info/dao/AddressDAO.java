@@ -47,9 +47,9 @@ public class AddressDAO {
 		String from = "from Address a ";
 		String join = " join ";
 		String where = "";
-		String groupBY = " group by ";
-		String having = " having ";
-		String orderBY = " order by ";
+		String groupBY = "";
+		String having = "";
+		String orderBY = "";
 
 		Integer idAddress = (Integer) searchParams.get("idAddress");
 		String cityCode = (String) searchParams.get("cityCode");
@@ -106,7 +106,7 @@ public class AddressDAO {
 			e.printStackTrace();
 		}
 
-		Query query = em.createQuery(select + from + join + where + groupBY + having + orderBY);
+		Query query = em.createQuery(select + from + join + where );
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
 

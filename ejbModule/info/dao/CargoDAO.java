@@ -44,11 +44,11 @@ public class CargoDAO {
 
 		String select = "select c ";
 		String from = "from Cargo c ";
-		String join = " join ";
+		String join = "";
 		String where = "";
-		String groupBY = " group by ";
-		String having = " having ";
-		String orderBY = " order by ";
+		String groupBY = "";
+		String having = "";
+		String orderBY = "";
 
 		Integer idCargo = (Integer) searchParams.get("idCargo");
 		String name = (String) searchParams.get("name");
@@ -112,7 +112,7 @@ public class CargoDAO {
 			e.printStackTrace();
 		}
 
-		Query query = em.createQuery(select + from + join + where + groupBY + having + orderBY);
+		Query query = em.createQuery(select + from +  where);
 		query.setFirstResult(info.getOffset());
 		query.setMaxResults(info.getLimit());
 
