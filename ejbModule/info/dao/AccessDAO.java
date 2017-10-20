@@ -52,7 +52,7 @@ public class AccessDAO {
 			where += " e.pass=:pass";
 		}
 
-		Query query = em.createQuery(select + from + join + where + groupBY + having + orderBY);
+		Query query = em.createQuery(select + from  + where);
 
 		if (login != null) {
 			query.setParameter("login", login);
