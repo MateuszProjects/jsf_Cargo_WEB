@@ -45,7 +45,7 @@ public class AddressDAO {
 
 		String select = "select a ";
 		String from = "from Address a ";
-		String join = " join ";
+		String join = "";
 		String where = "";
 		String groupBY = "";
 		String having = "";
