@@ -78,7 +78,7 @@
 						</p:cellEditor>
 					</p:column>
 
-					<p:column headerText="IdSalary">
+					<p:column headerText="IdUser">
 
 						<p:cellEditor>
 							<f:facet name="output">
@@ -100,7 +100,7 @@
 					<p:column headerText="delete">
 
 						<p:commandButton value="del"
-							action="#{paymentBB.deleate(payment)}" update=":form:msgs" />
+							action="#{paymentBB.delete(payment)}" update=":form:msgs" />
 
 					</p:column>
 					<p:column style="width:32px">
@@ -123,10 +123,10 @@
 							<p:messages />
 							<h:panelGrid columns="2" columnClasses="label, value">
 
-								<h:outputText value="Amount:" style="color:black;"/>
+								<h:outputText value="Amount:" style="color:black;" />
 								<p:inputText value="#{paymentBB.amount}" label="amount" />
 
-								<h:outputText value="date:" style="color:black;"/>
+								<h:outputText value="date:" style="color:black;" />
 								<p:inputText value="#{paymentBB.date}" label="date" />
 
 							</h:panelGrid>
@@ -138,7 +138,7 @@
 						<p:panel header="Contact Information">
 							<p:messages />
 							<h:panelGrid columns="2" columnClasses="label, value">
-								<h:outputText value="userId: " style="color:black;"/>
+								<h:outputText value="userId: " style="color:black;" />
 								<p:inputText value="#{paymentBB.idUser}" label="userId" />
 							</h:panelGrid>
 						</p:panel>
@@ -155,14 +155,14 @@
 									<h:outputText value="#{paymentBB.amount}"
 										styleClass="outputLabel" />
 
-									<h:outputText value="date: " style="color:black;"/>
+									<h:outputText value="date: " style="color:black;" />
 									<h:outputText value="#{paymentBB.date}"
 										styleClass="outputLabel" />
 								</h:panelGrid>
 
 								<h:panelGrid columns="2" columnClasses="label, value">
 
-									<h:outputText value="userId: " style="color:black;"/>
+									<h:outputText value="userId: " style="color:black;" />
 									<h:outputText value="#{paymentBB.idUser}"
 										styleClass="outputLabel" />
 

@@ -19,16 +19,16 @@
 				<fieldset style="border-radius: 0.2em;">
 					<legend>Opcje wyszukiwania</legend>
 					<h:panelGrid columns="2" cellpadding="5">
-						
+
 						<p:outputLabel value="idAddress" />
 						<p:inputText value="#{addressBB.idAddress}" />
-						
+
 						<p:outputLabel value="street" />
 						<p:inputText value="#{addressBB.street}" />
-						
+
 						<p:outputLabel value="cityCode" />
 						<p:inputText value="#{addressBB.cityCode}" />
-						
+
 						<p:commandButton value="Szukaj" update="table" />
 					</h:panelGrid>
 				</fieldset>
@@ -177,13 +177,13 @@
 								<h:panelGrid columns="2" columnClasses="label, value">
 
 									<h:outputText value="cityCode" style="color:black;" />
-									<h:outputText  value="#{addressBB.cityCode}"
+									<h:outputText value="#{addressBB.cityCode}"
 										styleClass="outputLabel" />
 
 									<h:outputText value="Email" style="color:black;" />
 									<h:outputText value="#{addressBB.email}"
 										styleClass="outputLabel" />
-										
+
 									<h:outputText value="Street" style="color:black;" />
 									<h:outputText value="#{addressBB.street}"
 										styleClass="outputLabel" />
@@ -191,11 +191,11 @@
 									<h:outputText value="Telephone" style="color:black;" />
 									<h:outputText value="#{addressBB.telephone}"
 										styleClass="outputLabel" />
-									
+
 									<h:outputText value="IdUser" style="color:black;" />
-									<h:outputText  value="#{addressBB.idUser}"
+									<h:outputText value="#{addressBB.idUser}"
 										styleClass="outputLabel" />
-										
+
 								</h:panelGrid>
 							</h:panelGrid>
 

@@ -71,8 +71,6 @@ public class PaymentBB implements Serializable {
 		this.idUser = idUser;
 	}
 
-	
-
 	public String getDate() {
 		return date;
 	}
@@ -143,7 +141,7 @@ public class PaymentBB implements Serializable {
 	}
 
 	public void onRowEdit(RowEditEvent event) {
-		FacesMessage msg = new FacesMessage("Payment Edited");
+		FacesMessage msg = new FacesMessage("Salary Edited");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
@@ -188,7 +186,7 @@ public class PaymentBB implements Serializable {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		FacesMessage msg = new FacesMessage("Updata Success");
+		FacesMessage msg = new FacesMessage("Update Success");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
