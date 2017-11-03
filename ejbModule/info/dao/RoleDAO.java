@@ -61,8 +61,7 @@ public class RoleDAO {
 			} else {
 				where += " or ";
 			}
-
-			where += idRole + ": ";
+			where += "c.idrole  like :idRole";
 		}
 
 		if (idUser != null) {
@@ -101,6 +100,10 @@ public class RoleDAO {
 
 		if (idUser != null) {
 			query.setParameter("idUser", idUser);
+		}
+		
+		if(idRole != null){
+			query.setParameter("idRole", idRole);
 		}
 
 		try {
